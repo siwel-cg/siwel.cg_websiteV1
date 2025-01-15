@@ -29,7 +29,9 @@
             <div class="gallery">
                 <!-- Each piece of art goes in its own gallery-item div -->
                 <div class="gallery-item">
-                    <img src="images/artwork1.jpg" alt="Artwork 1">
+                    <a href="artwork/artwork1.html">
+                        <img src="images/artwork1.jpg" alt="Abstract Piece">
+                    </a>
                     <h3>First Artwork</h3>
                     <p>Description of the first artwork</p>
                 </div>
@@ -46,33 +48,36 @@
                     <p>Abstract composition</p>
                 </div>
 
-                <div class="gallery-item">
-                    <img src="images/artwork3.jpg" alt="Artwork 4">
-                    <h3>Third Artwork</h3>
-                    <p>Abstract composition</p>
-                </div>
                 <!-- Add as many as you want -->
+                <div class="see-more-container">
+                    <a href="pages/gallery.html" class="button">See All Artwork</a>
+                </div>
             </div>
         </section>
 
         <section id="projects">
             <h2>Coding Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
+            <div class="gallery"> <!-- Using the same gallery class as art section -->
+                <div class="gallery-item">
+                    <img src="images/project1/preview.jpg" alt="Project 1">
                     <h3>Weather App</h3>
-                    <p>A JavaScript weather application using OpenWeather API</p>
-                    <a href="https://github.com/yourusername/weather-app" class="button">View Project</a>
+                    <p>A real-time weather application built with JavaScript</p>
                 </div>
-                <div class="project-card">
+                
+                <div class="gallery-item">
+                    <img src="images/project2/preview.jpg" alt="Project 2">
                     <h3>Task Manager</h3>
                     <p>A React-based todo list with local storage</p>
-                    <a href="https://github.com/yourusername/task-manager" class="button">View Project</a>
                 </div>
-                <div class="project-card">
+
+                <div class="gallery-item">
+                    <img src="images/project3/preview.jpg" alt="Project 3">
                     <h3>Portfolio Website</h3>
                     <p>This website! Built with HTML, CSS, and JavaScript</p>
-                    <a href="https://github.com/yourusername/portfolio" class="button">View Code</a>
                 </div>
+            </div>
+            <div class="see-more-container">
+                <a href="pages/projects.html" class="button">See All Projects</a>
             </div>
         </section>
 
@@ -81,15 +86,15 @@
             <p>Get in touch:</p>
             <ul class="contact-links">
                 <li><a href="mailto:lewis.ghrist@gmail.com">Email</a></li>
-                <li><a href="https://github.com/siwel-cg">GitHub</a></li>
                 <li><a href="https://siwel_cg.artstation.com/">Artstation</a></li>
+                <li><a href="https://github.com/siwel-cg">GitHub</a></li>
                 <!-- Add other social media links -->
             </ul>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <p>&copy; 2025 Lewis Ghrst. All rights reserved.</p>
     </footer>
 
     <script src="scripts/main.js"></script>

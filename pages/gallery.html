@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery - Your Portfolio</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/gallery.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="gallery.html" class="active">Art</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="gallery-page">
+        <h1>Art Gallery</h1>
+        
+        <!-- Filter/Category Section -->
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="digital">Digital</button>
+            <button class="filter-btn" data-filter="traditional">Traditional</button>
+            <!-- Add more filter buttons as needed -->
+        </div>
+
+        <div class="full-gallery">
+            <!-- Gallery Item Template -->
+            <div class="gallery-item" data-category="digital">
+                <img src="../images/artwork1.jpg" alt="Artwork 1">
+                <div class="gallery-item-info">
+                    <h3>Artwork Title</h3>
+                    <p>Digital Art, 2025</p>
+                    <a href="../artwork/artwork1.html" class="button">View Details</a>
+                </div>
+            </div>
+
+            <!-- Add more gallery items following the same structure -->
+            <div class="gallery-item" data-category="traditional">
+                <img src="../images/artwork2.jpg" alt="Artwork 2">
+                <div class="gallery-item-info">
+                    <h3>Another Artwork</h3>
+                    <p>Oil on Canvas, 2024</p>
+                    <a href="../artwork/artwork2.html" class="button">View Details</a>
+                </div>
+            </div>
+
+            <!-- Add more items as needed -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script src="../scripts/gallery.js"></script>
+</body>
+</html>
