@@ -1,3 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #ffffff;
+}
+
 /* Project page specific styles */
 .project-page {
     max-width: 1200px;

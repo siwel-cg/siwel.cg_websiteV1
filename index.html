@@ -13,6 +13,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#art">Art</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#demoreel">Demo Reel</a></li> <!-- New nav item -->
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -20,78 +21,99 @@
 
     <main>
         <section id="home">
-            <h1>Hello! I'm Lewis Ghrist</h1>
-            <p>I'm an artist and developer.</p>
+            <div class="content-container">
+                <h1>Hello! I'm Lewis Ghrist</h1>
+                <p>I'm an artist and developer.</p>
+            </div>
         </section>
 
         <section id="art">
-            <h2>Art Projects</h2>
-            <div class="gallery">
-                <!-- Each piece of art goes in its own gallery-item div -->
-                <div class="gallery-item">
-                    <a href="artwork/ScifiCity.html">
-                        <img src="images/ScifiCity/city-sunset-v1.png" alt="Procedural Scifi-City">
-                    </a>
-                    <h3>Procedural Scifi-City</h3>
-                    <p>Description of the first artwork</p>
-                </div>
+            <div class="content-container">
+                <h2>Art Projects</h2>
+                <div class="gallery">
+                    <!-- Each piece of art goes in its own gallery-item div -->
+                    <div class="gallery-item">
+                        <a href="artwork/ScifiCity.html">
+                            <img src="images/ScifiCity/city-sunset-v1.png" alt="Procedural Scifi-City">
+                        </a>
+                        <h3>Procedural Scifi-City</h3>
+                        <p>Description of the first artwork</p>
+                    </div>
 
-                <div class="gallery-item">
-                    <img src="images/artwork2.jpg" alt="Artwork 2">
-                    <h3>Second Artwork</h3>
-                    <p>Creative exploration in oils</p>
-                </div>
+                    <div class="gallery-item">
+                        <img src="images/Library/lewis-ghrist-library-v14-color.png" alt="Library">
+                        <h3>Paper Library</h3>
+                        <p>Creative exploration in oils</p>
+                    </div>
 
-                <div class="gallery-item">
-                    <img src="images/artwork3.jpg" alt="Artwork 3">
-                    <h3>Third Artwork</h3>
-                    <p>Abstract composition</p>
-                </div>
+                    <div class="gallery-item">
+                        <img src="images/MangaCity/image.png" alt="MangaCity">
+                        <h3>Playable Manga Panel</h3>
+                        <p>Abstract composition</p>
+                    </div>
 
-                <!-- Add as many as you want -->
-                <div class="see-more-container">
-                    <a href="pages/gallery.html" class="button">See All Artwork</a>
+                    <!-- Add as many as you want -->
+                    <div class="see-more-container">
+                        <a href="pages/gallery.html" class="button">See All Artwork</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="projects">
-            <h2>Coding Projects</h2>
-            <div class="gallery"> <!-- Using the same gallery class as art section -->
-                <div class="gallery-item">
-                    <a href="projects/PathTracer.html">
-                        <img src="images/PathTracer/LG_MicroFMirror_wEnvi.png" alt="Path Tracer">
-                    </a>
-                    <h3>Path Tracer Renderer</h3>
-                    <p>A real-time weather application built with JavaScript</p>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/project2/preview.jpg" alt="Project 2">
-                    <h3>Task Manager</h3>
-                    <p>A React-based todo list with local storage</p>
-                </div>
+            <div class="content-container">
+                <h2>Coding Projects</h2>
+                <div class="gallery"> <!-- Using the same gallery class as art section -->
+                    <div class="gallery-item">
+                        <a href="projects/PathTracer.html">
+                            <img src="images/PathTracer/LG_MicroFMirror_wEnvi.png" alt="Path Tracer">
+                        </a>
+                        <h3>Monte Carlo Path</h3>
+                        <p>A real-time weather application built with JavaScript</p>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="images/project2/preview.jpg" alt="Project 2">
+                        <h3>Task Manager</h3>
+                        <p>A React-based todo list with local storage</p>
+                    </div>
 
-                <div class="gallery-item">
-                    <img src="images/project3/preview.jpg" alt="Project 3">
-                    <h3>Portfolio Website</h3>
-                    <p>This website! Built with HTML, CSS, and JavaScript</p>
+                    <div class="gallery-item">
+                        <img src="images/project3/preview.jpg" alt="Project 3">
+                        <h3>Portfolio Website</h3>
+                        <p>This website! Built with HTML, CSS, and JavaScript</p>
+                    </div>
                 </div>
-            </div>
-            <div class="see-more-container">
-                <a href="pages/projects.html" class="button">See All Projects</a>
+                <div class="see-more-container">
+                    <a href="pages/projects.html" class="button">See All Projects</a>
+                </div>
             </div>
         </section>
 
+        <!-- New Demo Reel section -->
+        <section id="demoreel">
+            <div class="content-container">
+                <h2>Demo Reel</h2>
+                <!-- Replace 'my-demo-reel.mp4' with the actual path to your video file -->
+                <video controls width="640">
+                    <source src="videos/my-demo-reel.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+        <!-- End of new section -->
+
         <section id="contact">
-            <h2>Contact Me</h2>
-            <p>Get in touch:</p>
-            <ul class="contact-links">
-                <li><a href="mailto:lewis.ghrist@gmail.com">Email</a></li>
-                <li><a href="https://siwel_cg.artstation.com/">Artstation</a></li>
-                <li><a href="https://github.com/siwel-cg">GitHub</a></li>
-                <!-- Add other social media links -->
-            </ul>
+            <div class="content-container">
+                <h2>Contact Me</h2>
+                <p>Get in touch:</p>
+                <ul class="contact-links">
+                    <li><a href="mailto:lewis.ghrist@gmail.com">Email</a></li>
+                    <li><a href="https://siwel_cg.artstation.com/">Artstation</a></li>
+                    <li><a href="https://github.com/siwel-cg">GitHub</a></li>
+                    <!-- Add other social media links -->
+                </ul>
+            </div>
         </section>
     </main>
 
