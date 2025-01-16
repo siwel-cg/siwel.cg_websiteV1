@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="../styles/project.css">
 </head>
 <body>
-    <!-- Using the same header as main page -->
+    <!-- Using the same header as the main page -->
     <header>
         <nav>
             <ul>
                 <li><a href="../index.html#home">Home</a></li>
                 <li><a href="../index.html#art">Portfolio</a></li>
                 <li><a href="../index.html#projects">Projects</a></li>
-                <li><a href="../index.html#demoreel">Demo Reel</a></li> <!-- New nav item -->
+                <li><a href="../index.html#demoreel">Demo Reel</a></li>
                 <li><a href="../index.html#contact">Contact</a></li>
             </ul>
         </nav>
@@ -27,9 +27,14 @@
                 <h1>Project Name</h1>
                 <div class="project-meta">
                     <span class="date">Completed: January 2025</span>
-                    <div class="project-links">
-                        <a href="#" class="button">Live Demo</a>
-                        <a href="#" class="button">View Code</a>
+                    
+                    <!-- Tools Used at the top -->
+                    <div class="tools-used">
+                        <h4>Tools Used</h4>
+                        <ul class="tools-list">
+                            <li>Houdini</li>
+                            <li>Davinci Resolve</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -51,36 +56,29 @@
                     <img src="../images/ScifiCity/" alt="Project main image" class="main-image">
                 </section>
             </div>
-
-            <section class="project-details">
-                <h2>Technical Details</h2>
-                <div class="technologies">
-                    <h3>Technologies Used</h3>
-                    <ul>
-                        <li>Houdini</li>
-                        <li>Davinci Resolve</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="project-gallery">
-                <h2>Gallery</h2>
-                <div class="image-grid">
-                    <figure>
-                        <img src="../images/ScifiCity/city-midcont.png" alt="Project screenshot 1">
-                        <figcaption>Caption describing this feature</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="../images/ScifiCity/city-sunset-v1.png" alt="Project screenshot 2">
-                        <figcaption>Caption describing this feature</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="../images/project1/image3.jpg" alt="Project screenshot 3">
-                        <figcaption>Caption describing this feature</figcaption>
-                    </figure>
-                </div>
-            </section>
         </article>
+
+        <!-- New Breakdown Section -->
+        <section class="project-breakdown">
+            <h2>Breakdown</h2>
+            
+            <div class="breakdown-part">
+                <h3>Part One: Environment Setup</h3>
+                <p>Explain the initial steps, planning, or environment creation for your project.</p>
+            </div>
+
+            <div class="breakdown-part">
+                <h3>Part Two: Procedural Generation</h3>
+                <p>Dive into how you used tools like Houdini to procedurally generate assets or environments.</p>
+            </div>
+
+            <div class="breakdown-part">
+                <h3>Part Three: Final Integration</h3>
+                <p>Discuss how you brought everything together for the final build or render.</p>
+            </div>
+        </section>
+        <!-- End of Breakdown Section -->
+
     </main>
 
     <footer>

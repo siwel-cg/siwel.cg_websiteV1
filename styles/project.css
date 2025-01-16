@@ -7,15 +7,49 @@ body {
     background-color: #ffffff;
 }
 
-/* Project page specific styles */
+/* Header (unchanged from main page) */
+header {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header nav ul li {
+    margin-left: 2rem;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #007bff;
+}
+
+/* Project Page */
 .project-page {
     max-width: 1200px;
-    margin: 80px auto 0;
+    margin: 80px auto 0; /* top margin so it's not behind fixed header */
     padding: 0 20px;
 }
 
+/* Project Header */
 .project-header {
-    text-align: center;
+    text-align: left;
     margin: 3rem 0;
     padding: 2rem 0;
     border-bottom: 1px solid #eee;
@@ -31,14 +65,25 @@ body {
     margin-top: 1rem;
 }
 
-.project-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
+/* Tools Used */
+.tools-used {
     margin-top: 1.5rem;
 }
 
-/* Grid layout for overview and main image */
+.tools-used h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.tools-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Project Grid Layout */
 .project-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -65,6 +110,7 @@ body {
     position: relative;
 }
 
+/* Adds an arrow for each list item */
 .project-overview li:before {
     content: "→";
     position: absolute;
@@ -72,67 +118,50 @@ body {
     color: #007bff;
 }
 
+/* Main Image styling */
 .project-showcase .main-image {
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Technologies section */
-.technologies ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
+/* Breakdown Section */
+.project-breakdown {
+    margin: 3rem 0; /* space around the section */
 }
 
-.technologies li {
-    background: #f0f0f0;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
+.project-breakdown h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
 }
 
-/* Image gallery */
-.project-gallery {
-    margin: 4rem 0;
-}
-
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+.breakdown-part {
     margin: 2rem 0;
 }
 
-figure {
-    margin: 0;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+.breakdown-part h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #007bff; /* example color for headings */
 }
 
-figure:hover {
-    transform: translateY(-5px);
+.breakdown-part p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
 }
 
-figure img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
 
-figcaption {
-    padding: 1rem;
+/* Footer */
+footer {
     text-align: center;
-    color: #666;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    margin-top: 4rem;
 }
 
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
     .project-grid {
         grid-template-columns: 1fr;
