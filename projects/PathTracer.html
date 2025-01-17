@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Name - Your Portfolio</title>
+  <title>Monte Carlo Path Tracer - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="../styles/pathTracer.css">
 </head>
@@ -24,14 +24,13 @@
   <!-- Full-width project header with background color -->
   <div class="project-header">
     <div class="header-container">
-      <h1>Project Name</h1>
+      <h1>Monte Carlo Path Tracer</h1>
       <div class="project-meta">
         <span class="date">Completed: January 2025</span>
         <div class="tools-used">
-          <h4>Tools Used</h4>
           <ul class="tools-list">
-            <li>Houdini</li>
-            <li>Davinci Resolve</li>
+            <li>C++</li>
+            <li>GLSL</li>
             <!-- Add more tools as needed -->
           </ul>
         </div>
@@ -45,40 +44,127 @@
       <section class="overview-section">
         <h2>Overview</h2>
         <p>
-          Provide a concise description of your project here. Discuss goals, 
-          motivations, and any important context. Explain what problems the 
-          project solves or what unique features it has.
+          This was one of the major projects for CIS 5610. It is a fully featured Monte Carlo path tracer that 
+          simulates realistic lighting. Leveraging multiple 
+          importance sampling (MIS) and cosine-weighted sampling, the path tracer efficiently converges toward 
+          physically accurate global illumination. A JSON-based scene importer allows custom scenes—complete with lights, 
+          materials, and geometry—to be easily made and rendered.
         </p>
       </section>
 
       <!-- Image Gallery (supports multiple images) -->
       <section class="images-section">
-        <h2>Project Images</h2>
+        <h2>Custom Scene Renders</h2>
         <div class="image-grid">
           <figure>
-            <img src="../images/ProjectXYZ/image1.jpg" alt="Screenshot 1">
+            <img src="../images/PathTracer/LG_Scene1.png" alt="Screenshot 1">
+            <figcaption>Glass Sphere in a micro-facet mirror box</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/PathTracer/LG_Scene2.png" alt="Screenshot 2">
             <figcaption>Caption describing feature or scene</figcaption>
           </figure>
           <figure>
-            <img src="../images/ProjectXYZ/image2.jpg" alt="Screenshot 2">
+            <img src="../images/PathTracer/LG_Scene3.png" alt="Screenshot 3">
             <figcaption>Caption describing feature or scene</figcaption>
           </figure>
-          <figure>
-            <img src="../images/ProjectXYZ/image3.jpg" alt="Screenshot 3">
-            <figcaption>Caption describing feature or scene</figcaption>
-          </figure>
-          <!-- Add more <figure> blocks as needed -->
         </div>
       </section>
 
-      <!-- Optional Additional Sections (e.g. breakdown, challenges, etc.) -->
+      <!-- Breakdown Section -->
       <section class="breakdown-section">
-        <h2>Breakdown</h2>
-        <p>
-          Go into detail on various aspects of the project, such as 
-          environment setup, procedural tools, or final rendering process.
-        </p>
+        <h2>Features</h2>
+      
+        <!-- 1. Multiple Importance Sampling (MIS) -->
+        <div class="breakdown-part">
+          <div class="breakdown-content">
+            <h3>Multiple Importance Sampling (MIS)</h3>
+            <p>
+              To reduce noise and speed up convergence, each bounce in the scene 
+              leverages both BSDF sampling and direct light sampling. MIS balances 
+              these different strategies, ensuring that neither approach dominates, 
+              improving the quality of global illumination without a large increase 
+              in render time.
+            </p>
+          </div>
+          <div class="breakdown-image">
+            <img src="../images/PathTracer/MIS_Veach.png" alt="MIS Illustration">
+          </div>
+        </div>
+      
+        <!-- 2. Global Illumination & Bounce Handling -->
+        <div class="breakdown-part">
+          <div class="breakdown-content">
+            <h3>Global Illumination & Bounce Handling</h3>
+            <p>
+              For each ray bounce, the path tracer computes both the material’s BSDF contribution 
+              and direct lighting from the light sources. Cosine-weighted sampling helps accurately 
+              model diffuse reflections and reduce noise in indirect lighting. Rays continue bouncing 
+              until they  hit a light source or exceed a bounce limit, capturing complex 
+              light interactions within the scene.
+            </p>
+          </div>
+          <div class="breakdown-image">
+            <img src="../images/PathTracer/placeholder.jpg" alt="Global Illumination Illustration">
+          </div>
+        </div>
+      
+        <!-- 3. Material Models -->
+        <div class="breakdown-part">
+          <div class="breakdown-content">
+            <h3>Material Models</h3>
+            <p>
+              The path tracer supports a variety of surface types:
+            </p>
+            <ul>
+              <li><strong>Lambertian (Diffuse):</strong> Perfectly diffuse reflection.</li>
+              <li><strong>Perfect Mirrors:</strong> Perfect reflection.</li>
+              <li><strong>Microfacet:</strong> Glossy or rough reflections via micro-surface distribution.</li>
+              <li><strong>Dielectric:</strong> Fresnel-based reflection/refraction for glass-like materials.</li>
+            </ul>
+          </div>
+          <div class="breakdown-image">
+            <img src="../images/PathTracer/placeholder.jpg" alt="Material Models Illustration">
+          </div>
+        </div>
+      
+        <!-- 4. Light Types -->
+        <div class="breakdown-part">
+          <div class="breakdown-content">
+            <h3>Light Types</h3>
+            <p>
+              The path tracer includes multiple ways to illuminate a scene:
+            </p>
+            <ul>
+              <li><strong>Environment Light (HDR):</strong> An HDR map that wraps the entire scene.</li>
+              <li><strong>Sphere & Area Lights:</strong> Extended emitters for softer shadows.</li>
+              <li><strong>Point & Spot Lights:</strong> Localized emitters for sharper or focused lighting.</li>
+            </ul>
+          </div>
+          <div class="breakdown-image">
+            <img src="../images/PathTracer/placeholder.jpg" alt="Light Types Illustration">
+          </div>
+        </div>
+      
+        <!-- 5. Scene & Asset Management -->
+        <div class="breakdown-part">
+          <div class="breakdown-content">
+            <h3>Scene & Asset Management</h3>
+            <p>
+              Custom scenes are specified via JSON, defining lights, geometry, 
+              materials, and textures. This modular approach lets you import different 
+              configurations or experimental setups without recompiling, ensuring 
+              flexibility and faster iteration on scene design.
+            </p>
+          </div>
+          <div class="breakdown-image">
+            <img src="../images/PathTracer/placeholder.jpg" alt="Scene Management Illustration">
+          </div>
+        </div>
+      
       </section>
+      
+
     </article>
   </main>
 
