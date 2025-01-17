@@ -14,14 +14,14 @@ body {
     padding: 0;
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #000000;
+    color: #333333;          /* Dark gray text */
+    background-color: #ffffff; /* White page background */
 }
 
 /* Header and Navigation */
 header {
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #ffffff; /* White header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
     top: 0;
@@ -43,86 +43,98 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: #333333;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #007bff;
+    color: #00bcd4; /* Teal accent on hover */
 }
 
 /* Main content */
 main {
-    margin: 80px auto 0;
+    margin: 80px auto 0; /* Space for fixed header */
 }
 
+/* Each section offset by header height when clicking anchor links */
 section {
     margin: 4rem 0;
     padding: 2rem 0;
-    scroll-margin-top: 80px; /* Offsets scrolling by the header’s height */
+    scroll-margin-top: 80px;
 }
 
 h1, h2 {
     margin-bottom: 1.5rem;
+    color: #333333;
 }
 
-/* Gallery Grid */
-.gallery {
+/* Section Background Colors (optional subtle variations) */
+#home {
+    background-color: #f2f2f2;
+}
+
+#art {
+    background-color: #e9ecef; 
+}
+
+#projects {
+    background-color: #f8f9fa;
+}
+
+#demoreel {
+    background-color: #e9ecef;
+}
+
+#contact {
+    background-color: #f2f2f2;
+}
+
+/* Gallery / Projects Grid */
+.gallery, .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     padding: 1rem 0;
 }
 
-.gallery-item {
-    background: #fff;
+.gallery-item, .project-card {
+    background: #ffffff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
-.gallery-item:hover {
+.gallery-item:hover, .project-card:hover {
     transform: translateY(-5px);
 }
 
-.gallery-item img {
+.gallery-item img, .project-card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
 
-.gallery-item h3, .gallery-item p {
+.gallery-item h3, .gallery-item p,
+.project-card h3, .project-card p {
     padding: 1rem;
+    color: #333333;
 }
 
-/* Projects Grid */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
+/* Buttons with teal accent */
 .button {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
+    background-color: #00bcd4; /* Teal accent */
+    color: #ffffff;
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #0095a1; /* Darker teal on hover */
 }
 
 /* Contact Section */
@@ -133,7 +145,7 @@ h1, h2 {
 }
 
 .contact-links a {
-    color: #007bff;
+    color: #00bcd4; /* Teal for contact links */
     text-decoration: none;
 }
 
@@ -143,6 +155,7 @@ footer {
     padding: 2rem;
     background-color: #f8f9fa;
     margin-top: 4rem;
+    color: #333333;
 }
 
 /* Responsive Design */
@@ -156,47 +169,32 @@ footer {
         margin: 0.5rem 0;
     }
     
-    .gallery {
+    .gallery, .projects-grid {
         grid-template-columns: 1fr;
     }
 }
 
-
-#home {
-    background-color: #e0f7fa; /* Light teal */
-}
-
-#art {
-    background-color: #ffe0b2; /* Light orange */
-}
-
-#projects {
-    background-color: #f3e5f5; /* Light purple */
-}
-
-#demoreel {
-    background-color: #fff9c4; /* Light yellow */
-}
-
-#contact {
-    background-color: #c8e6c9; /* Light green */
-}
-
+/* Centered content container (optional) */
 .content-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* Optional Showcase Layout (for special sections/cards) */
 .project-showcase {
     display: flex;
-    background: #fff;
+    background: #ffffff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     margin-bottom: 2rem;
-    height: clamp(300px, 400px, 500px); /* Sets min, preferred, and max height */
+    height: clamp(300px, 400px, 500px);
+}
+
+.project-showcase:hover {
+    transform: translateY(-5px);
 }
 
 .showcase-info {
@@ -206,34 +204,20 @@ footer {
     flex-direction: column;
     justify-content: center;
     min-width: 300px;
-    overflow-y: auto; /* Allows scrolling if content is too long */
+    overflow-y: auto;
+    color: #333333;
 }
 
 .showcase-image {
     flex: 2;
     max-width: 60%;
-    height: 100%; /* Fill the parent height */
+    height: 100%;
 }
 
 .showcase-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* This will crop/scale the image to fill the space */
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    .project-showcase {
-        flex-direction: column;
-    }
-
-    .showcase-image {
-        max-width: 100%;
-    }
-
-    .showcase-info {
-        min-width: auto;
-    }
+    object-fit: cover;
 }
 
 /* Tools section styles */
@@ -244,7 +228,7 @@ footer {
 .tools-used h4 {
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
-    color: #666;
+    color: #666666;
 }
 
 .tools-list {
@@ -260,5 +244,6 @@ footer {
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     font-size: 0.8rem;
-    color: #555;
+    color: #555555;
 }
+

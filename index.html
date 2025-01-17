@@ -16,7 +16,7 @@
                 <li><a href="#demoreel">Demo Reel</a></li> <!-- New nav item -->
                 <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav>
+        </nav>       
     </header>
 
     <main>
@@ -65,8 +65,9 @@
 
         <section id="projects">
             <div class="content-container">
-                <h2>Coding Projects</h2>
-                <div class="gallery"> <!-- Using the same gallery class as art section -->
+                <h2>Projects</h2>
+                <div class="gallery">
+                    <!-- Each piece of art goes in its own gallery-item div -->
                     <div class="gallery-item">
                         <a href="projects/PathTracer.html">
                             <img src="images/PathTracer/LG_MicroFMirror_wEnvi.png" alt="Path Tracer">
@@ -74,21 +75,27 @@
                         <h3>Monte Carlo Path</h3>
                         <p>MIS path tracer with multiple light types and materials</p>
                     </div>
-                    
+
                     <div class="gallery-item">
-                        <img src="images/BlackHole/BlackHole_V1.png" alt="Project 2">
+                        <a href="projects/BlackHole.html">
+                            <img src="images/BlackHole/BlackHole_V1.png" alt="Project 2">
+                        </a>
                         <h3>Black Hole Shader</h3>
                         <p>Noise based vertex and fragment shader</p>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/MiniMC/MainImage_Day_V1.png" alt="Project 3">
+                        <a href="projects/MiniMC.html">
+                            <img src="images/MiniMC/MainImage_Day_V1.png" alt="Path Tracer">
+                        </a>
                         <h3>Mini Minecraft</h3>
                         <p>Custom implementation of </p>
                     </div>
-                </div>
-                <div class="see-more-container">
-                    <a href="pages/projects.html" class="button">See All Projects</a>
+
+                    <!-- Add as many as you want -->
+                    <div class="see-more-container">
+                        <a href="pages/projects.html" class="button">See All Projects</a>
+                    </div>
                 </div>
             </div>
         </section>

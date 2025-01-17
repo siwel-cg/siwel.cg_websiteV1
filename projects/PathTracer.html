@@ -1,91 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Name - Your Portfolio</title>
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/project.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Name - Your Portfolio</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/pathTracer.css">
 </head>
 <body>
-    <!-- Using the same header as main page -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="../index.html#home">Home</a></li>
-                <li><a href="../index.html#art">Portfolio</a></li>
-                <li><a href="../index.html#projects">Projects</a></li>
-                <li><a href="../index.html#demoreel">Demo Reel</a></li> <!-- New nav item -->
-                <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Same header/nav as main page -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#art">Portfolio</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#demoreel">Demo Reel</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main class="project-page">
-        <article class="project-content">
-            <div class="project-header">
-                <h1>Project Name</h1>
-                <div class="project-meta">
-                    <span class="date">Completed: January 2025</span>
-                    <div class="project-links">
-                        <a href="#" class="button">Live Demo</a>
-                        <a href="#" class="button">View Code</a>
-                    </div>
-                </div>
-            </div>
+  <!-- Full-width project header with background color -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Project Name</h1>
+      <div class="project-meta">
+        <span class="date">Completed: January 2025</span>
+        <div class="tools-used">
+          <h4>Tools Used</h4>
+          <ul class="tools-list">
+            <li>Houdini</li>
+            <li>Davinci Resolve</li>
+            <!-- Add more tools as needed -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <div class="project-grid">
-                <section class="project-overview">
-                    <h2>Overview</h2>
-                    <p>Detailed description of your project. Explain what the project does, why you built it, and what problem it solves.</p>
-                    
-                    <h3>Features</h3>
-                    <ul>
-                        <li>Key feature one</li>
-                        <li>Key feature two</li>
-                        <li>Key feature three</li>
-                    </ul>
-                </section>
+  <main class="project-page">
+    <article class="project-content">
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          Provide a concise description of your project here. Discuss goals, 
+          motivations, and any important context. Explain what problems the 
+          project solves or what unique features it has.
+        </p>
+      </section>
 
-                <section class="project-showcase">
-                    <img src="../images/PathTracer/LG_MicroFMirror_wEnvi.png" alt="Project main image" class="main-image">
-                </section>
-            </div>
+      <!-- Image Gallery (supports multiple images) -->
+      <section class="images-section">
+        <h2>Project Images</h2>
+        <div class="image-grid">
+          <figure>
+            <img src="../images/ProjectXYZ/image1.jpg" alt="Screenshot 1">
+            <figcaption>Caption describing feature or scene</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/ProjectXYZ/image2.jpg" alt="Screenshot 2">
+            <figcaption>Caption describing feature or scene</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/ProjectXYZ/image3.jpg" alt="Screenshot 3">
+            <figcaption>Caption describing feature or scene</figcaption>
+          </figure>
+          <!-- Add more <figure> blocks as needed -->
+        </div>
+      </section>
 
-            <section class="project-details">
-                <h2>Technical Details</h2>
-                <div class="technologies">
-                    <h3>Technologies Used</h3>
-                    <ul>
-                        <li>HTML5</li>
-                        <li>CSS3</li>
-                        <li>JavaScript</li>
-                    </ul>
-                </div>
-            </section>
+      <!-- Optional Additional Sections (e.g. breakdown, challenges, etc.) -->
+      <section class="breakdown-section">
+        <h2>Breakdown</h2>
+        <p>
+          Go into detail on various aspects of the project, such as 
+          environment setup, procedural tools, or final rendering process.
+        </p>
+      </section>
+    </article>
+  </main>
 
-            <section class="project-gallery">
-                <h2>Gallery</h2>
-                <div class="image-grid">
-                    <figure>
-                        <img src="../images/PathTracer/LG_Scene1.png" alt="Project screenshot 1">
-                        <figcaption>Caption describing this feature</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="../images/PathTracer/LG_Scene2.png" alt="Project screenshot 2">
-                        <figcaption>Caption describing this feature</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="../images/PathTracer/LG_Scene3.png" alt="Project screenshot 3">
-                        <figcaption>Caption describing this feature</figcaption>
-                    </figure>
-                </div>
-            </section>
-        </article>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
-    </footer>
+  <footer>
+    <p>&copy; 2025 Your Name. All rights reserved.</p>
+  </footer>
 </body>
 </html>
