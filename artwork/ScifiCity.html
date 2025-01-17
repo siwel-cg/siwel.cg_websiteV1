@@ -1,88 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Name - Your Portfolio</title>
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/project.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Under Construction - Your Portfolio</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/pathTracer.css"> <!-- or remove if not needed -->
 </head>
 <body>
-    <!-- Using the same header as the main page -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="../index.html#home">Home</a></li>
-                <li><a href="../index.html#art">Portfolio</a></li>
-                <li><a href="../index.html#projects">Projects</a></li>
-                <li><a href="../index.html#demoreel">Demo Reel</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Same header/nav as main page -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#art">Portfolio</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#demoreel">Demo Reel</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main class="project-page">
-        <article class="project-content">
-            <div class="project-header">
-                <h1>Project Name</h1>
-                <div class="project-meta">
-                    <span class="date">Completed: January 2025</span>
-                    
-                    <!-- Tools Used at the top -->
-                    <div class="tools-used">
-                        <h4>Tools Used</h4>
-                        <ul class="tools-list">
-                            <li>Houdini</li>
-                            <li>Davinci Resolve</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+  <!-- Main section with "Under Construction" message -->
+  <main style="min-height: calc(100vh - 80px); /* accommodates fixed header */ 
+               display: flex; 
+               align-items: center; 
+               justify-content: center;">
+    <h1 style="font-size: 3rem; text-align: center;">Under Construction</h1>
+  </main>
 
-            <div class="project-grid">
-                <section class="project-overview">
-                    <h2>Overview</h2>
-                    <p>Detailed description of your project. Explain what the project does, why you built it, and what problem it solves.</p>
-                    
-                    <h3>Features</h3>
-                    <ul>
-                        <li>Key feature one</li>
-                        <li>Key feature two</li>
-                        <li>Key feature three</li>
-                    </ul>
-                </section>
-
-                <section class="project-showcase">
-                    <img src="../images/ScifiCity/city-midcont.png" alt="Project main image" class="main-image">
-                </section>
-            </div>
-        </article>
-
-        <!-- New Breakdown Section -->
-        <section class="project-breakdown">
-            <h2>Breakdown</h2>
-            
-            <div class="breakdown-part">
-                <h3>Part One: Environment Setup</h3>
-                <p>Explain the initial steps, planning, or environment creation for your project.</p>
-            </div>
-
-            <div class="breakdown-part">
-                <h3>Part Two: Procedural Generation</h3>
-                <p>Dive into how you used tools like Houdini to procedurally generate assets or environments.</p>
-            </div>
-
-            <div class="breakdown-part">
-                <h3>Part Three: Final Integration</h3>
-                <p>Discuss how you brought everything together for the final build or render.</p>
-            </div>
-        </section>
-        <!-- End of Breakdown Section -->
-
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
-    </footer>
+  <!-- Optional footer -->
+  <footer>
+    <p>&copy; 2025 Your Name. All rights reserved.</p>
+  </footer>
 </body>
 </html>
