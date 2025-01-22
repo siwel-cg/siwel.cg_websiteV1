@@ -6,6 +6,12 @@
   <title>Monte Carlo Path Tracer - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="../styles/pathTracer.css">
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+    id="MathJax-script"
+    async
+  ></script>
 </head>
 <body>
   <!-- Same header/nav as main page -->
@@ -58,114 +64,105 @@
         <div class="image-grid">
           <figure>
             <img src="../images/PathTracer/LG_Scene1.png" alt="Screenshot 1">
-            <figcaption>Glass Sphere in a micro-facet mirror box</figcaption>
+            <figcaption>Glass sphere in a micro-facet mirror box</figcaption>
           </figure>
           <figure>
             <img src="../images/PathTracer/LG_Scene2.png" alt="Screenshot 2">
-            <figcaption>Caption describing feature or scene</figcaption>
+            <figcaption>Glass cubes</figcaption>
           </figure>
           <figure>
             <img src="../images/PathTracer/LG_Scene3.png" alt="Screenshot 3">
-            <figcaption>Caption describing feature or scene</figcaption>
+            <figcaption>Glass Cubes in a micro-facet mirror box</figcaption>
           </figure>
         </div>
       </section>
 
-      <!-- Breakdown Section -->
-      <section class="breakdown-section">
-        <h2>Features</h2>
-      
-        <!-- 1. Multiple Importance Sampling (MIS) -->
-        <div class="breakdown-part">
-          <div class="breakdown-content">
-            <h3>Multiple Importance Sampling (MIS)</h3>
-            <p>
-              To reduce noise and speed up convergence, each bounce in the scene 
-              leverages both BSDF sampling and direct light sampling. MIS balances 
-              these different strategies so that you get the "best of both worlds".
-              
-              
-              , ensuring that neither approach dominates, 
-              improving the quality of global illumination without a large increase 
-              in render time.
-            </p>
-          </div>
-          <div class="breakdown-image">
-            <img src="../images/PathTracer/MIS_Veach.png" alt="MIS Illustration">
-          </div>
-        </div>
-      
-        <!-- 2. Global Illumination & Bounce Handling -->
-        <div class="breakdown-part">
-          <div class="breakdown-content">
-            <h3>Global Illumination & Bounce Handling</h3>
-            <p>
-              For each ray bounce, the path tracer computes both the material’s BSDF contribution 
-              and direct lighting from the light sources. Cosine-weighted sampling helps accurately 
-              model diffuse reflections and reduce noise in indirect lighting. Rays continue bouncing 
-              until they  hit a light source or exceed a bounce limit, capturing complex 
-              light interactions within the scene.
-            </p>
-          </div>
-          <div class="breakdown-image">
-            <img src="../images/PathTracer/placeholder.jpg" alt="Global Illumination Illustration">
-          </div>
-        </div>
-      
-        <!-- 3. Material Models -->
-        <div class="breakdown-part">
-          <div class="breakdown-content">
-            <h3>Material Models</h3>
-            <p>
-              The path tracer supports a variety of surface types:
-            </p>
-            <ul>
-              <li><strong>Lambertian (Diffuse):</strong> Perfectly diffuse reflection.</li>
-              <li><strong>Perfect Mirrors:</strong> Perfect reflection.</li>
-              <li><strong>Microfacet:</strong> Glossy or rough reflections via micro-surface distribution.</li>
-              <li><strong>Dielectric:</strong> Fresnel-based reflection/refraction for glass-like materials.</li>
-            </ul>
-          </div>
-          <div class="breakdown-image">
-            <img src="../images/PathTracer/placeholder.jpg" alt="Material Models Illustration">
-          </div>
-        </div>
-      
-        <!-- 4. Light Types -->
-        <div class="breakdown-part">
-          <div class="breakdown-content">
-            <h3>Light Types</h3>
-            <p>
-              The path tracer includes multiple ways to illuminate a scene:
-            </p>
-            <ul>
-              <li><strong>Environment Light (HDR):</strong> An HDR map that wraps the entire scene.</li>
-              <li><strong>Sphere & Area Lights:</strong> Extended emitters for softer shadows.</li>
-              <li><strong>Point & Spot Lights:</strong> Localized emitters for sharper or focused lighting.</li>
-            </ul>
-          </div>
-          <div class="breakdown-image">
-            <img src="../images/PathTracer/placeholder.jpg" alt="Light Types Illustration">
-          </div>
-        </div>
-      
-        <!-- 5. Scene & Asset Management -->
-        <div class="breakdown-part">
-          <div class="breakdown-content">
-            <h3>Scene & Asset Management</h3>
-            <p>
-              Custom scenes are specified via JSON, defining lights, geometry, 
-              materials, and textures. This modular approach lets you import different 
-              configurations or experimental setups without recompiling, ensuring 
-              flexibility and faster iteration on scene design.
-            </p>
-          </div>
-          <div class="breakdown-image">
-            <img src="../images/PathTracer/placeholder.jpg" alt="Scene Management Illustration">
-          </div>
-        </div>
-      
+      <section class="features-section">
+        <h2>Breakdown</h2>
+        <h2>Multiple Importance Sampling</h2>
+        <p>
+          With Monte Carlo estimation, a PDF distribution is needed to adjust the contributions of the incomeing rays and approximate the light integral.
+          A sigle function that matches both the PDF of our light source and the PDF of the BRDF at a surface point,
+          we importance-sample each PDF separately, then combine the results using appropriate weights. Basically, you get the best of both methods
+          by weighting one methods contribution more deppending on how well the pdf matches the smapled ray.
+        </p>
+        <p>
+          Depending on the characteristics of the light and the BRDF, one sampling strategy may be far more effective than the other. For example,
+          with a Specular BRDF, sampling only the light's PDF can miss narrow reflections, thus under-sampling bright highlights, but sampling with the BRDFs 
+          PDF would work just fine. On the hand, for a diffuse BRDF, sampling only the BRDF's PDF can miss small lights, 
+          especially if they occupy a tiny solid angle in the scene. 
+        </p>
+
+        <p>
+          To get the correct weighting, we use the Balance Heuristic:
+        </p>
+        <p style="text-align:center;">
+          \[
+            L_{\text{final}}(x_i) 
+            = \frac{f(x_i)}{N_L \, p_L(x_i)}\, w_i,
+            \quad
+            L_{\text{final}}(x_j) 
+            = \frac{f(x_j)}{N_B \, p_B(x_j)}\, w_j.
+          \]
+        </p>
+
+
+        <H2>Materials</H2>
+        <p>
+          
+        </p>
+        <p>
+          A flexible JSON-based scene importer provides an easy way to define geometry, materials, 
+          and lights without recompiling. Texture support allows for detailed surface properties 
+          and intricate shading effects, further enhancing the visual fidelity of your renders.
+        </p>
       </section>
+
+      <section class="images-section">
+        <h2>Test Scenes</h2>
+        <div class="image-grid">
+          <figure>
+            <img src="../images/PathTracer/LG_Cornell_wEnvi.png" alt="Screenshot 1">
+            <figcaption>Single area light and enviroment light box (MIS)</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/PathTracer/LG_CornellNoLight_wEnvi.png" alt="Screenshot 2">
+            <figcaption>Enviroment light box (MIS)</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/PathTracer/LG_MirrorBox_wEnvi.png" alt="Screenshot 3">
+            <figcaption>Enviroment lgith with mirror box (MIS)</figcaption>
+          </figure>
+
+          <figure>
+            <img src="../images/PathTracer/Point Light Direct.png" alt="Screenshot 3">
+            <figcaption>Point light box (MIS)</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/PathTracer/MIS_doubleLight_Box.png" alt="Screenshot 3">
+            <figcaption>Double area light box (MIS)</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/PathTracer/Spot Light direct.png" alt="Screenshot 3">
+            <figcaption>Spot light box (MIS)</figcaption>
+          </figure>
+
+          <figure>
+            <img src="../images/PathTracer/GlassBall Naive.png" alt="Screenshot 3">
+            <figcaption>Glass ball box (naive)</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/PathTracer/TransmitBall Naive.png" alt="Screenshot 3">
+            <figcaption>Transmissive ball box (naive)</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/PathTracer/LG_MicroFMirror_wEnvi.png" alt="Screenshot 3">
+            <figcaption>Micro-facet box (MIS)</figcaption>
+          </figure>
+
+        </div>
+      </section>
+
       
 
     </article>

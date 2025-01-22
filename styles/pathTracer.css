@@ -242,3 +242,9 @@ header nav ul li a:hover {
 }
 
 
+.top-buttons {
+  display: flex;
+  /*justify-content: center;  This aligns the buttons in the middle */
+  margin: 2rem 0;          /* Optional: vertical spacing around the buttons */
+  gap: 1rem;               /* Optional: space between the two buttons */
+}

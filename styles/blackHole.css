@@ -1,229 +1,247 @@
-/* Base styles */
+/* Example reset / base styles (optional if you have them elsewhere) */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333333;
-    background-color: #ffffff;
-  }
-  
-  /* Header styles (same as original) */
-  header {
-    background-color: #ffffff;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  header nav ul {
-    display: flex;
-    justify-content: flex-end;
-    list-style: none;
-    padding: 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  header nav ul li {
-    margin-left: 2rem;
-  }
-  
-  header nav ul li a {
-    text-decoration: none;
-    color: #333333;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  header nav ul li a:hover {
-    color: #00bcd4;
-  }
-  
-  /* Project Header */
-  .project-header {
-    width: 100%;
-    background-color: #f2f2f2;
-    margin-top: 60px;
-    padding: 1rem 0;
-  }
-  
-  .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333333;               /* Dark gray text */
+  background-color: #ffffff;    /* White background */
+}
+
+/* --- Added universal paragraph spacing --- */
+body p {
+  margin-bottom: 1.5rem; /* Adjust as needed: 1.5rem, 2rem, etc. */
+}
+
+/* Fixed top nav */
+header {
+  background-color: #ffffff; /* White header */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header nav ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header nav ul li {
+  margin-left: 2rem;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Teal accent on hover */
+header nav ul li a:hover {
+  color: #00bcd4;
+}
+
+.overview-section {
+  margin: 2rem 0;  
+  padding: 1rem 0; 
+}
+
+/* 2. Increase the font size for the Overview section title */
+.overview-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Project Header (full-width background) */
+.project-header {
+  width: 100%;
+  background-color: #f2f2f2;
+  margin-top: 60px;
+  padding: 1rem 0;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; /* Horizontal padding for breathing room */
+}
+
+.project-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: #333333;
+}
+
+.project-meta {
+  color: #666666;
+  margin-top: 0.5rem;
+}
+
+/* Tools used at the top */
+.tools-used {
+  margin-top: 1rem;
+}
+
+.tools-used h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #666666;
+}
+
+.tools-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+/* Main content container */
+.project-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 20px;
+}
+
+/* Image section spacing */
+.images-section {
+  margin: 2rem 0;  
+  padding: 1rem 0;
+}
+
+/* Increase images-section title size */
+.images-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.image-grid figure {
+  background: #ffffff; 
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.image-grid figure:hover {
+  transform: translateY(-5px);
+}
+
+.image-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-grid figcaption {
+  padding: 1rem;
+  text-align: center;
+  color: #666666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
   .project-header h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    color: #333333;
+    font-size: 2rem;
   }
-  
-  /* Overview Section */
-  .overview-section {
-    margin: 2rem 0;
-    padding: 1rem 0;
+  .header-container {
+    padding: 0 10px;
   }
-  
-  .overview-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  /* Video Section */
-  .video-section {
-    margin: 2rem 0;
-    padding: 1rem 0;
-  }
-  
-  .video-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .video-container {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-  
-  .video-container video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-  }
-  
-  /* Project Links Section */
-  .project-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: 3rem 0;
-  }
-  
-  .project-button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .project-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .code-button {
-    background-color: #333333;
-    color: #ffffff;
-  }
-  
-  .demo-button {
-    background-color: #00bcd4;
-    color: #ffffff;
-  }
-  
-  /* Breakdown Section */
-  .breakdown-section {
-    margin-top: 3rem;
-  }
-  
-  .breakdown-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-  
+}
+
+/* Breakdown styling */
+.breakdown-section {
+  margin-top: 1rem;
+  font-size: 2rem;
+}
+
+/* Card-like layout for each breakdown part */
+.breakdown-part {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.breakdown-content {
+  flex: 1;
+}
+
+.breakdown-image {
+  flex: 1;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.breakdown-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.breakdown-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333333;
+}
+
+.breakdown-content p,
+.breakdown-content ul {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555555;
+}
+
+.breakdown-content ul li {
+  margin: 0.5rem 0;
+}
+
+/* Responsive for breakdown card */
+@media (max-width: 768px) {
   .breakdown-part {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 3rem;
     padding: 2rem;
     gap: 2rem;
   }
-  
   .breakdown-content {
-    flex: 1;
-  }
-  
-  .breakdown-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .breakdown-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  
-  .breakdown-content h3 {
-    font-size: 1.8rem;
     margin-bottom: 1rem;
-    color: #333333;
   }
-  
-  .breakdown-content p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #555555;
+  .breakdown-image {
+    width: 100%;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .project-header h1 {
-      font-size: 2rem;
-    }
-    
-    .header-container {
-      padding: 0 10px;
-    }
-    
-    .breakdown-part {
-      flex-direction: column;
-      text-align: center;
-      margin-bottom: 3rem;
-      padding: 2rem;
-      gap: 2rem;
-    }
-    
-    .breakdown-content {
-      margin-bottom: 1rem;
-    }
-    
-    .breakdown-image {
-      width: 100%;
-    }
-    
-    .project-links {
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-    
-    .project-button {
-      width: 80%;
-      text-align: center;
-    }
-  }
+}
+
+.top-buttons {
+  display: flex;
+  /*justify-content: center;  This aligns the buttons in the middle */
+  margin: 2rem 0;          
+  gap: 1rem;               
+}
