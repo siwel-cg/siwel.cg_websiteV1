@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction - Your Portfolio</title>
+  <title>Project Title - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/pathTracer.css"> <!-- or remove if not needed -->
+  <link rel="stylesheet" href="../styles/blackHole.css">
 </head>
 <body>
-  <!-- Same header/nav as main page -->
+  <!-- Header/nav -->
   <header>
     <nav>
       <ul>
@@ -21,17 +21,68 @@
     </nav>
   </header>
 
-  <!-- Main section with "Under Construction" message -->
-  <main style="min-height: calc(100vh - 80px); /* accommodates fixed header */ 
-               display: flex; 
-               align-items: center; 
-               justify-content: center;">
-    <h1 style="font-size: 3rem; text-align: center;">Under Construction</h1>
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Mini Minecraft</h1>
+      <div class="project-meta">
+        <span class="date">December 2023</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>C++</li>
+            <li>GLSL</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p> 
+          
+        </p>
+
+        <h2>Implemented Features</h2>
+        <h3>Chunking</h3>
+        <p>
+          In order to speed up the game play, I designed a chunking system similar to the one found in Minecraft. Each chunk was 16x256x16 blocks in size. 
+          Chunks would be generated based on proximity to the player so that you could never reach the end of the generated world before the ground had loaded in. Additionally, while generating each chunk, only block faces that didn't have blocks in front of them were created and buffered to the GPU for rendering. Using a chunking system also allowed for multi threading later on, as each chunk could be generated in parallel. 
+        </p>
+        <p>
+          To keep track of which faces to include, I created a new struct which represents an entire block face keyed by the direction it is pointing. I used this in combination with several unordered maps to construct the vertex buffer objects (VBO) for each block. For faces on the border between two chunks, I used a mod system to check the next chunk over for blocks. Rather than updating the model matrix for each face, I kept the world space positions of the current chunk which I used with the chunk space position of each point to directly draw the faces in world space. The main dfficulty was getting the chunk border to work correctly when checkin for empty blocks. 
+        </p>
+
+        <h3>Textures</h3>
+        <p>
+          Implementing textures was fairly strait forward. I created a large map of uv choordinates keyed on the block type. To distinguish animated textures (water and lava) from static textures, I repurposed every part of the color buffer rather than creating a seperate attribute. The first two slots were used to pass in the UVs from my texture map, the third slot was used as a boolean (0 or 1) to represent if the texture is animated or not, and finaly the fourth slot was used for the ambient occlusion value (see bellow). For rendering transparent textures like the water I just created two sepperate buffers and functions that processed the VBOs. I would used each one based on if the current block was opaque or not, then during the rendering stage I would render just the opque blocks then the transparent blocks on top.  
+        </p>
+
+        <h3>Voxel Ambient Occlusion</h3>
+        <p>
+          The implementation was similar to how I did chunk generation, but on a per vertex basis. For each vertex, you check all the neighboring blocks. The difficulty came with getting the right blocks for each vertex on the face, due to the fact that they could be in different chunks. In the most extreme case, the three possible occluding blocks could be in three different chunks. The way I got around this was with a somewhat overly extensive check for each position value I would use. I then passed on the number of occluders to the shaders, and used that number to calculate a darkening scalar for the final color within the vertex shader.
+        </p>
+
+        <h3>Flowers / Grass / Mushrooms</h3>
+        <p>
+          These types of assets were implemented as to crossing bilboard textures. This required a new form of VBOs needed to be generated. Becuase these features are just two planes set diagonaly across a block, the old position system wouldn't work. However, I could still reuse some of the values. Because of the order of the point's positions I had previously hardcoded in, there wasn't some niece patter I could take advantage of. Thus I hard coded in the X shape. I added these blocks to the transparend VBOs so that the blocks behind them would be correctly rendered. I also slightly adjusted the fragment shader used to render them to discard any fragments with an alpha of 0. This was to solve an issue with fully transparent fragments blocking the opaque fragments behind them when they should have been rendered. This set of blocks was also excluded when taking lighting into account.
+        </p>
+
+        <h3>Shadow Map</h3>
+        <p>
+          Shadow mpaing, in theory, is a pretty simple idea. Just render a depth map from the lights point of view and do a bit of geometry in the fragment shader to check for occlusion. The tough part is the slight adjustments you need to make for it to fit with your geometry well. To make the shadow map, I reused the frame buffer code used to make the post process effects along with a new shader that rendered the fragments z coordinate as the color. Getting the right position for this light camera took a bit of work to get it to both see all the terain but to also smoothly follow the player's movement. With the shadow map texture created, I passed it into final shader to comput which fragments were in shadow. The hard part was adjusting the bias to remove all atrifacts, which even after hours of adjusting values still resulted in some slight shadow bands when the sun is at a certain angle. Part of the problem is also with the resolution of the light's depth map. Even after upscalling it, the shadow map still resulted in some minor artifacting. The other issue I had was that the shadows buzzed around alot as the sun moved. A partial fix for this was to clamp part of the cameras MVP values, althoguh that only eliminated jittering along one axis. 
+        </p>
+      </section>
+
+
+    </article>
   </main>
 
-  <!-- Optional footer -->
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
   </footer>
 </body>
 </html>
