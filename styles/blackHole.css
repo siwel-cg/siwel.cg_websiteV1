@@ -93,6 +93,16 @@ header nav ul li a:hover {
   margin-top: 1rem;
 }
 
+/* Style each "Tools Used" item like a button */
+.tools-list li {
+  background-color: #00bcd4; /* Change this to any color you want */
+  color: #ffffff;            /* Text color on the "button" */
+  padding: 0.4rem 0.8rem;    /* Adjust spacing inside the button */
+  border-radius: 4px;        /* Round the corners slightly */
+  transition: background-color 0.3s ease;
+  cursor: pointer;           /* Mouse pointer indicates clickability (optional) */
+}
+
 .tools-used h4 {
   margin-bottom: 0.5rem;
   font-size: 1.1rem;

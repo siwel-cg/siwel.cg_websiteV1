@@ -13,8 +13,8 @@
     <nav>
       <ul>
         <li><a href="../index.html#home">Home</a></li>
-        <li><a href="../index.html#art">Portfolio</a></li>
-        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../pages/gallery.html">Portfolio</a></li>
+        <li><a href="../pages/projects.html">Projects</a></li>
         <li><a href="../index.html#demoreel">Demo Reel</a></li>
         <li><a href="../index.html#contact">Contact</a></li>
       </ul>
@@ -68,7 +68,7 @@
 
         <h3>Flowers / Grass / Mushrooms</h3>
         <p>
-          These types of assets were implemented as to crossing bilboard textures. This required a new form of VBOs needed to be generated. Becuase these features are just two planes set diagonaly across a block, the old position system wouldn't work. However, I could still reuse some of the values. Because of the order of the point's positions I had previously hardcoded in, there wasn't some niece patter I could take advantage of. Thus I hard coded in the X shape. I added these blocks to the transparend VBOs so that the blocks behind them would be correctly rendered. I also slightly adjusted the fragment shader used to render them to discard any fragments with an alpha of 0. This was to solve an issue with fully transparent fragments blocking the opaque fragments behind them when they should have been rendered. This set of blocks was also excluded when taking lighting into account.
+          These types of geometry were implemented as to crossing bilboard textures, which required a new form of VBOs to be generated. Becuase these features are just two planes set diagonaly across a block, the block position system wouldn't work. However, I could still reuse some of the values. Because of the order of the point's positions I had previously hardcoded in, there wasn't some niece patter I could take advantage of. Thus I hard coded in the X shape. I added these blocks to the transparend VBOs so that the blocks behind them would be correctly rendered. I also slightly adjusted the fragment shader used to render them to discard any fragments with an alpha of 0. This was to solve an issue with fully transparent fragments blocking the opaque fragments behind them when they should have been rendered. This set of blocks was also excluded when taking lighting into account.
         </p>
 
         <h3>Shadow Map</h3>

@@ -1,7 +1,7 @@
 // Smooth scrolling for navigation links
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
+        //e.preventDefault();
         const section = document.querySelector(this.getAttribute('href'));
         section.scrollIntoView({
             behavior: 'smooth'
@@ -30,13 +30,13 @@ window.addEventListener('scroll', () => {
 });
 
 // Simple form validation for contact form (if you add one)
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Add your form submission logic here
-            console.log('Form submitted!');
-        });
-    }
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     const form = document.querySelector('form');
+//     if (form) {
+//         form.addEventListener('submit', (e) => {
+//             e.preventDefault();
+//             // Add your form submission logic here
+//             console.log('Form submitted!');
+//         });
+//     }
+// });
