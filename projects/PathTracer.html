@@ -50,11 +50,22 @@
       <section class="overview-section">
         <h2>Overview</h2>
         <p>
-          This was one of the major projects for CIS 5610. It is a fully featured Monte Carlo path tracer that 
-          simulates realistic lighting. Leveraging multiple 
-          importance sampling (MIS) and cosine-weighted sampling, the path tracer efficiently converges toward 
-          physically accurate global illumination. A JSON-based scene importer allows custom scenes—complete with lights, 
-          materials, and geometry—to be easily made and rendered.
+          This was one of the major projects for CIS 5610. It uses Monte Carlo elstimation to approximate the Light Transport Equation:
+        </p>
+        <p style="text-align:center;">
+          \[
+            L_o(\mathbf{x}, \boldsymbol{\omega}_o)
+            = L_e(\mathbf{x}, \boldsymbol{\omega}_o)
+            \;+\;
+            \int_{\Omega}
+            f_r\!\bigl(\mathbf{x}, \boldsymbol{\omega}_i, \boldsymbol{\omega}_o\bigr)
+            \,L_i\!\bigl(\mathbf{x}, \boldsymbol{\omega}_i\bigr)
+            \,(\mathbf{n} \cdot \boldsymbol{\omega}_i)
+            \,d\boldsymbol{\omega}_i
+          \]
+        </p>
+        <p>
+          Optimozations such as Multiple Importance Sampling and Cosine weighted sampling were used to improve the time it takes for a rendered image to converge. This renderer supports a variety of material types including Lambertian, Specular, Transmissive, Emmisive, and Micro-facet models. Different light types including area lights, sphere lights, point lights, spot lights, and environment lights were implemented. With these features available, custom scenes could be created and imported via a .JSON file reader. 
         </p>
       </section>
 
@@ -79,7 +90,7 @@
 
       <section class="features-section">
         <h2>Breakdown</h2>
-        <h2>Multiple Importance Sampling</h2>
+        <h3>Multiple Importance Sampling</h3>
         <p>
           With Monte Carlo estimation, a PDF distribution is needed to adjust the contributions of the incomeing rays and approximate the light integral.
           A sigle function that matches both the PDF of our light source and the PDF of the BRDF at a surface point,
@@ -107,7 +118,7 @@
         </p>
 
 
-        <H2>Materials</H2>
+        <h3>Materials</h3>
         <p>
           
         </p>
@@ -149,11 +160,11 @@
 
           <figure>
             <img src="../images/PathTracer/GlassBall Naive.png" alt="Screenshot 3">
-            <figcaption>Glass ball box (BRDF)</figcaption>
+            <figcaption>Glass ball box (BRDF Sampling)</figcaption>
           </figure>
           <figure>
             <img src="../images/PathTracer/TransmitBall Naive.png" alt="Screenshot 3">
-            <figcaption>Transmissive ball box (BRDF)</figcaption>
+            <figcaption>Transmissive ball box (BRDF Sampling)</figcaption>
           </figure>
           <figure>
             <img src="../images/PathTracer/LG_MicroFMirror_wEnvi.png" alt="Screenshot 3">

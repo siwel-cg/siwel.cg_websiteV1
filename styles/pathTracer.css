@@ -94,6 +94,7 @@ header nav ul li a:hover {
   color: #ffffff;            /* Text color on the "button" */
   padding: 0.4rem 0.8rem;    /* Adjust spacing inside the button */
   border-radius: 4px;        /* Round the corners slightly */
+
   transition: background-color 0.3s ease;
   cursor: pointer;           /* Mouse pointer indicates clickability (optional) */
 }
@@ -174,6 +175,18 @@ header nav ul li a:hover {
   }
 }
 
+/* Features styling (instead of 'breakdown-section') */
+.features-section {
+  margin-top: 0rem; /* Or however much space you want above this section */
+  /* Remove any 'font-size: 2rem;' so text stays the original size */
+}
+
+/* Match the main title in .features-section to other titles (2.5rem) */
+.features-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
 /* Breakdown styling */
 .breakdown-section {
   margin-top: 1rem;
@@ -216,7 +229,7 @@ header nav ul li a:hover {
 
 /* HEADINGS inside breakdown sections */
 .breakdown-content h3 {
-  font-size: 1.8rem;
+  font-size: 1.8rem;  /* Original size from your code */
   margin-bottom: 1rem;
   color: #333333;
 }
@@ -228,7 +241,6 @@ header nav ul li a:hover {
   color: #555555;
 }
 
-/* Slightly bigger bullet text, margin between items */
 .breakdown-content ul li {
   margin: 0.5rem 0;
 }
@@ -250,6 +262,7 @@ header nav ul li a:hover {
     width: 100%;
   }
 }
+
 
 .top-buttons {
   display: flex;
