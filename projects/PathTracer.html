@@ -50,7 +50,7 @@
       <section class="overview-section">
         <h2>Overview</h2>
         <p>
-          This was one of the major projects for CIS 5610. It uses Monte Carlo elstimation to approximate the Light Transport Equation:
+          This was one of the major projects for CIS 5610. It uses Monte Carlo approximation to "solve" the Light Transport Equation:
         </p>
         <p style="text-align:center;">
           \[
@@ -65,7 +65,7 @@
           \]
         </p>
         <p>
-          Optimozations such as Multiple Importance Sampling and Cosine weighted sampling were used to improve the time it takes for a rendered image to converge. This renderer supports a variety of material types including Lambertian, Specular, Transmissive, Emmisive, and Micro-facet models. Different light types including area lights, sphere lights, point lights, spot lights, and environment lights were implemented. With these features available, custom scenes could be created and imported via a .JSON file reader. 
+          Optimizations such as Multiple Importance Sampling and Cosine weighted sampling were used to improve the time it takes for a rendered image to converge. This renderer supports a variety of material types including Lambertian, Specular, Transmissive, Emmisive, and Micro-facet models. Different light types including area lights, sphere lights, point lights, spot lights, and environment lights were implemented. With these features available, custom scenes could be created and imported via a .JSON file reader. 
         </p>
       </section>
 
@@ -116,10 +116,13 @@
             = \frac{f(x_j)}{N_B \, p_B(x_j)}\, w_j.
           \]
         </p>
-
+        <p>
+          For each sampling type, BSDF and Direct, we sample two directions, 
+        </p>
 
         <h3>Materials</h3>
         <p>
+          
           
         </p>
         <p>

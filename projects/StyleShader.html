@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Title - Your Portfolio</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/blackHole.css">
+</head>
+<body>
+  <!-- Header/nav -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../pages/gallery.html">Portfolio</a></li>
+        <li><a href="../pages/projects.html">Projects</a></li>
+        <li><a href="../index.html#demoreel">Demo Reel</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Can Gogh Shader</h1>
+      <div class="project-meta">
+        <span class="date">November 2024</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>Unity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+
+    <div class="top-buttons">
+        <a href="https://github.com/siwel-cg/hw04-stylization" class="button">Project Repo</a>
+    </div>
+
+
+    <article class="project-content">
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          This is a custom surface and post process shader inspired by the iconic painting style of Van Gogh. 
+        </p>
+      </section>
+
+      <!-- Example: Placing the Vimeo embed under your Project Header -->
+      <div class="video-section">
+        <h2>Full Project Video Demo</h2>
+        <!-- Vimeo Embed -->
+        <div style="padding:56.25% 0 0 0;position:relative;">
+          <iframe
+            src="https://player.vimeo.com/video/901575818?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;"
+            title="Mini Minecraft">
+          </iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+      </div>
+
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Breakdown</h2>
+        <p>
+            For this project I was trying to mimic the swirling painterly effect of Van Gogh. To do this, I started with our base toon shader and added a series of noises to deform the UVs for another noise. This distored the cutoff lines between the highlight, midtone, and shadow colors. On top of that I added some slight color variation using mor noise. In particular, a double worley noise where the UVs are multiplied by one Worley and then passed into the second one. This give the circular swirling pattern I was going for. The colors and thresholds were all parameterized for easy customization. To get the main brush stroke effect, I used a variation on the voronoi mozaic post process effect. By combinin it with some layers of noise (using the same technique described above) I was able to rough up the edges of the voronoi cells.
+        </p>
+      </section>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
+  </footer>
+</body>
+</html>
