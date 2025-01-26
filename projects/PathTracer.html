@@ -105,31 +105,52 @@
         </p>
 
         <p>
+          For each sampling type—BSDF and Direct—we draw samples from both the surface’s BRDF distribution
+          (<em>p<sub>B</sub>(x)</em>) and the light’s distribution (<em>p<sub>L</sub>(x)</em>). That is, we sample with both distributions for both sampling types (four samples in total). We then apply the appropriate weight <em>w<sub>i</sub></em> or <em>w<sub>j</sub></em> based on the Balance Heuristic (see below) and sum the contributions. This helps ensure that no matter if the BRDF is highly specular or very diffuse, or 
+          the lights are large or small, we capture all significant lighting paths with minimal noise.
+        </p>
+
+        <p>
           To get the correct weighting, we use the Balance Heuristic:
         </p>
         <p style="text-align:center;">
           \[
-            L_{\text{final}}(x_i) 
-            = \frac{f(x_i)}{N_L \, p_L(x_i)}\, w_i,
+            w_i = \frac{N_L \, p_L(x)}{N_L \, p_L(x) + N_B \, p_B(x)}, 
             \quad
-            L_{\text{final}}(x_j) 
-            = \frac{f(x_j)}{N_B \, p_B(x_j)}\, w_j.
+            w_j = \frac{N_B \, p_B(x)}{N_L \, p_L(x) + N_B \, p_B(x)}.
           \]
         </p>
+        
         <p>
-          For each sampling type, BSDF and Direct, we sample two directions, 
+          When the final radiance is computed, each sample's contribution is:
+        </p>
+      
+        <p style="text-align:center;">
+          \[
+            L_{\text{final}}(x_i)
+            = \frac{f(x_i)}{N_L \, p_L(x_i)} \, w_i,
+            \quad
+            L_{\text{final}}(x_j)
+            = \frac{f(x_j)}{N_B \, p_B(x_j)} \, w_j.
+          \]
+        </p>
+      
+        <p>
+          This way, samples that are very likely under the BRDF PDF but also
+          well-covered by the light PDF won't be doubly counted, and vice versa. The <em>Balance
+          Heuristic</em> effectively merges both sampling strategies so that each important
+          region of the integrand (bright lights, glossy reflections, etc.) receives enough
+          samples.
         </p>
 
-        <h3>Materials</h3>
-        <p>
-          
-          
-        </p>
-        <p>
-          A flexible JSON-based scene importer provides an easy way to define geometry, materials, 
-          and lights without recompiling. Texture support allows for detailed surface properties 
-          and intricate shading effects, further enhancing the visual fidelity of your renders.
-        </p>
+      </section>
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/PathTracer/MIS_Veach.png" alt="veach">
+            <figcaption>Varying light size and deffuse levels (MIS)</figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="images-section">

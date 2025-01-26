@@ -8,18 +8,18 @@
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
-  color: #333333;               /* Dark gray text */
-  background-color: #ffffff;    /* White background */
+  color: #333333;
+  background-color: #ffffff;
 }
 
 /* Fixed top nav */
 header {
-  background-color: #ffffff; /* White header */
+  background-color: #ffffff;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 header nav ul {
@@ -47,35 +47,24 @@ header nav ul li a:hover {
   color: #00bcd4;
 }
 
-.overview-section {
-  margin: 2rem 0;  /* Adjust to your preferred spacing */
-  padding: 1rem 0; /* If there's extra padding, reduce here */
-}
-
-/* 2. Increase the font size for the Overview section title */
-.overview-section h2 {
-  font-size: 2.5rem; /* Adjust for your desired heading size */
-  margin-bottom: 1rem; /* Control spacing below the heading */
-}
-
 /* Project Header (full-width background) */
 .project-header {
   width: 100%;
-  background-color: #f2f2f2; /* Light gray background */
-  margin-top: 60px;          /* Space below fixed nav */
+  background-color: #f2f2f2;
+  margin-top: 60px;    /* Space below fixed nav */
   padding: 1rem 0;
 }
 
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px; /* Horizontal padding for breathing room */
+  padding: 0 20px;     /* Horizontal padding for breathing room */
 }
 
 .project-header h1 {
   font-size: 3rem;
   margin-bottom: 0.5rem;
-  color: #333333;  /* Dark text on light gray background */
+  color: #333333;
 }
 
 .project-meta {
@@ -90,13 +79,12 @@ header nav ul li a:hover {
 
 /* Style each "Tools Used" item like a button */
 .tools-list li {
-  background-color: #00bcd4; /* Change this to any color you want */
-  color: #ffffff;            /* Text color on the "button" */
-  padding: 0.4rem 0.8rem;    /* Adjust spacing inside the button */
-  border-radius: 4px;        /* Round the corners slightly */
-
+  background-color: #00bcd4;
+  color: #ffffff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
   transition: background-color 0.3s ease;
-  cursor: pointer;           /* Mouse pointer indicates clickability (optional) */
+  cursor: pointer;
 }
 
 .tools-used h4 {
@@ -117,21 +105,31 @@ header nav ul li a:hover {
 .project-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 20px; /* Add some vertical padding if you like */
+  padding: 1rem 20px;
 }
 
-/* Image grid */
+/* OVERVIEW Section */
+.overview-section {
+  /* Reduced vertical spacing */
+  margin: 1rem 0;
+  padding: 1rem 0;
+}
 
-/* 1. Reduce vertical spacing for the images-section */
+.overview-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* IMAGES Section */
 .images-section {
-  margin: 2rem 0;   /* Was 4rem or similar; lowers space above/below */
-  padding: 1rem 0;  /* If there's extra padding, reduce it here */
+  /* Reduced vertical spacing */
+  margin: 1rem 0;
+  padding: 1rem 0;
 }
 
-/* 2. Increase the font size for the images-section title */
 .images-section h2 {
-  font-size: 2.5rem; /* Increase from default 1.5-2rem */
-  margin-bottom: 1rem; /* Optional: control spacing below the title */
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .image-grid {
@@ -142,7 +140,7 @@ header nav ul li a:hover {
 }
 
 .image-grid figure {
-  background: #ffffff; 
+  background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -165,45 +163,23 @@ header nav ul li a:hover {
   color: #666666;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .project-header h1 {
-      font-size: 2rem;
-  }
-  .header-container {
-      padding: 0 10px;
-  }
-}
-
-/* Features styling (instead of 'breakdown-section') */
+/* FEATURES Section (replaces 'breakdown-section') */
 .features-section {
-  margin-top: 0rem; /* Or however much space you want above this section */
-  /* Remove any 'font-size: 2rem;' so text stays the original size */
+  margin: 1rem 0; /* Lower vertical spacing */
 }
 
-/* Match the main title in .features-section to other titles (2.5rem) */
-.features-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-/* Breakdown styling */
-.breakdown-section {
-  margin-top: 1rem;
-  font-size: 2rem;
-}
-
-/* Each "part" is a card-like section with background, padding, etc. */
+/* If you still use a card-like layout inside features-section,
+   e.g. .breakdown-part or .features-part: */
 .breakdown-part {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin-bottom: 2rem;
   padding: 2rem;
-  gap: 2rem; /* Spacing between content and image */
+  gap: 2rem;
 }
 
 /* The textual content takes some portion of the width */
@@ -211,25 +187,22 @@ header nav ul li a:hover {
   flex: 1;
 }
 
-/* The image is large, let's make it about 50% of the card width */
 .breakdown-image {
   flex: 1;
-  display: flex;             /* allows us to center or position the image if needed */
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Make sure the image itself is big but contained within the parent */
 .breakdown-image img {
   width: 100%;
   height: auto;
-  border-radius: 8px;        /* slight corner rounding if you like */
+  border-radius: 8px;
   object-fit: cover;
 }
 
-/* HEADINGS inside breakdown sections */
 .breakdown-content h3 {
-  font-size: 1.8rem;  /* Original size from your code */
+  font-size: 1.8rem;
   margin-bottom: 1rem;
   color: #333333;
 }
@@ -245,28 +218,33 @@ header nav ul li a:hover {
   margin: 0.5rem 0;
 }
 
-/* Responsive: Stack content and image on top of each other for smaller screens */
+/* Responsive design */
 @media (max-width: 768px) {
+  .project-header h1 {
+    font-size: 2rem;
+  }
+  .header-container {
+    padding: 0 10px;
+  }
+
   .breakdown-part {
     flex-direction: column;
     text-align: center;
-
-    margin-bottom: 3rem; /* Increase to taste */
-    padding: 2rem;       /* Add some internal spacing */
-    gap: 2rem;    
+    margin-bottom: 3rem;
+    padding: 2rem;
+    gap: 2rem;
   }
   .breakdown-content {
-    margin-bottom: 1rem; /* spacing before the image when stacked */
+    margin-bottom: 1rem;
   }
   .breakdown-image {
     width: 100%;
   }
 }
 
-
 .top-buttons {
   display: flex;
   /*justify-content: center;  This aligns the buttons in the middle */
-  margin: 2rem 0;          /* Optional: vertical spacing around the buttons */
-  gap: 1rem;               /* Optional: space between the two buttons */
+  margin: 2rem 0;
+  gap: 1rem;
 }

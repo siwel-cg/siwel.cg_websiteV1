@@ -47,34 +47,65 @@
       <section class="overview-section">
         <h2>Overview</h2>
         <p>
-          This is a custom surface and post process shader inspired by the iconic painting style of Van Gogh. 
-        </p>
+          This is a custom surface and post process shader inspired by the iconic painting style of Van Gogh. I did this using various combinations of noise functions to add surface color, outlines, and a brush stroke distortion. The base color and outlines were done using Unities npr shader graph and the brush post process effect was done in a  . . . The scene was created using custom tree assets, and various free assets from online.
+
+      </section>
+      <section class="images-section">
+        <h2>Reference Images</h2>
+        <div class="image-grid">
+          <figure>
+            <img src="../images/StlyeShader/ImageRef1.webp" alt="Screenshot 1">
+            <figcaption>Wheat Field with Cypresses</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/StlyeShader/ImageRef2.jpg" alt="Screenshot 2">
+            <figcaption>Landscape from Saint-Rémy</figcaption>
+          </figure>
+        </div>
       </section>
 
       <!-- Example: Placing the Vimeo embed under your Project Header -->
       <div class="video-section">
-        <h2>Full Project Video Demo</h2>
+        <h2>Video Demo</h2>
         <!-- Vimeo Embed -->
-        <div style="padding:56.25% 0 0 0;position:relative;">
-          <iframe
-            src="https://player.vimeo.com/video/901575818?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;"
-            title="Mini Minecraft">
-          </iframe>
+        <div class="video-container">
+            <iframe 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/1Z01x3Q1u8c" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
         </div>
-        <script src="https://player.vimeo.com/api/player.js"></script>
-      </div>
-
 
       <!-- Overview Section -->
       <section class="overview-section">
         <h2>Breakdown</h2>
+        <h3>Surface Shader</h3>
         <p>
-            For this project I was trying to mimic the swirling painterly effect of Van Gogh. To do this, I started with our base toon shader and added a series of noises to deform the UVs for another noise. This distored the cutoff lines between the highlight, midtone, and shadow colors. On top of that I added some slight color variation using mor noise. In particular, a double worley noise where the UVs are multiplied by one Worley and then passed into the second one. This give the circular swirling pattern I was going for. The colors and thresholds were all parameterized for easy customization. To get the main brush stroke effect, I used a variation on the voronoi mozaic post process effect. By combinin it with some layers of noise (using the same technique described above) I was able to rough up the edges of the voronoi cells.
+            For this project I was trying to mimic the swirling painterly effect of Van Gogh. To do this, I started with a base toon shader, which was made using a discrete gradient. I then added a series of noises to deform the UVs of the surface, which I then used as the input for another noise. This distored the cutoff lines between the highlight, midtone, and shadow colors making the colors have a more swirly feel. On top of that I added some slight color variation using two passes of a worley noise where the UVs are multiplied by one Worley and then passed into the second one. This give the circular swirling pattern I was going for. Additionally, I could offset the UVs by a time variable allowing those swirls to move around and ripple. The colors and thresholds were all parameterized for easy customization.
+        </p>
+        <h3>Brush Stroke Post Process Shader</h3>
+        <p>
+            To get the main brush stroke effect, I added a full screen post process layer. This shader takes in our rendered scene and discritizes the entire thing into voronoi cells where the color of each cell is determined by the color of the fragment the voronoi point lies in. This by itself makes a mosaic like version of the scene. By combining this effectwith some layers of noise (using the same double Worley noise technique described above) I was able to rough up the edges of the voronoi cells, causing them to swirl togeather and creating a more brush like effect.
+        </p>
+
+        <h3>Outlines</h3>
+        <p>
+
         </p>
       </section>
+
+    <section class="images-section">
+      <div class="image-grid">
+        <figure>
+          <img src="../images/StlyeShader/Scene Image.png" alt="Screenshot 1">
+          <figcaption>Full Shader Effect</figcaption>
+        </figure>
+      </div>
+    </section>
+
 
     </article>
   </main>
