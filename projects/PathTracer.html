@@ -153,6 +153,66 @@
         </div>
       </section>
 
+      <section class="features-section">
+        <h3>Materials</h3>
+        <h3>Blinn Micro-facet</h3> 
+        <p>
+          A micro-facet material attemps to immitate the the tinny, rough details of regular surfaces by assuming our surface is made from a distribution of small, mirrored surfaces. The more uniform this distribution is, the mirror like the surface becomes, and likewise, the more random the distribution, the more diffuse the surface becomes. A micro-facet model has a few key components:
+
+          <p>
+            <strong>Surface Roughness:</strong> This controls how "rough" or "smooth" the tiny mirrored surfaces are. A smooth surface creates sharp, focused highlights, while a rough surface scatters light in many directions, producing softer, more diffuse reflections. Roughness is mathematically tied to the <em>Normal Distribution Function (NDF)</em>, which describes the orientation of the microfacets. One commonly used NDF is the GGX distribution:
+        </p>
+        <div style="margin-left: 20px; font-style: italic;">
+            <code>D(h) = &alpha;<sup>2</sup> / (π * ((n · h)<sup>2</sup>(&alpha;<sup>2</sup> - 1) + 1)<sup>2</sup>)</code>
+        </div>
+        <p>
+            Here, <em>&alpha;</em> represents the roughness, <em>n</em> is the surface normal, and <em>h</em> is the half-vector (midway between the light and view directions).
+        </p>
+        
+        <p>
+            <strong>Fresnel Effect:</strong> This describes how light reflects differently depending on the viewing angle. At steep angles, more light is reflected, which is why surfaces like water or polished metal appear shinier at grazing angles. This effect is often approximated using the <em>Schlick Approximation:</em>
+        </p>
+        <div style="margin-left: 20px; font-style: italic;">
+            <code>F(v, h) = F<sub>0</sub> + (1 - F<sub>0</sub>) * (1 - (v · h))<sup>5</sup></code>
+        </div>
+        <p>
+            Here, <em>v</em> is the view direction, <em>h</em> is the half-vector, and <em>F<sub>0</sub></em> is the reflectance at normal incidence (e.g., 0.04 for dielectrics or higher for metals).
+        </p>
+        
+        <p>
+            <strong>Shadowing and Masking:</strong> Rough surfaces may have microfacets that block light from reaching other parts of the surface (shadowing) or prevent reflected light from reaching the viewer (masking). These effects are modeled using a <em>geometry function</em>. One commonly used formula is:
+        </p>
+        <div style="margin-left: 20px; font-style: italic;">
+            <code>G(l, v) = G<sub>1</sub>(l) * G<sub>1</sub>(v)</code>, where:
+            <br>
+            <code>G<sub>1</sub>(x) = 2 / (1 + sqrt(1 + &alpha;<sup>2</sup>(1 - (n · x)<sup>2</sup>) / (n · x)<sup>2</sup>))</code>
+        </div>
+        <p>
+            Here, <em>l</em> is the light direction, <em>v</em> is the view direction, and <em>&alpha;</em> is the roughness.
+        </p>
+        
+        <p>
+            <strong>Microfacet Distribution:</strong> This represents the statistical spread of microfacet orientations. A uniform distribution leads to highly focused reflections, while a random distribution creates rougher, scattered appearances. The combination of the NDF, Fresnel, and geometry terms produces the <em>microfacet BRDF:</em>
+        </p>
+        <div style="margin-left: 20px; font-style: italic;">
+            <code>f(l, v) = (F * G * D) / (4 * (n · l) * (n · v))</code>
+        </div>
+        <p>
+            Here, <em>D</em> is the NDF, <em>F</em> is the Fresnel term, and <em>G</em> is the geometry term.
+        </p>
+        
+        <p>
+            By combining these elements, the microfacet material model allows us to accurately simulate a wide range of surface appearances, from rough and diffuse to smooth and reflective, while staying grounded in real-world physics.
+        </p>
+              
+        
+        <p>
+            By combining these elements, microfacet materials can simulate a wide range of surface types, from smooth polished metals to rough concrete, all while maintaining a realistic interaction with light.
+        </p>
+      
+
+      </section>
+
       <section class="images-section">
         <h2>Test Scenes</h2>
         <div class="image-grid">
