@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Title - Your Portfolio</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/blackHole.css">
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+        id="MathJax-script"
+        async
+    ></script>
+</head>
+
+<body>
+  <!-- Header/nav -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../pages/gallery.html">Portfolio</a></li>
+        <li><a href="../pages/projects.html">Projects</a></li>
+        <li><a href="../index.html#demoreel">Demo Reel</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Curve Editor</h1>
+      <div class="project-meta">
+        <span class="date">December 2023</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>C++</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          This is a simple, interactive demo for creating and editing various types of splines. There are three types of splines: Linear, Bezier, and Hermite splines. Base points can be edited, added and removed, and for Bezier and Hermite splines, control points can be move around.
+        </p>
+      </section>
+
+      <!-- Example: Placing the Vimeo embed under your Project Header -->
+      <div class="video-section">
+        <h2>Video Demo</h2>
+        <div class="video-container">
+            <iframe 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/6iZOERFOBqA" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Breakdown</h2>
+        <h3>Linear</h3>
+        Linear splines are very simple to implement. Given some base positions and some ordering of these points, you just "connect the dots" and draw in strait lines between the positions. 
+        <section class="images-section">
+            <div class="image-grid">
+                <figure>
+                <img src="../images/CurveEditor/Linear1.png" alt="Screenshot 1">
+                <figcaption>Linear Spline</figcaption>
+                </figure>
+
+            </div>
+        </section>
+
+        <h3>Bezier</h3>
+        <p>Three different methods for making the Bezier splines were implemented: Catmul-Rom Splines, De Casteljau's algorithm, and the Matrix Method. They all will give the same result, but in different ways.</p>
+        <p>
+            <strong>Catmull-Rom splines </strong> are a way of concatonating piecewise Bezier curves by creating specific control points to ensure C1 continuity along the spline. For each inputted position in our sequence two control points are created (except for the ends), one infront and one behind. These control points ensure that the slope going into the base point matches the slope leaving the base point. We get this slope by calculating the backwards difference with the previous point.
+        </p>
+        
+        <p>
+            <strong>De Casteljau's Method</strong> is a recursive process for creating Bézier curves by breaking them into smaller and smaller linear interpolations between control points. At each step, points are blended based on the curve parameter, eventually converging on a single point on the curve.
+        </p>
+        <p>
+            <strong>Matrix Method</strong> formulates Bézier curves using linear algebra to streamline the computation process. Control points are combined with a pre-defined basis matrix, which encodes the blending weights for the curve. 
+        </p>
+
+        <section class="images-section">
+            <div class="image-grid">
+                <figure>
+                <img src="../images/CurveEditor/Bez1.png" alt="Bez 1">
+                <figcaption>Catmul-Rom</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="../images/CurveEditor/Bez1.png" alt="Bez 2">
+                    <figcaption>De Casteljau's</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="../images/CurveEditor/Bez1.png" alt="Bez 2">
+                    <figcaption>Matrix Method/figcaption>
+                </figure>
+
+            </div>
+        </section>
+
+        <h3>Hermite</h3>
+        <p>
+            Hermite splines are a type of cubic interpolating spline that allow precise control over the shape of the curve by specifying not just the points the curve passes through but also the tangents at those points. For each segment of the spline, the curve is defined between two endpoints, with tangents controlling the slope at those points. This means that Hermite splines are C2 continuous.  
+        </p>
+        <p>
+            The curve for a Hermite spline segment is constructed using a blend of four basis functions. These functions are weighted combinations of the two endpoints and their tangents, ensuring the curve smoothly transitions between segments. The general form of the curve is:
+        </p>
+        <p style="text-align:center;">
+            \[
+            C(t) = h_1(t)P_0 + h_2(t)P_1 + h_3(t)T_0 + h_4(t)T_1
+            \]
+        </p>
+        <p>
+            Here, \( P_0 \) and \( P_1 \) are the endpoints of the curve segment, \( T_0 \) and \( T_1 \) are the tangents at those endpoints, and \( h_1(t) \), \( h_2(t) \), \( h_3(t) \), and \( h_4(t) \) are the Hermite basis functions. These basis functions determine how the endpoints and tangents influence the shape of the curve as the parameter \( t \) progresses from 0 to 1.
+        </p>
+
+        <section class="images-section">
+            <div class="image-grid">
+                <figure>
+                <img src="../images/CurveEditor/Hermite1.png" alt="hermite 1">
+                <figcaption>Hermite Spline</figcaption>
+                </figure>
+
+            </div>
+        </section>
+      
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
+  </footer>
+</body>
+</html>
