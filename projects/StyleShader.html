@@ -30,6 +30,7 @@
         <div class="tools-used">
           <ul class="tools-list">
             <li>Unity</li>
+            <li>HLSL</li>
           </ul>
         </div>
       </div>
@@ -92,6 +93,7 @@
         </p>
 
         <h3>Outlines</h3>
+          To get an outline effect around the various objects, I started with a basic depth based approach. For each fragment, you compare its depth with the depth of neighboring fragments. The difference in depth between these fragments is then used as the alpha of a post process shader which overlays a parametrized color over the entire screen. If there is enough of a difference, it means we are on the vissible edge of an object or shape, and our difference will be large. This will color in just those edge fragments. Additionally, I offset the sampled neighboring fragments using a noise to get a non-uniform edge.
         <p>
 
         </p>
