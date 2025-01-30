@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction - Your Portfolio</title>
+  <title>Project Title - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/pathTracer.css"> <!-- or remove if not needed -->
+  <link rel="stylesheet" href="../styles/blackHole.css">
 </head>
 <body>
-  <!-- Same header/nav as main page -->
+  <!-- Header/nav -->
   <header>
     <nav>
       <ul>
@@ -21,17 +21,80 @@
     </nav>
   </header>
 
-  <!-- Main section with "Under Construction" message -->
-  <main style="min-height: calc(100vh - 80px); /* accommodates fixed header */ 
-               display: flex; 
-               align-items: center; 
-               justify-content: center;">
-    <h1 style="font-size: 3rem; text-align: center;">Under Construction</h1>
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Procedural Lego Generation</h1>
+      <div class="project-meta">
+        <span class="date">October 2023</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>Houdini</li>
+            <li>Davinci Resolve</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+
+    <article class="project-content">
+      <section class="overview-section">
+       
+      <h2>Overview</h2>
+      <p>
+        This was a fun personal project to combine one of my favorite toys with one of my favorite pieces of software. The tool takes in some base geometry and converts in to 1:1 blocks of customizable size. It uses slanted blocks based on surface normals to give some variation. This works with any form of geometry, including fluid and smoke simulations.
+      </p>
+
+      <!-- Example: Placing the Vimeo embed under your Project Header -->
+      <div class="video-section">
+        <h2>Video Demo</h2>
+        <!-- Vimeo Embed -->
+        <div class="video-container">
+            <iframe 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/K9uEiwPpdwI" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Breakdown</h2>
+        <p>
+          The base setup iuses a 3D grid of lines, with the spacing based of the size of a single cube set by the user. This grid fills the bouding box of the geometry inputted. We then do a bound test on the actual geometry to determine which points are inside and which points aren't. These points are then used as the base postions for instancing our lego block. Because the spacing is based off the size of the cube, the instanced blocks perfectly fill up the volume of the object. For a bit of variation, each blcok is very slightly rotated about the y axis to add a bit of realism and make it look like the model was actualy build by hand. Additionally, we can transfer the normals of the underlying geometry to nearby points. By using a simple dot product check, we can determine if a block should be converted into a slope block and the orientation of the block if it is converted. 
+        </p>
+        <p>
+          Since all we need to generate a lego model is some base mesh, simulation and volumes can be converted in to lego by first converting to polygons. This allowes for things like lego water and smoke. However, a slight limitation to this method is that highly convex or sitributed models are not very efficient. Because our base grid fills the entire bouding box, for an object with a very dispropotinate ratio between volume and bounding box volume will cause the outer point culling to take longer. 
+
+        </p>
+
+        <section class="images-section">
+          <div class="image-grid">
+            <figure>
+              <img src="../images/Lego/lewis-ghrist-lego-mario-v04.png" alt="Screenshot 1">
+              <figcaption>Lego Mario</figcaption>
+            </figure>
+            <figure>
+              <img src="../images/Lego/WatersimV4.png" alt="Screenshot 1">
+              <figcaption>Lego Fluid Simulation</figcaption>
+            </figure>
+          </div>
+        </section>
+
+
+        </p>
+      </section>
+
+    </article>
   </main>
 
-  <!-- Optional footer -->
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
   </footer>
 </body>
 </html>
