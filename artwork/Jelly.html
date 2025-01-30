@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction - Your Portfolio</title>
+  <title>Project Title - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/pathTracer.css"> <!-- or remove if not needed -->
+  <link rel="stylesheet" href="../styles/blackHole.css">
 </head>
 <body>
-  <!-- Same header/nav as main page -->
+  <!-- Header/nav -->
   <header>
     <nav>
       <ul>
@@ -21,17 +21,104 @@
     </nav>
   </header>
 
-  <!-- Main section with "Under Construction" message -->
-  <main style="min-height: calc(100vh - 80px); /* accommodates fixed header */ 
-               display: flex; 
-               align-items: center; 
-               justify-content: center;">
-    <h1 style="font-size: 3rem; text-align: center;">Under Construction</h1>
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Magical Jellyfish</h1>
+      <div class="project-meta">
+        <span class="date">October 2024</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>Houdini</li>
+            <li>Davinci Resolve</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+
+    <div class="top-buttons">
+        <a href="https://github.com/siwel-cg/hw02-jellyfish" class="button">Project Repo</a>
+    </div>
+
+
+    <article class="project-content">
+      <section class="overview-section">
+       
+      <h2>Overview</h2>
+      <p>
+        This is a fully procedural jelly fish model along with a mixture of simulated and key framed animations. It has a basic framework for customizing shape and size. 
+      </p>
+
+      <!-- Example: Placing the Vimeo embed under your Project Header -->
+      <div class="video-section">
+        <h2>Video Demo</h2>
+        <!-- Vimeo Embed -->
+        <div class="video-container">
+            <iframe 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/BWo0xF2EGZU" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Breakdown</h2>
+        <h3>Bell / Veins / Organs</h3>
+        <p>
+          The bell was made using the instructed method with a base curve deformed using bend nodes and revolving the curve to form the base shape. From there that surface is extruded and some slight noise is added to give the shape some variation. From the base mesh, I group some 'start' points towards the top of the bell and some 'end' points towards the bottom edge which are used with a shortest path node to create the veins. Values in the bend nodes and a transform node animate the bell to deform like it is swimming. The organs are made up of a simple bent capsule shape copied around in a circle and a larger structure made from a simple smoke simulation turned into polygons and mirrored across the xy and zy planes.
+        </p>
+
+        <section class="images-section">
+          <div class="image-grid">
+            <figure>
+              <img src="../images/Jelly/Bell_V1.png" alt="Screenshot 1">
+              <figcaption>Bell Shape</figcaption>
+            </figure>
+            <figure>
+              <img src="../images/Jelly/OrgansImage_V1.png" alt="Screenshot 1">
+              <figcaption>Organs</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <h3>Tenticles / Arms</h3>
+        <p>
+          The tentacles were made using an edge swept along a base curve and then mirrored for symmetry. This allowed me to adjust the size of the tentacle using a curve that adjusts pscale. The result is then deformed using a lower frequency curl noise and a higher frequency AA noise. This is then twisted about the base curve axis and copied around to get multiple tentacles. This setup is put through a cloth simulation with a bit of noise to give the underwater effect. The arms were made by copying some base curves to a circle whose points are on the inner side face of the bell's extrusion. These lines are then run through another cloth sim to get the deformation.
+        </p>
+
+        <section class="images-section">
+          <div class="image-grid">
+            <figure>
+              <img src="../images/Jelly/10_V1.png" alt="Screenshot 1">
+              <figcaption>Tenticles</figcaption>
+            </figure>
+            <figure>
+              <img src="../images/Jelly/Arms_V1.png" alt="Screenshot 1">
+              <figcaption>Arms</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <h3>Shading</h3>
+        <p>
+          The materials are a mix of attribute magic and a camera fall-off node. These are passed through some gradients and used to drive base color, emission, and opacity. The render is done in Karma, and some bloom and color adjustments were made in post using Davinci Resolve.
+        </p>
+
+        </p>
+      </section>
+
+    </article>
   </main>
 
-  <!-- Optional footer -->
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
   </footer>
 </body>
 </html>
