@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction - Your Portfolio</title>
+  <title>Project Title - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/pathTracer.css"> <!-- or remove if not needed -->
+  <link rel="stylesheet" href="../styles/blackHole.css">
 </head>
 <body>
-  <!-- Same header/nav as main page -->
+  <!-- Header/nav -->
   <header>
     <nav>
       <ul>
@@ -21,17 +21,106 @@
     </nav>
   </header>
 
-  <!-- Main section with "Under Construction" message -->
-  <main style="min-height: calc(100vh - 80px); /* accommodates fixed header */ 
-               display: flex; 
-               align-items: center; 
-               justify-content: center;">
-    <h1 style="font-size: 3rem; text-align: center;">Under Construction</h1>
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Paper Library</h1>
+      <div class="project-meta">
+        <span class="date">March 2024</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>Houdini</li>
+            <li>Davinci Resolve</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          All assets were custom made in Houdini. The main idea behind this render was to create a library made out of paper. I scattered planes on almost every surface along with a simple, front face culling toon outline. The main bookshelves use a rigid body simulation for each book to mimic a more natural, random resting position. There are multiple cloth simulations to added detail. The custom book stack tool allowed for quick scattering of books around the hall, each one with a random heigh, color pallet, and orientation. The majority of the assets have a default grey Lambertian shader, with all the color comeing from colored lights and colored shadows. 
+        </p>
+      </section>
+
+    <section class="images-section">
+      <div class="image-grid">
+          <figure>
+          <img src="../images/Library/lewis-ghrist-library-v14-color.png" alt="Bez 1">
+          <figcaption>Paper Library</figcaption>
+          </figure>
+
+      </div>
+    </section>
+
+    <h2>Full Breakdown</h2>
+      <div class="video-container">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/dhI0fmdPs0E" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Subtools</h2>
+        <h3>Book Stack Tool</h3>
+        <p>
+          I wanted to have these stacks of books filling parts of the floor to add more detail and depth to the final render. Since multiple stacks were going to be vissible, making a single asset and scattering it around wasn't the way to go. To achieve this result, I made a tool that takes in a base point to generte the stack from and some other basic parameters like seed and size. I could then scatter stacks of varying heights and orientations around, completely ellimiating the need for any hand placed labor. The baseic setup works by recursively copying another book to some centered random position on the top most book. The orientation about the up axis is randomized and the scale of the size of the book is reduced so that we don't get very large books stacked ontop of very small books. 
+        </p>
+        <h3>Book Stack Tool</h3>
+        <div class="video-container">
+          <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/FLZN68xOzC4" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <h3>Bookshelves</h3>
+        <p>
+          Since it is a library, I obviously needed some bookshelves. Again, with all the detail a bookshelf has in it, making a bookshelf procedurally is so much easier and can easily be configured to generate many unique assets. The base structure of the too is a set of lines and points, the spacing of which is determined by a size parameter and the number of shelves. The entire outer structure of the shelf is generated around these base lines so that the books and shelves fit inside. To get variation within each shelf, the books are put through a rigid body simlation. This drops the books on the shelves and adds a bit of a random force for some placement vartion. This gives the books a natural, hand placed feel while letting the RBD solver do all the work.
+        </p>
+
+        <h3>Bookshelf Tool</h3>
+        <div class="video-container">
+          <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/Tn-qOcKFk68" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+            <figure>
+            <img src="../images/Library/lewis-ghrist-librarygrey-planes.png" alt="Bez 1">
+            <figcaption>Base Geometry</figcaption>
+            </figure>
+  
+        </div>
+      </section>
+
+    </article>
   </main>
 
-  <!-- Optional footer -->
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
   </footer>
 </body>
 </html>
