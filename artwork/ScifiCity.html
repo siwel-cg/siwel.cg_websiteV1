@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction - Your Portfolio</title>
+  <title>Project Title - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/pathTracer.css"> <!-- or remove if not needed -->
+  <link rel="stylesheet" href="../styles/blackHole.css">
 </head>
 <body>
-  <!-- Same header/nav as main page -->
+  <!-- Header/nav -->
   <header>
     <nav>
       <ul>
@@ -21,17 +21,96 @@
     </nav>
   </header>
 
-  <!-- Main section with "Under Construction" message -->
-  <main style="min-height: calc(100vh - 80px); /* accommodates fixed header */ 
-               display: flex; 
-               align-items: center; 
-               justify-content: center;">
-    <h1 style="font-size: 3rem; text-align: center;">Under Construction</h1>
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Procedural Scifi City</h1>
+      <div class="project-meta">
+        <span class="date">December 2023</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>Houdini</li>
+            <li>Davinci Resolve</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          Procedural SciFi city. The building layout is based on a noise texture that drives a voronoi fracture. Each face is then subdivided again into smaller zones which get extruded to form the buildings. Details such as wires, tiling, pipes, neon signs, and antenna towers are then added to the buildings. The two main twisting buildings are the sources of the larger, orange pipes that procedurally wrap around the smaller buildings. 
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+            <figure>
+            <img src="../images/ScifiCity/city-midcont.png" alt="Bez 1">
+            <figcaption>Night</figcaption>
+            </figure>
+
+        </div>
+    </section>
+
+    <section class="images-section">
+      <div class="image-grid">
+          <figure>
+              <img src="../images/ScifiCity/city-sunset-v1.png" alt="Bez 2">
+              <figcaption>Sunset</figcaption>
+          </figure>
+
+      </div>
+    </section>
+
+      
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Subtools</h2>
+        <h3>Main Layout</h3>
+        <p>
+          The main layou tool takes in three inputs: some base mesh to build the city on, a set of "Hero" buildings to be the main focus of the city, and a set of input geometry that can be used to determine spacing of buildings. The spacing of buildings can also be controlled using a noise in combination with this spacing shape. This was done so that an artist could manually control the exact layout if needed by drawing in curves. The noise or geometry would drive a density attributed used when scattering points for a voronoi fracture. This would make areas near that spacing geometry or high valued noise have more points and thus have a higher density of voronoi cells. Since these cells would then get turned into buildings, it defines zones with samller buildings. ADditional controls like the spread of the attribute and the height of the buildings could then be controlled afterwards as needed. The output of this layou is a base set of these samller buildings, the base voronoi cells for larger buildings, and the voronoi 'web' that can be used for streets or dividors between the buildings. 
+        </p>
+        <h3>City Layout Tool</h3>
+        <div class="video-container">
+          <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/hS0shv7s1Yc" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <h3>Wires and Pipes</h3>
+        <p>
+          Both the wire and the pipe tools were built with the same underlying setup. A series of points were scattered in specific places and then connected to the nearest piece of geometry, within a set range, in the direction of the surface normal at that point. Thes base curves were then converted to pipe or wire geometry respectively. For the wires, using the curveu attribute, I translated the position of the points downwards via a quadratic distribution. This sag could be scaled as needed or by a random amount to add varioation to the wires. Note no simulation was used, it was all done using a simple vertex based deformation. Although realistic looking enough, this type of setup does not account for collisions, which would need additional checks to handle. For the pipes, the way the enitial curves were gennerated was slightly different. Unlike wires where connections would be just between two adjacent building faces, I wanted the pipes to look like they were expanding outwards through the city from the main two buildings. To do this I ray cast from a set of points on the sides of the twisty buildings out the edge of the city, ignoring any collisions with buildings. Then using a bounds test, any points that lay within a building got pushed out making the pipe curves wrap around the sides of buildings. As for the pipe geometry, I converted each curve into a simple tube and then used a path finding algorithm to generate random details around each base curve. This added a unique set of varion and detail to each pipe.  
+        </p>
+
+        <h3>Pipes and Wires</h3>
+        <div class="video-container">
+          <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/fyIiTawK1NE" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        
+      </section>
+
+    </article>
   </main>
 
-  <!-- Optional footer -->
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
   </footer>
 </body>
 </html>
