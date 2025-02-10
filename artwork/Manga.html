@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction - Your Portfolio</title>
+  <title>Project Title - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/pathTracer.css"> <!-- or remove if not needed -->
+  <link rel="stylesheet" href="../styles/blackHole.css">
 </head>
 <body>
-  <!-- Same header/nav as main page -->
+  <!-- Header/nav -->
   <header>
     <nav>
       <ul>
@@ -21,17 +21,101 @@
     </nav>
   </header>
 
-  <!-- Main section with "Under Construction" message -->
-  <main style="min-height: calc(100vh - 80px); /* accommodates fixed header */ 
-               display: flex; 
-               align-items: center; 
-               justify-content: center;">
-    <h1 style="font-size: 3rem; text-align: center;">Under Construction</h1>
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Playable Manga Panel</h1>
+      <div class="project-meta">
+        <span class="date">December 2024</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>Houdini</li>
+            <li>Unreal Engine 5</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          This was a group project in collaboration with Viraj Doshi and Christina Qiu. I was responsible for the environment model, and they made all the game play mechanics and shaders. The environment model was created in Houdini and exported as an HDA to Unreal 5. For the environment I created a few different custom generators, each one taking in a simple geometry input and generated the corresponding geometry around that input (any bounded geometry -> Building clusters, a cylinder -> wind turbines, any line or curve -> support beam or twisting cables), including supports and wires which interact with other geometry. This allowed for simpler art direction, with just some basic shapes needed to block out a scene and leaving all the detail work to the generators. The result is a easily customizable, but complex looking scene. 
+        </p>
+      </section>
+
+    <h2>Gameplay</h2>
+      <div class="video-container">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/oHNQxJjiosw" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+    <section class="images-section">
+      <div class="image-grid">
+          <figure>
+          <img src="../images/MangaCity/image.png" alt="Bez 1">
+          <figcaption>Full Shader On</figcaption>
+          </figure>
+
+          <figure>
+            <img src="../images/MangaCity/image2.png" alt="Bez 1">
+            <figcaption>Base Geometry</figcaption>
+          </figure>
+
+      </div>
+    </section>
+
+    <section class="images-section">
+      <div class="image-grid">
+        <figure>
+          <img src="../images/MangaCity/Screenshot_2024-12-09_133213.png" alt="Bez 1">
+          <figcaption>Houdini Geometry</figcaption>
+        </figure>
+
+        <figure>
+          <img src="../images/MangaCity/image3.png" alt="Bez 1">
+          <figcaption>Character View</figcaption>
+        </figure>
+      </div>
+    </section>
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Subtools</h2>
+        <h3>Wire Clusters</h3>
+        <p>
+          I wanted to have these large clusters and coils of wires that twist togeather and can be easily configurated and controlled. To do this, I started with a base curve that would define the overall shape. Then at set intervals along this curve, I copy a set of disks. These disks in turn then get turned into a specific number of randomized points. The points from each disk are then connected along that base curve such that we get n continuous curves (for n being the number of points on each disk). Since the positions are randomized, these sub curves intertwine with eachother in random way. Because this overall structure is created from a single input curve, I can easily just scatter around some base curves in my scene and quickly generate a large number of tangled wires. 
+        </p>
+
+        <h3>Buildings</h3>
+        <p>
+          The buildings start off as a single deformed cube. This cube is then converted into randomized samller cubes which blend togeather to form the base building shape. To match the arcetectural style of the mange, various shapes are booleaned out of these base clusters of cubes. This adds even more variation to the structures. Supports, pipes, and wires are then scattered between the various different blocks to add more detail to the scene and realism to the buildings.
+        </p>
+
+        <section class="images-section">
+          <div class="image-grid">
+              <figure>
+              <img src="../images/MangaCity/Screenshot_2024-12-09_133325.png" alt="Bez 1">
+              <figcaption>Subtools</figcaption>
+              </figure>
+          </div>
+        </section>
+
+      </section>
+
+    </article>
   </main>
 
-  <!-- Optional footer -->
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
   </footer>
 </body>
 </html>
