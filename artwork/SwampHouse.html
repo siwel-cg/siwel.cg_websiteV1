@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction - Your Portfolio</title>
+  <title>Project Title - Your Portfolio</title>
   <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/pathTracer.css"> <!-- or remove if not needed -->
+  <link rel="stylesheet" href="../styles/blackHole.css">
 </head>
 <body>
-  <!-- Same header/nav as main page -->
+  <!-- Header/nav -->
   <header>
     <nav>
       <ul>
@@ -21,17 +21,99 @@
     </nav>
   </header>
 
-  <!-- Main section with "Under Construction" message -->
-  <main style="min-height: calc(100vh - 80px); /* accommodates fixed header */ 
-               display: flex; 
-               align-items: center; 
-               justify-content: center;">
-    <h1 style="font-size: 3rem; text-align: center;">Under Construction</h1>
+  <!-- Project header -->
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Swamp House</h1>
+      <div class="project-meta">
+        <span class="date">October 2024</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>Houdini</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          This project involved picking an archectural stlye or building to recreate procedural in Houdini. The system needed to be customizale, allowing for some artistic input for specific designs, but largely I wanted my sytem to be more random based with parameters to limit and control that random valus. This makes getting a large variety of completely unique building much easier. The renders below we made by simply feeding in a series of planes from a voronoi fracture and changing the master seed for each prim.
+        </p>
+      </section>
+
+    <section class="images-section">
+      <div class="image-grid">
+          <figure>
+          <img src="../images/SwampHouse/SwampHouseRen_1.png" alt="Bez 1">
+          <figcaption>House Cluster</figcaption>
+          </figure>
+      </div>
+    </section>
+    <h2>Reference Images (Midjourney)</h2>
+    <section class="images-section">
+      <div class="image-grid">
+          <figure>
+            <img src="../images/SwampHouse/REFimg1house.png" alt="Bez 1">
+            <figcaption>Reference Image 1</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/SwampHouse/REFimg2house.png" alt="Bez 1">
+            <figcaption>Reference Image 2</figcaption>
+          </figure>
+      </div>
+    </section>
+
+    <h2>Demo Video</h2>
+      <div class="video-container">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/p0PV_0bE47U" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2>Breakdown</h2>
+        <h3>Base Structure</h3>
+        <p>
+          I wanted a system that allowed for a scallable house/building tool for larger scale scattering of these clustered, scrappy shacks. This lead me to design my tool take in a base grid which the house would be generated on. Since the look I was going for was more chaotic than just base blocks stacked ontop of eachother, I had my inital blocks be placed randomly above an inputted plane. This allowed for both position and orientation of the blocks to randomized while also also allowing me to specify the number of bases I wanted. To generate the upper blocks, I scattered a point ontop of each block and randomized that point's normal and pscale to get a random orientation and size of the next floor I copy onto that point. These base blocks were then split up into a few different systems for the details and rooves.
+        </p>
+
+        <h3>Wall Details</h3>
+        <p>
+          To get the corigated mattel panneling on the sides I started by dividing each side with a Lbas Lot Subdivision node. For each resulting prim, a series of lines was coppied to its surface with every other line beight slightly offset. These lines were then connected to for the mesh. Some optimization with point grouping and blasting was used to avoid using a boolean to cut holes for the windows and doors. An undelying structure of poly wired lines was added to give another level of detail in the places where the mettel pannels have gaps.
+        </p>
+
+
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+            <figure>
+              <img src="../images/SwampHouse/SwampHouseRen_2.png" alt="Bez 1">
+              <figcaption>Small Cluster</figcaption>
+            </figure>
+            <figure>
+              <img src="../images/SwampHouse/SwampHouseRen_3.png" alt="Bez 1">
+              <figcaption>Large Cluster</figcaption>
+            </figure>
+  
+        </div>
+      </section>
+
+    </article>
   </main>
 
-  <!-- Optional footer -->
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
   </footer>
 </body>
 </html>
