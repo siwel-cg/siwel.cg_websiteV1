@@ -163,6 +163,38 @@ header nav ul li a:hover {
   color: #666666;
 }
 
+/* Style for ALL figures within project-content, not just direct children */
+.project-content figure {
+  margin: 2.5rem auto;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  max-width: fit-content;
+  padding: 0;
+}
+
+.project-content figure:hover {
+  transform: translateY(-5px);
+}
+
+.project-content figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Style for the captions of these single images */
+.project-content figure figcaption {
+  padding: 1rem;
+  margin-top: 0;
+  color: #666666;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
 /* FEATURES Section (replaces 'breakdown-section') */
 .features-section {
   margin: 1rem 0; /* Lower vertical spacing */
@@ -248,3 +280,5 @@ header nav ul li a:hover {
   margin: 2rem 0;
   gap: 1rem;
 }
+
+

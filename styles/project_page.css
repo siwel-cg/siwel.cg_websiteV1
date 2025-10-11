@@ -1,0 +1,362 @@
+/* Example reset / base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+/* --- Added universal paragraph spacing --- */
+body p {
+  margin-bottom: 1.5rem;
+}
+
+/* Fixed top nav */
+header {
+  background-color: #ffffff;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header nav ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header nav ul li {
+  margin-left: 2rem;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #00bcd4;
+}
+
+/* Project Header */
+.project-header {
+  width: 100%;
+  background-color: #f2f2f2;
+  margin-top: 60px;
+  padding: 1rem 0;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.project-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: #333333;
+}
+
+.project-meta {
+  color: #666666;
+  margin-top: 0.5rem;
+}
+
+.tools-used {
+  margin-top: 1rem;
+}
+
+.tools-list li {
+  background-color: #00bcd4;
+  color: #ffffff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.tools-used h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #666666;
+}
+
+.tools-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+/* Main content container */
+.project-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 20px;
+}
+
+/* General Section Styling */
+.project-content section {
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+
+.project-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.project-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333333;
+}
+
+.project-content p {
+  line-height: 1.6;
+  color: #555555;
+}
+
+.project-content ul {
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+}
+
+.project-content ul li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+/* --- CORRECTED IMAGE STYLES START HERE --- */
+
+/* Style for ALL figures within project-content */
+.project-content figure {
+  margin: 2rem auto;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  max-width: 90%;
+  padding: 1rem;
+}
+
+.project-content figure:hover {
+  transform: translateY(-5px);
+}
+
+.project-content figure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+/* Style for the captions */
+.project-content figure figcaption {
+  padding: 1rem;
+  margin-top: 0;
+  color: #666666;
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* This rule handles the grid layout specifically */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Override padding for grid figures to match original style */
+.image-grid figure {
+  padding: 0;
+  margin: 0;
+}
+
+.image-grid figcaption {
+  padding: 1rem;
+}
+
+/* Hero section styling */
+.hero-section {
+  margin: 1rem 0 2rem 0;
+}
+
+.hero-section figure {
+  margin: 1rem auto;
+}
+
+/* Overview section styling */
+.overview-section {
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+
+.overview-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* --- CORRECTED IMAGE STYLES END HERE --- */
+
+
+/* FEATURES Section */
+.breakdown-part {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.breakdown-content {
+  flex: 1;
+}
+
+.breakdown-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.breakdown-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.breakdown-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333333;
+}
+
+.breakdown-content p,
+.breakdown-content ul {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555555;
+}
+
+.breakdown-content ul li {
+  margin: 0.5rem 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .project-header h1 {
+    font-size: 2rem;
+  }
+  .header-container {
+    padding: 0 10px;
+  }
+
+  .breakdown-part {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    gap: 2rem;
+  }
+  .breakdown-content {
+    margin-bottom: 1rem;
+  }
+  .breakdown-image {
+    width: 100%;
+  }
+}
+
+.top-buttons {
+  display: flex;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+/* Image section spacing to mirror example */
+.images-section {
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+
+/* === Tighten vertical rhythm (drop-in overrides) === */
+:root {
+  --section-gap: 0.5rem;     /* global section margin */
+  --section-pad: 0.25rem;   /* global section padding */
+}
+
+/* General sections in the project content */
+.project-content section {
+  margin: var(--section-gap) 0;      /* was 2rem 0 */
+  padding: var(--section-pad) 0;     /* was 1rem 0 */
+}
+
+/* Specific section helpers (in case they’re used elsewhere) */
+.overview-section {
+  margin: var(--section-gap) 0;      /* was 2rem 0 */
+  padding: var(--section-pad) 0;     /* was 1rem 0 */
+}
+
+.images-section {
+  margin: calc(var(--section-gap) * 1.2) 0;  /* was 2rem 0 */
+  padding: var(--section-pad) 0;             /* was 1rem 0 */
+}
+
+/* Slightly tighter headings inside sections */
+.project-content h2 {
+  margin: 1.2rem 0 0.5rem;   /* tightened from 2.5rem section spacing context */
+}
+.project-content h3 {
+  margin: 0.9rem 0 0.4rem;
+}
+
+/* Remove extra space at very top/bottom of the page sections */
+.project-page .overview-section:first-of-type,
+.project-page .images-section:first-of-type { margin-top: 0.5rem; }
+
+.project-page .overview-section:last-of-type,
+.project-page .images-section:last-of-type { margin-bottom: 0.5rem; }
+
+
+/* Fix layout when an image-grid has exactly one figure */
+.image-grid > figure:only-child {
+  max-width: min(100%, 900px);  /* cap width; tweak 900px as you like */
+  margin: 0 auto;               /* center the figure block */
+  padding: 0;                   /* remove inner padding that can shift visuals */
+}
+
+.image-grid > figure:only-child img {
+  display: block;
+  margin: 0 auto;               /* center the image inside the figure */
+  width: 100%;
+  height: auto;
+}
+
+/* Ensure grid cells center their contents (helps in all cases) */
+.image-grid { justify-items: center; }
+.image-grid figure { display: flex; flex-direction: column; align-items: center; }

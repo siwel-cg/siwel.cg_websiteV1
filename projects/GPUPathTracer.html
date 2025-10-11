@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CUDA Path Tracer - Lewis Ghrist</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/project_page.css">
+  <!-- MathJax v3 -->
+  <script>
+  window.MathJax = {
+    tex: {inlineMath: [['\\(', '\\)'], ['$', '$']]},
+    options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}
+  };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../pages/gallery.html">Portfolio</a></li>
+        <li><a href="../pages/projects.html">Projects</a></li>
+        <li><a href="../index.html#demoreel">Demo Reel</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="project-header">
+    <div class="header-container">
+      <h1>CUDA Path Tracer</h1>
+      <div class="project-meta">
+        <span class="date">October 2025</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>CUDA</li>
+            <li>C++</li>
+            <li>Thrust</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+      
+      <div class="top-buttons">
+        <a href="https://github.com/siwel-cg/Project3-CUDA-Path-Tracer" class="button">Code</a>
+      </div>
+
+      <!-- Hero Images -->
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/blackhole_mirrors.2025-10-08_03-18-09z.2523samp.png" alt="Hero1">
+          </figure>
+        </div>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/blackhole_mirrors.2025-10-08_03-24-26z.3236samp.png" alt="Hero2">
+          </figure>
+        </div>
+      </section>
+
+
+      <!-- Overview -->
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          This project is a physically-based path tracer built from the ground up in C++ and CUDA for the University of Pennsylvania's CIS 565: GPU Programming and Architecture course. Path tracing is a rendering technique that simulates light transport by tracing rays backward from the camera. Each ray bounces off surfaces, accumulating color and lighting information until it hits a light source or is terminated. By averaging many randomly sampled paths per pixel, the algorithm converges to a photorealistic image with accurate global illumination, soft shadows, and complex light interactions.
+        </p>
+        
+        <h3>GPU Implementation</h3>
+        <p>
+          This path tracer uses a <strong>wavefront architecture</strong> optimized for GPU parallelism. Instead of assigning each thread a complete path (which would cause divergence as paths terminate at different times), each thread processes a single path segment—one bounce at a time. This approach maintains high GPU occupancy by keeping threads synchronized at each bounce level, avoiding the warp divergence that would occur if different threads were at different depths in their paths.
+        </p>
+      </section>
+
+      <section>
+        <h2>Features</h2>
+        
+        <h3>Core Rendering</h3>
+        <ul>
+          <li><strong>Physically-Based Materials</strong>: Diffuse and mirror BSDFs with stochastic roughness-based blending.</li>
+          <li><strong>Stochastic Anti-Aliasing</strong>: Randomized subpixel sampling for smooth edges.</li>
+          <li><strong>Environment Mapping</strong>: HDR skybox lighting with spherical coordinate sampling.</li>
+        </ul>
+        
+        <h3>Advanced Effects</h3>
+        <ul>
+          <li><strong>Black Hole Gravitational Lensing</strong>: Physically accurate light bending with a procedural accretion disk.</li>
+          <li><strong>Depth of Field</strong>: Thin lens camera model with configurable focal distance and aperture size.</li>
+          <li><strong>Bloom Post-Processing</strong>: Perceptual luminance-based glow for bright light sources.</li>
+        </ul>
+        
+        <h3>Performance Optimizations</h3>
+        <ul>
+          <li><strong>BVH Acceleration</strong>: Custom bounding volume hierarchy for fast ray-mesh intersection.</li>
+          <li><strong>Stream Compaction</strong>: Automatic culling of terminated ray paths to maintain GPU efficiency.</li>
+          <li><strong>Material Sorting</strong>: Coherent BSDF evaluation through dynamic ray reordering.</li>
+        </ul>
+        
+        <h3>Pipeline</h3>
+        <ul>
+          <li><strong>Custom OBJ Loader</strong>: Direct .obj mesh import supporting positions and normals.</li>
+        </ul>
+      </section>
+
+      <!-- Black Hole Gravitational Lensing -->
+      <section class="overview-section">
+        <h2>Black Hole Gravitational Lensing</h2>
+        <p>
+          Path tracing typically assumes light travels in perfectly straight lines. Black holes, however, are a dramatic exception. Their immense mass distorts spacetime itself, bending the paths of light rays. This implementation simulates a ray's trajectory as it curves under gravitational acceleration, much like simulating a particle under Newtonian gravity.
+        </p>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/LightWarpSolo_V1.png" alt="Hero2">
+            <figcaption>Light from the background environment map bending around the black hole's event horizon.</figcaption>
+          </figure>
+        </div>
+      </section>
+        
+        <h3>The Physics</h3>
+        <p>
+          The implementation is based on an <a href="https://rantonels.github.io/starless/" target="_blank">excellent article by rantonels</a>, which derives a formula for the acceleration experienced by light near a Schwarzschild black hole. Using an RK4 integrator for numerical stability, light rays are marched through the gravitational field.
+        </p>
+        <p>
+          The acceleration is given by:
+          <p>\[\mathbf{a} = \left( -\frac{3 M h^2}{\lVert \mathbf{r} \rVert^5} \right)\mathbf{r}\,w\]</p>
+          Where <strong>M</strong> is the mass, <strong>h²</strong> is the squared angular momentum, and <strong>w</strong> is a windowing function.
+        </p>
+
+        <h3>Accretion Disk</h3>
+        <p>
+          To make the lensing visible, a procedural accretion disk was created. When a simulated ray passes through the disk's plane, its position is used to sample a swirled Perlin noise function. This sample stochastically determines if the ray should terminate and emit light or pass through, creating a wispy, turbulent appearance without the overhead of a full volumetric simulation. This technique was adapted from a <a href="https://siwel-cg.github.io/siwel.cg_websiteV1/projects/BlackHole.html">previous WebGL shader project</a> of mine.
+        </p>
+
+        <section class="images-section">
+          <div class="image-grid">
+            <figure>
+              <img src="../images/GPUPathTracer/BlackHoleSolo_V1.png" alt="Close up of the procedural accretion disk">
+            <figcaption>The procedural accretion disk, showing the swirling noise pattern.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- Visual Improvements -->
+      <section class="overview-section">
+        <h2>Visual Improvements</h2>
+        
+        <h3>Bloom</h3>
+        <p>
+          Bloom is a post-processing effect that adds a soft glow to bright areas of the image, simulating light scattering inside a camera lens or the human eye. After the image is rendered, a brightness filter is applied, and the result is blurred with a 21x21 Gaussian kernel. This blurred layer is then additively blended with the original image.
+        </p>
+        
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/singleBH_V1.2025-10-04_03-01-39z.593samp.png" alt="Black hole render without bloom">
+            <figcaption>Without Bloom</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/GPUPathTracer/singleBH_V1.2025-10-04_03-03-55z.950samp.png" alt="Black hole render with bloom">
+            <figcaption>With Bloom</figcaption>
+          </figure>
+        </div>
+
+        <h3>Environment Mapping</h3>
+        <p>
+          To light scenes realistically, I implemented support for HDR environment maps. When a ray fails to intersect any scene geometry, its direction is converted to spherical coordinates, which are used to sample a texture that surrounds the entire scene at an infinite distance. This provides both background imagery and high-quality, image-based lighting.
+        </p>
+        
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/compaction_test.2025-09-23_14-55-01z.5000samp.png" alt="Scene with basic lighting">
+            <figcaption>Without Environment Map</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/GPUPathTracer/compaction_test.2025-09-26_14-23-01z.3240samp.png" alt="Scene with HDR environment map lighting">
+            <figcaption>With Environment Map</figcaption>
+          </figure>
+        </div>
+
+        <h3>Thin Lens Depth of Field</h3>
+        <p>
+          A thin lens camera model was implemented to simulate depth of field. Instead of originating from a single point, rays are cast from random points on a virtual lens aperture. These rays are directed to converge at a specific focal plane, causing objects at that distance to appear sharp while foreground and background objects become blurred.
+        </p>
+        
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/dof_comparison.2025-10-08_00-13-16z.5000samp.png" alt="Depth of field with focus on the foreground">
+            <figcaption>Focus on Foreground</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/GPUPathTracer/dof_comparison.2025-10-08_00-10-07z.5000samp.png" alt="Depth of field with focus on the middle ground">
+            <figcaption>Focus on Middle Ground</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Performance Improvements -->
+      <section class="overview-section">
+        <h2>Performance Improvements</h2>
+        
+        <h3>BVH and OBJs</h3>
+        <p>
+          To render complex triangle meshes from .obj files, I implemented a Bounding Volume Hierarchy (BVH). A BVH is a tree structure that spatially organizes geometry into nested bounding boxes. During rendering, this allows the tracer to quickly discard large parts of the scene that a ray cannot possibly intersect, reducing the number of ray-triangle intersection tests from O(N) to O(log N) and making complex scenes render at interactive rates.
+        </p>
+        
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/bvh_stress_test.2025-10-08_01-15-18z.1560samp.png" alt="Simple BVH scene">
+            <figcaption>A simple scene with a few objects.</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/GPUPathTracer/bvh_stress_test.2025-10-08_01-25-28z.580samp.png" alt="Complex BVH scene with an OBJ model">
+            <figcaption>The same scene with a 5k+ triangle model.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Stream Compaction & Material Sorting</h3>
+        <p>
+          Two key optimizations for the wavefront architecture are stream compaction and material sorting.
+          <strong>Stream compaction</strong> uses <code>thrust::partition</code> to remove "dead" rays from the processing queue after each bounce, ensuring that threads are not wasted on paths that have already terminated. This is especially effective in open scenes where many rays miss all geometry.
+          <strong>Material sorting</strong> uses <code>thrust::sort_by_key</code> to group rays by the material they have hit. This ensures that threads within a GPU warp execute the same shading code, avoiding divergence and maximizing throughput.
+        </p>
+      </section>
+
+      <!-- Performance Analysis -->
+      <section class="overview-section">
+        <h2>Performance Analysis</h2>
+        <p>
+          Performance was tested on an NVIDIA GeForce RTX 3080. The graphs below show the impact of key optimizations on framerate.
+        </p>
+        
+        <figure>
+          <img src="../images/GPUPathTracer/StreamCompactGraph_V1.png" alt="Graph showing performance gain from stream compaction" style="width: 75%;">
+          <figcaption>Stream compaction provides a major FPS boost in open scenes.</figcaption>
+        </figure>
+        
+        <figure>
+          <img src="../images/GPUPathTracer/BVH Graph.png" alt="Graph showing performance gain from BVH" style="width: 75%;">
+          <figcaption>BVH is essential for rendering scenes with more than a few hundred triangles.</figcaption>
+        </figure>
+        
+        <figure>
+          <img src="../images/GPUPathTracer/BH Graph.png" alt="Graph showing performance with multiple black holes" style="width: 75%;">
+          <figcaption>Performance scales well even with a large number of black holes in the scene.</figcaption>
+        </figure>
+      </section>
+
+      <!-- Gallery -->
+      <section class="overview-section">
+        <h2>Gallery</h2>
+        <p>
+          Overall, I was very happy with how this project turned out. The gravitational lensing effect is visually compelling and integrates seamlessly into the physically-based rendering pipeline. Future work could include adding more material types like glass and subsurface scattering, as well as improving the scene loading and UI. Below are some additional renders created during development.
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/space_scene_bh.2025-10-03_03-31-17z.407samp.png" alt="Gallery render 2">
+          </figure>
+        </div>
+      </section>
+        
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/blackhole_bvh_test.2025-10-05_02-25-49z.537samp.png" alt="Gallery render 3">
+          </figure>
+          <figure>
+            <img src="../images/GPUPathTracer/blackhole_bvh_test.2025-10-05_02-39-31z.775samp.png" alt="Gallery render 4">
+          </figure>
+        </div>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/singleBH_V1.2025-10-05_16-53-14z.97samp.png" alt="A hand reaching for a black hole">
+          </figure>
+        </div>
+      </section>
+
+      
+      <section class="overview-section">
+        <h2>Bloopers</h2>
+        <p>These are just some wild renders I got while trying to implement some of these features.</p>
+
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/cornell.2025-10-03_20-11-58z.634samp.png" alt="Blooper 1">
+          </figure>
+          <figure>
+            <img src="../images/GPUPathTracer/cornell.2025-10-03_20-22-33z.363samp.png" alt="Blooper 2">
+          </figure>
+        </div>
+
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GPUPathTracer/cornell.2025-10-04_00-38-55z.35samp.png" alt="Blooper 3">
+          </figure>
+          <figure>
+            <img src="../images/GPUPathTracer/singleBH_V1.2025-10-03_01-23-23z.164samp.png" alt="Blooper 4">
+          </figure>
+        </div>
+      </section>
+
+
+    </article>
+  </main>
+<footer>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
