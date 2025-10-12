@@ -298,65 +298,180 @@ header nav ul li a:hover {
   gap: 1rem;
 }
 
-/* Image section spacing to mirror example */
-.images-section {
-  margin: 2rem 0;
-  padding: 1rem 0;
+
+/* === Standardized Theme Colors & Components (match main.css) === */
+/* Typography */
+body, main, .project-page, .content-container {
+  color: var(--fg-0);
+}
+h1, h2, h3, h4, h5, h6 { color: var(--fg-0); }
+p, li, small { color: var(--fg-1); }
+a { color: var(--fg-0); text-decoration: none; }
+a:hover { color: var(--acc-0); text-shadow: 0 0 6px rgba(123,220,255,0.35); }
+
+/* Buttons */
+.button, button, .btn {
+  color: var(--fg-0);
+  background: linear-gradient(90deg, rgba(123,220,255,0.15), rgba(192,132,252,0.15));
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  box-shadow: var(--glow);
+}
+.button:hover, button:hover, .btn:hover {
+  background: linear-gradient(90deg, rgba(123,220,255,0.25), rgba(192,132,252,0.25));
 }
 
-/* === Tighten vertical rhythm (drop-in overrides) === */
-:root {
-  --section-gap: 0.5rem;     /* global section margin */
-  --section-pad: 0.25rem;   /* global section padding */
+/* Cards & Image Containers */
+.gallery-item, .project-card, .project-showcase,
+.image-grid figure, .project-content figure, figure.card {
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: var(--glow);
+  color: var(--fg-0);
 }
 
-/* General sections in the project content */
-.project-content section {
-  margin: var(--section-gap) 0;      /* was 2rem 0 */
-  padding: var(--section-pad) 0;     /* was 1rem 0 */
+/* Card titles and body text */
+.gallery-item h3, .project-card h3, .project-showcase h3,
+figure.card h3, .project-content figure h3 {
+  color: var(--fg-0);
+}
+.gallery-item p, .project-card p, .project-showcase p,
+figure.card p, .project-content figure p {
+  color: var(--fg-1);
 }
 
-/* Specific section helpers (in case they’re used elsewhere) */
-.overview-section {
-  margin: var(--section-gap) 0;      /* was 2rem 0 */
-  padding: var(--section-pad) 0;     /* was 1rem 0 */
+/* Captions */
+.image-grid figcaption,
+.project-content figure figcaption,
+figure.card figcaption {
+  color: var(--fg-muted);
 }
 
-.images-section {
-  margin: calc(var(--section-gap) * 1.2) 0;  /* was 2rem 0 */
-  padding: var(--section-pad) 0;             /* was 1rem 0 */
+/* Tool pills */
+.tools-list li, .tools-list span {
+  background: rgba(255,255,255,0.06);
+  color: var(--fg-1);
+  border: 1px solid var(--stroke);
 }
 
-/* Slightly tighter headings inside sections */
-.project-content h2 {
-  margin: 1.2rem 0 0.5rem;   /* tightened from 2.5rem section spacing context */
+/* Inputs (if any) */
+input, select, textarea {
+  background: rgba(255,255,255,0.06);
+  color: var(--fg-0);
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
 }
+input::placeholder, textarea::placeholder { color: var(--fg-muted); }
+
+/* Code blocks */
+pre, code, kbd, samp {
+  background: rgba(255,255,255,0.06);
+  color: var(--fg-0);
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+}
+pre { padding: 0.9rem 1rem; overflow: auto; }
+code { padding: 0.1rem 0.35rem; }
+
+/* Ensure images display crisply on dark UI */
+img { image-rendering: auto; }
+
+
+/* === Single Project Pages — Dark Title + Readable Text + Figure Captions === */
+
+/* Title/header area: remove old white strips and teal-only buttons */
+.project-header,
+.header-container,
+.project-header .header-container {
+  background: transparent !important;
+  color: var(--fg-0);
+}
+
+.project-header h1,
+.header-container h1,
+.project-content h1,
+.project-content h2,
 .project-content h3 {
-  margin: 0.9rem 0 0.4rem;
+  color: var(--fg-0);
 }
 
-/* Remove extra space at very top/bottom of the page sections */
-.project-page .overview-section:first-of-type,
-.project-page .images-section:first-of-type { margin-top: 0.5rem; }
-
-.project-page .overview-section:last-of-type,
-.project-page .images-section:last-of-type { margin-bottom: 0.5rem; }
-
-
-/* Fix layout when an image-grid has exactly one figure */
-.image-grid > figure:only-child {
-  max-width: min(100%, 900px);  /* cap width; tweak 900px as you like */
-  margin: 0 auto;               /* center the figure block */
-  padding: 0;                   /* remove inner padding that can shift visuals */
+/* Ensure meta text (dates, tags) are readable */
+.project-meta,
+.project-meta * {
+  color: var(--fg-1) !important;
 }
 
-.image-grid > figure:only-child img {
-  display: block;
-  margin: 0 auto;               /* center the image inside the figure */
-  width: 100%;
-  height: auto;
+/* Top buttons (match main theme) */
+.top-buttons .button,
+.project-header .button,
+.header-container .button {
+  background: linear-gradient(90deg, rgba(123,220,255,0.15), rgba(192,132,252,0.15)) !important;
+  border: 1px solid var(--stroke) !important;
+  color: var(--fg-0) !important;
+  border-radius: 10px;
+  box-shadow: var(--glow);
 }
 
-/* Ensure grid cells center their contents (helps in all cases) */
+.top-buttons .button:hover,
+.project-header .button:hover,
+.header-container .button:hover {
+  background: linear-gradient(90deg, rgba(123,220,255,0.25), rgba(192,132,252,0.25)) !important;
+}
+
+/* Body text legibility on dark */
+.project-content p,
+.project-content li,
+.project-content small {
+  color: var(--fg-1);
+}
+
+/* Figure/card styling consistent with main */
+.image-grid figure,
+.project-content figure {
+  background: var(--card) !important;
+  border: 1px solid var(--stroke) !important;
+  border-radius: var(--radius);
+  box-shadow: var(--glow);
+  color: var(--fg-0);
+}
+
+/* Fix white figcaption boxes: use transparent bg + muted text */
+.image-grid figcaption,
+.project-content figure figcaption {
+  background: transparent !important;
+  color: var(--fg-muted) !important;
+}
+
+/* Ensure images center nicely */
 .image-grid { justify-items: center; }
-.image-grid figure { display: flex; flex-direction: column; align-items: center; }
+.image-grid figure {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0; margin: 0;
+}
+.image-grid img, .project-content figure img {
+  display: block; margin: 0 auto; width: 100%; height: auto;
+}
+
+/* Keep spacing modest */
+.project-content section { margin: 1.2rem 0; padding: 0.5rem 0; }
+
+
+/* === Minimal Glass Header Fix (non-invasive) === */
+header {
+  background: var(--glass) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--stroke);
+}
+
+
+/* === Minimal Header Text Color Fix (match main.css) === */
+header a,
+header nav ul li a {
+  color: var(--fg-0) !important;
+}
+header nav ul li a:hover {
+  color: var(--acc-0) !important;
+  text-shadow: 0 0 6px rgba(123,220,255,0.4);
+}

@@ -99,4 +99,23 @@
     font-size: 0.8rem;
     color: #555;
   }
-  
+
+/* ===== Black Hole Theme — Gallery ===== */
+.gallery-filters { gap: 1rem; }
+.filter-btn {
+  border-color: rgba(123,220,255,0.5);
+  color: var(--fg-0);
+  background: rgba(10,14,24,0.35);
+  box-shadow: var(--glow);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: linear-gradient(90deg, rgba(123,220,255,0.2), rgba(192,132,252,0.2));
+  color: var(--fg-0);
+}
+
+.tools-list li {
+  background-color: rgba(255,255,255,0.06);
+  color: var(--fg-1);
+  border: 1px solid var(--stroke);
+}
