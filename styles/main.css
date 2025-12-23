@@ -128,11 +128,6 @@ main > section {
   border-bottom: 1px solid var(--panel-stroke);
 }
 
-/* alternate panel shade (optional, but looks good) */
-main > section:nth-of-type(even) {
-  background: var(--panel-strong);
-}
-
 .content-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -144,6 +139,18 @@ h1, h2 {
   margin-bottom: 1.25rem;
   color: var(--fg-0);
   letter-spacing: 0.2px;
+}
+
+main > section h1 {
+  font-size: 3rem;          /* tweak: 2.6–3.2rem */
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+main > section h2 {
+  font-size: 3rem;          /* tweak: 2.6–3.2rem */
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
 }
 
 p { color: var(--fg-1); }
