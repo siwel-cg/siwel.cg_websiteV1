@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circuit Nova - Lewis Ghrist</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/project_page.css">
+  <!-- MathJax v3 -->
+  <script>
+  window.MathJax = {
+    tex: {inlineMath: [['\\(', '\\)'], ['$', '$']]},
+    options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}
+  };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</head>
+
+<body>
+
+<header>
+      <nav>
+          <ul>
+              <li><a href="../index.html#home">Home</a></li>
+              <li><a href="../pages/projects.html">Projects</a></li>
+              <li><a href="../pages/research.html">Research</a></li>
+              <li><a href="../pages/gallery.html">Portfolio</a></li>
+              <li><a href="../index.html#demoreel">Demo Reel</a></li>
+              <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Circuit Nova</h1>
+      <div class="project-meta">
+        <span class="date">December 2025</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>WebGPU</li>
+            <li>WGSL</li>
+            <li>TypeScript</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+
+      <div class="top-buttons">
+        <a href="https://johnnysist.github.io/CIS5650-Final-Project/" class="button" target="_blank">Live Demo</a>
+        <a 
+            class="button" href="https://github.com/JohnnySIST/CIS5650-Final-Project" target="_blank"rel="noopener">Code
+        </a>
+      </div>
+
+      <!-- Hero Images -->
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/CircuitNova/BigWostr_Layer-FCu.png" alt="Circuit Nova — Big Board">
+          </figure>
+        </div>
+      </section>
+
+      <!-- Overview -->
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          We are team <strong>Circuit Nova</strong>:
+          <a href="https://github.com/hendrych-upenn" target="_blank">Oliver Hendrych</a>,
+          <a href="https://siwel-cg.github.io/siwel.cg_websiteV1/index.html#home" target="_blank">Lewis Ghrist</a>,
+          and <a href="https://johnnyding.com/portfolio" target="_blank">Hongyi Ding</a>.
+          This project is a browser-based, WebGPU thermal simulation tool for PCB design and prototyping,
+          built on the Walk on Stars (WoStr) algorithm.
+          Users can import or draw PCB layouts, set boundary condition types and values, and interactively
+          move components while the heat distribution updates in real time.
+        </p>
+      </section>
+
+      <section class="overview-section">
+        <h2>Motivation and Background</h2>
+        <p>
+          Modern electronics are limited by heat dissipation. Being able to quickly visualize and simulate heat diffusion
+          on PCBs is critical during early prototyping, yet most PCB design tools provide little to no thermal feedback
+          while adjusting layouts. Full finite-element solvers are accurate but slow and don't allow for layout adjustments.
+          Doing a global, high-fidelity solve is also often overkill and requires a full re-simulation every time a small change is made.
+          This project targets that bottleneck by introducing a browser-based GPU thermal estimator built on the Walk-on-Stars (WoStr) algorithm.
+          WoStr allows for fast re-simulation on geometry changes, localized solves over targeted regions, and a progressive convergence that provides
+          immediate, intermediate estimates. All of these are advantageous for quick design iteration and prototyping.
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/CircuitNova/Processing_Pipeline.png" alt="Processing Pipeline">
+          </figure>
+        </div>
+      </section>
+
+      <section class="overview-section">
+        <h2>Current Open Source Availability</h2>
+        <p>
+          Current open source options are limited and take a large number of processing steps before achieving a final result [1].
+          Users are forced to download many distinct pieces of software for each part of the process, beyond the initial KiCad development,
+          if they want to continue license-free [2]. KiCad boards are exported first to Salome to perform mesh building and conversion.
+          Then, that output is exported ElmerVTK where the FEM simulation is run. Finally, to produce high quality images, that output must be exported to Paraview.
+          If one wants to iterate on their design, then go back to KiCad, modify the appropriate geometry, then complete this whole process again.
+          In our software, the last 3 steps will be condensed to a single software, which will also allow for interative editing to shorten the design loop.
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/CircuitNova/Process_Comparison.png" alt="Process Comparison">
+          </figure>
+        </div>
+      </section>
+
+      <section class="overview-section">
+        <h2>Walk on Spheres &amp; Walk on Stars</h2>
+        <p>
+          Walk on Spheres works by launching random walks from query points until they hit a boundary.
+          Drawing inspiration from path tracing and sphere tracing, each walk contributes to a Monte Carlo estimator
+          that converges toward the true solution of the steady-state heat equation. Because each walk is independent,
+          the method is embarrassingly parallel, making it a perfect fit for WebGPU compute shaders.
+        </p>
+        <p>
+          Walk on Stars is an extension to the WoS algorithm to allow for a combination of Dirichlet and Neumann boundary conditions,
+          a feature that is needed for physically based heat simulations. The structure is the same in that it is a Monte Carlo based method
+          using random walks from a set of query points. The radius of the sphere used for sphere tracing is only dependent on the Dirichlet boundaries.
+          When walking to the uniformly sampled point on this sphere, if we cross a Neumann boundary, we reflect our walk about the boundary's flux direction
+          and adjust values based on that flux. The walks continue on, only terminating when we finally hit a Dirichlet boundary. This allows for accurate sinks and sources.
+          Again we can take advantage of GPU parallelization to make this process extremely fast.
+        </p>
+        <p>
+          The original papers, as well as many extentions, can be found here:
+          <a href="https://rohan-sawhney.github.io/mcgp-resources/" target="_blank">https://rohan-sawhney.github.io/mcgp-resources/</a>
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/CircuitNova/WoS_SS1.png" alt="Walk on Spheres (Dirichlet only)">
+            <figcaption>Walk on Spheres (Dirichlet only)</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/CircuitNova/SoStr_SS1.png" alt="Walk on Stars (Dirichlet + Neumann)">
+            <figcaption>Walk on Stars (Dirichlet + Neumann)</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="overview-section">
+        <h2>Break Down</h2>
+        <p>
+          The general pipeline involves two main compute shaders. First, we do an initial screening of our simulation domain to get just the query points
+          within the boundaries of our geometry. This can be done once before the simulation starts and allows us to only simulate on point's that will actually result
+          in meaning full data. These query points are then shipped to the second compute shader where the real work happens. This second compute shader handles the actuall simulation.
+          For each query point, we send out these random walks, stepping based on the closest distance to a boundary. This closest distance is found using a BVH struture
+          (or in this case BAH structure since we are in 2D), which drastically speeds up walk times, especially in complex boards. As explained in the WoStr method,
+          at Neumann boundaries, this walk get reflected, picking up some flux value, and at Dirichlet boundarie's, the walk ends and returns the Dirichlet boundary value
+          along with any accumulated flux along the walk. These results then get sent to a final fragment shader, which averages all the walk results for each query point,
+          fits that value through a simple color ramp, and draws it to the screen along with the boundary geometry.
+        </p>
+      </section>
+
+      <section class="overview-section">
+        <h2>Interactivity</h2>
+        <p>Here is the layout of the UI:</p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/CircuitNova/interaction.png" alt="Interaction UI">
+          </figure>
+        </div>
+      </section>
+
+      <section class="overview-section">
+        <p>Major features include:</p>
+        <ul>
+          <li>Import and export as KiCad PCB formats</li>
+          <li>Simulation zone selection</li>
+          <li>Change simulation resolution</li>
+          <li>Geometry selection, addition/deletion and alteration</li>
+          <li>Change boundary conditions and values</li>
+          <li>Selection of board layers</li>
+          <li>Zooming, panning camera controls</li>
+          <li>Toggle simulation on/off</li>
+          <li>Live FPS display</li>
+        </ul>
+
+        <p>
+          A unique advantage of this WoStr method, is that because it is based only on a set of initial query points, we don't need to do a global solve to get results.
+          To take advantage of this, we implemented a simulation zone selection feature that lets users focus computation on a specific region of interest.
+          For complex boards, or if there is a specific area you are particularly interested in, you can easily simulate just on that area in a higher resolution,
+          without paying for the cost of simulating the entire board.
+        </p>
+
+        <p align="center">
+          <img src="../images/CircuitNova/BoundaryLines_V1.png" alt="Boundary Lines" style="width:50%; height:auto;" />
+        </p>
+
+        <p>
+          The main user interaction feature is being able to select, add/delete, and move geometry as well as change the boundary types and values as needed.
+          This allows for custom board creation or user imported boards to be edited and adjusted. The final configuration can then be exported out.
+        </p>
+
+        <p>
+          The user can also choose which layer of the board they would like to modify and simulate. Modern PCB designs contain many layers, and it is important to be able to simulate any of them.
+          Below is an example of this with the KiCad <code>kit-dev-coldfire-xilinx_5213</code> demo project:
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/CircuitNova/BigWostr_Layer-FCu.png" alt="FCu Layer">
+            <figcaption>FCu Layer</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/CircuitNova/BigWostr_Layer-In1Cu.png" alt="In1Cu Layer">
+            <figcaption>In1Cu Layer</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/CircuitNova/BigWostr_Layer-In2Cu.png" alt="In2Cu Layer">
+            <figcaption>In2Cu Layer</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="overview-section">
+        <p>
+          Finally, for some quality of life features, we implemented a basic camera system for navigating the board, a live FPS display for performance monitoring,
+          a pause button for the simulation, and a selection menu for adjusting simulation resolution.
+        </p>
+
+        <p>Here is a demo video of the tool in action.</p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <a href="https://www.youtube.com/watch?v=hk4TR0w7xXk" target="_blank">
+              <img src="https://img.youtube.com/vi/hk4TR0w7xXk/maxresdefault.jpg" alt="Demo Video Thumbnail">
+            </a>
+          </figure>
+        </div>
+      </section>
+
+      <section class="overview-section">
+        <h2>KiCad Integration</h2>
+        <p>
+          An important part of open source development is integrating with other tools from the ecosystem. KiCad is a very popular open source EDA (electronic design automation)
+          tool that is used for PCB design and prototyping. Additionally, other software have capabilities to import and export KiCad PCB files, making it a common element for PCB design.
+          As such, we chose it as our primary integration point, for both import and export of board geometry. Our tool uses a forked version of the kicadts package to parse
+          <code>.kicad_pcb</code> files and reexport the modified <code>.kicad_pcb</code> file. Its plaintext format makes it easy to parse and modify.
+          Upon importing a KiCad PCB file, the tool will parse the file and extract the footprint and segment geometries, which can then be used in the simulation.
+          The user can then modify, delete, or add geometry as needed. When the user is done, the geometry can be exported back to a KiCad PCB file.
+        </p>
+
+        <p>
+          <a href="https://youtu.be/vax0-jZ_6Vk" target="_blank">KiCad Integration Video</a>
+        </p>
+
+        <p align="center">
+          <a href="https://youtu.be/vax0-jZ_6Vk" target="_blank">
+            <img src="https://img.youtube.com/vi/vax0-jZ_6Vk/maxresdefault.jpg" alt="KiCad Integration Video Thumbnail" style="max-width:900px; width:100%; height:auto;">
+          </a>
+        </p>
+      </section>
+
+      <section class="overview-section">
+        <h2>Future Work</h2>
+        <p>
+          There are still some additional features that can be added for more functionality or better resutls. For starters, there has been a lot of recent work on extending or improving
+          the Walk on Stars algorithm. This includes things like faster convergence and more complex boundary types. The simulation at the moment doesn't take into account material properties,
+          which in a full, physically accurate simulation is important. As a prototying tool, getting this approximate solution is still valuable, but WoStr can be extended to support materal properties.
+          Additionally, the pipeline can be extended to support more geometry types beyond simple segments and circles, making it more in line with prexisting PCB editors.
+          Finally, as always, further optimizations and performance improvemnts can be made for smoother and faster results.
+        </p>
+      </section>
+
+      <section class="overview-section">
+        <h2>References</h2>
+        <ul>
+            <li><a href="https://jrainimo.com/build/2024/11/oss-thermal-simulation-of-pcbs/" target="_blank" rel="noopener">
+                OSS Thermal Simulation of PCBs
+            </a></li>
+            <li><a href="https://resources.altium.com/p/why-you-should-use-thermal-prototyping-instead-simulations" target="_blank" rel="noopener">
+                Thermal Prototyping vs Simulation
+            </a></li>
+            <li><a href="https://jacco.ompf2.com/2022/04/13/how-to-build-a-bvh-part-1-basics/" target="_blank" rel="noopener">
+                BVH Construction Basics
+            </a></li>
+            <li><a href="https://rohan-sawhney.github.io/mcgp-resources/" target="_blank" rel="noopener">
+                Monte Carlo Geometry Processing Resources
+            </a></li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+
+<footer>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

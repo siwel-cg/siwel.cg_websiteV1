@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebGPU Gaussian Splat Viewer - Lewis Ghrist</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/project_page.css">
+  <!-- MathJax v3 -->
+  <script>
+  window.MathJax = {
+    tex: {inlineMath: [['\\(', '\\)'], ['$', '$']]},
+    options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}
+  };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</head>
+<body>
+  <header>
+      <nav>
+          <ul>
+              <li><a href="../index.html#home">Home</a></li>
+              <li><a href="../pages/projects.html">Projects</a></li>
+              <li><a href="../pages/research.html">Research</a></li>
+              <li><a href="../pages/gallery.html">Portfolio</a></li>
+              <li><a href="../index.html#demoreel">Demo Reel</a></li>
+              <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <div class="project-header">
+    <div class="header-container">
+      <h1>WebGPU Gaussian Splat Viewer</h1>
+      <div class="project-meta">
+        <span class="date">October 2025</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>WebGPU</li>
+            <li>TypeScript</li>
+            <li>WGSL</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+      <div class="top-buttons">
+        <a href="https://siwel-cg.github.io/Project5-WebGPU-Gaussian-Splat-Viewer/" class="button">Live Demo</a>
+        <a href="https://www.youtube.com/watch?v=FcsVPEqJQR4" class="button">Demo Video</a>
+      </div>
+
+      <!-- Hero Images -->
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GaussSplat/Bicycle_GS_V1.png" alt="Gaussian Splat Render (Bicycle)">
+          </figure>
+        </div>
+      </section>
+
+      <!-- Overview -->
+      <section class="overview-section">
+        <h2>Overview</h2>
+        <p>
+          <strong>Gaussian Splatting</strong> is a neural rendering technique for reconstructing scenes from posed images.
+          Instead of dense voxels or a full neural field (e.g., NeRF), the scene is represented as a set of <em>3D Gaussians</em>.
+          Each Gaussian stores position, color, opacity, and a covariance that encodes local geometric shape. During rendering,
+          Gaussians are projected to the screen as textured quads and blended using alpha compositing in screen space.
+        </p>
+        <p>
+          In this project, I implemented a <strong>WebGPU-based splat viewer</strong> that loads a <code>.ply</code> splat file and renders it in real time.
+          The pipeline has three main stages:
+        </p>
+        <ul>
+          <li><strong>Preprocess</strong> the Gaussian point cloud (color, covariance, opacity, quad size, NDC position), with simple frustum culling.</li>
+          <li><strong>Depth sort</strong> splats using a GPU radix sort implementation.</li>
+          <li><strong>Render</strong> screen-oriented quads and shade them with Gaussian falloff in the fragment shader, composited back-to-front.</li>
+        </ul>
+        <p>
+          For more information, see the <a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/3d_gaussian_splatting_high.pdf" target="_blank" rel="noopener noreferrer">original 3D Gaussian Splatting paper</a>.
+        </p>
+      </section>
+
+      <section class="overview-section">
+        <h2>This is a work in progrss. . .</h2>
+        <p>
+          The current implementation has a few known issues:
+        </p>
+        <ul>
+          <li>
+            <strong>Radius / LOD:</strong> quad sizes do not vary as much as expected, so splats look too uniform.
+          </li>
+          <li>
+            <strong>Covariance falloff:</strong> splats appear overly distinct, suggesting an issue in covariance computation or how the falloff is mapped into the quad.
+          </li>
+          <li>
+            <strong>Culling / indexing:</strong> when zoomed out, a large portion of the scene can disappear and splats may flash due to intermediate index buffer / culling logic.
+          </li>
+        </ul>
+        <p>
+          These are the areas I'm planning on revisiting to improve photorealism and robustness.
+        </p>
+      </section>
+
+      <!-- Point Clouds -->
+      <section class="overview-section">
+        <h2>Point Clouds</h2>
+        <p>
+          The input is a set of 3D points with attributes (e.g., color, normals). While this representation is sparse and discontinuous,
+          it becomes visually dense once each point is rendered as a Gaussian splat.
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GaussSplat/Bicycle_pointcloud_V1.png" alt="Bicycle point cloud">
+            <figcaption>Bicycle point cloud input.</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/GaussSplat/bonsai_pointcloud_V1.png" alt="Bonsai point cloud">
+            <figcaption>Bonsai point cloud input.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Gaussian Splatting -->
+      <section class="overview-section">
+        <h2>Gaussian Splatting</h2>
+
+        <h3>Quads</h3>
+        <p>
+          Each 3D Gaussian is projected to the screen and rendered as a <strong>screen-aligned quad</strong> whose size bounds the Gaussian’s projected ellipse.
+          After projecting the Gaussian center to NDC, we compute a screen-space covariance and derive a 2×2 ellipse.
+          The quad is chosen large enough to cover this ellipse so that the Gaussian falloff can be evaluated per-pixel in the fragment shader.
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GaussSplat/Bicycle_SizedQuads_V1.png" alt="Sized quads">
+            <figcaption>Screen-aligned quads sized to bound each splat’s projected footprint.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="overview-section">
+        <h3>Colors and Covariance</h3>
+
+        <h4>Appearance</h4>
+        <p>
+          Instead of storing a fixed RGB value per splat, each splat stores <strong>spherical harmonic (SH) coefficients</strong>.
+          At render time, the view direction selects an SH evaluation to produce view-dependent color.
+        </p>
+
+        <h4>Covariance</h4>
+        <p>
+          The covariance matrix encodes the anisotropic shape of the Gaussian ellipsoid in 3D.
+          Before rasterization, the 3D covariance is transformed to a 2D covariance in screen space, which dictates the falloff profile across the quad.
+          After preprocessing, splats are <strong>sorted back-to-front</strong> for correct alpha compositing.
+        </p>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GaussSplat/Bicycle_DepthSorted_V1.png" alt="Depth-sorted splats">
+            <figcaption>Depth-sorted splats prior to final compositing.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Output -->
+      <section class="overview-section">
+        <h2>Output</h2>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/GaussSplat/Bicycle_GS_V1.png" alt="Bicycle output">
+            <figcaption>Bicycle scene output.</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/GaussSplat/Bonsai_GS_V1.png" alt="Bonsai output">
+            <figcaption>Bonsai scene output.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Credits / References -->
+      <section>
+        <h3>Credits</h3>
+        <ul class="reference-list">
+          <li><a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer">Vite</a></li>
+          <li><a href="https://tweakpane.github.io/docs//v3/monitor-bindings/" target="_blank" rel="noopener noreferrer">tweakpane</a></li>
+          <li><a href="https://github.com/mrdoob/stats.js" target="_blank" rel="noopener noreferrer">stats.js</a></li>
+          <li><a href="https://github.com/greggman/wgpu-matrix" target="_blank" rel="noopener noreferrer">wgpu-matrix</a></li>
+          <li><a href="https://github.com/graphdeco-inria/diff-gaussian-rasterization" target="_blank" rel="noopener noreferrer">Differential Gaussian Renderer</a></li>
+          <li><a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/3d_gaussian_splatting_high.pdf" target="_blank" rel="noopener noreferrer">3D Gaussian Splatting paper</a></li>
+          <li>Special thanks to: Shrek Shao (Google WebGPU team)</li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Lewis Ghrist. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
