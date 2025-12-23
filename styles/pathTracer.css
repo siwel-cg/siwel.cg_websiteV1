@@ -148,7 +148,15 @@ header nav ul li a:hover {
 }
 
 .image-grid figure:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 44px rgba(0,0,0,0.45),
+    0 0 0.5px rgba(123,220,255,0.70),
+    0 0 18px rgba(123,220,255,0.22),
+    0 0 34px rgba(192,132,252,0.12);
+
+  border-color: rgba(123,220,255,0.55);
 }
 
 .image-grid img {
@@ -176,7 +184,15 @@ header nav ul li a:hover {
 }
 
 .project-content figure:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 44px rgba(0,0,0,0.45),
+    0 0 0.5px rgba(123,220,255,0.70),
+    0 0 18px rgba(123,220,255,0.22),
+    0 0 34px rgba(192,132,252,0.12);
+
+  border-color: rgba(123,220,255,0.55);
 }
 
 .project-content figure img {
@@ -282,3 +298,222 @@ header nav ul li a:hover {
 }
 
 
+/* === Canonical Header from main.css === */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--stroke);
+}
+
+header nav ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header nav ul li { margin-left: 2rem; }
+
+header nav ul li a {
+  text-decoration: none;
+  color: var(--fg-0);
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+header nav ul li a:hover {
+  color: var(--acc-0);
+  text-shadow: 0 0 6px rgba(123,220,255,0.4);
+}
+
+/* Ensure page content clears fixed header consistently */
+main, .project-page, .content-container {
+  scroll-margin-top: 80px;
+}
+body { padding-top: 64px; } /* adjust if your header is taller */
+
+
+/* === Standardized Theme Colors & Components (match main.css) === */
+/* Typography */
+body, main, .project-page, .content-container {
+  color: var(--fg-0);
+}
+h1, h2, h3, h4, h5, h6 { color: var(--fg-0); }
+p, li, small { color: var(--fg-1); }
+a { color: var(--fg-0); text-decoration: none; }
+a:hover { color: var(--acc-0); text-shadow: 0 0 6px rgba(123,220,255,0.35); }
+
+/* Buttons */
+.button, button, .btn {
+  color: var(--fg-0);
+  background: linear-gradient(90deg, rgba(123,220,255,0.15), rgba(192,132,252,0.15));
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  box-shadow: var(--glow);
+}
+.button:hover, button:hover, .btn:hover {
+  background: linear-gradient(90deg, rgba(123,220,255,0.25), rgba(192,132,252,0.25));
+}
+
+/* Cards & Image Containers */
+.gallery-item, .project-card, .project-showcase,
+.image-grid figure, .project-content figure, figure.card {
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: var(--glow);
+  color: var(--fg-0);
+}
+
+/* Card titles and body text */
+.gallery-item h3, .project-card h3, .project-showcase h3,
+figure.card h3, .project-content figure h3 {
+  color: var(--fg-0);
+}
+.gallery-item p, .project-card p, .project-showcase p,
+figure.card p, .project-content figure p {
+  color: var(--fg-1);
+}
+
+/* Captions */
+.image-grid figcaption,
+.project-content figure figcaption,
+figure.card figcaption {
+  color: var(--fg-muted);
+}
+
+/* Tool pills */
+.tools-list li, .tools-list span {
+  background: rgba(255,255,255,0.06);
+  color: var(--fg-1);
+  border: 1px solid var(--stroke);
+}
+
+/* Inputs (if any) */
+input, select, textarea {
+  background: rgba(255,255,255,0.06);
+  color: var(--fg-0);
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+}
+input::placeholder, textarea::placeholder { color: var(--fg-muted); }
+
+/* Code blocks */
+pre, code, kbd, samp {
+  background: rgba(255,255,255,0.06);
+  color: var(--fg-0);
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+}
+pre { padding: 0.9rem 1rem; overflow: auto; }
+code { padding: 0.1rem 0.35rem; }
+
+/* Ensure images display crisply on dark UI */
+img { image-rendering: auto; }
+
+
+/* === Single Project Pages — Dark Title + Readable Text + Figure Captions === */
+
+/* Title/header area: remove old white strips and teal-only buttons */
+.project-header,
+.header-container,
+.project-header .header-container {
+  background: transparent !important;
+  color: var(--fg-0);
+}
+
+.project-header h1,
+.header-container h1,
+.project-content h1,
+.project-content h2,
+.project-content h3 {
+  color: var(--fg-0);
+}
+
+/* Ensure meta text (dates, tags) are readable */
+.project-meta,
+.project-meta * {
+  color: var(--fg-1) !important;
+}
+
+/* Top buttons (match main theme) */
+.top-buttons .button,
+.project-header .button,
+.header-container .button {
+  background: linear-gradient(90deg, rgba(123,220,255,0.15), rgba(192,132,252,0.15)) !important;
+  border: 1px solid var(--stroke) !important;
+  color: var(--fg-0) !important;
+  border-radius: 10px;
+  box-shadow: var(--glow);
+}
+
+.top-buttons .button:hover,
+.project-header .button:hover,
+.header-container .button:hover {
+  background: linear-gradient(90deg, rgba(123,220,255,0.25), rgba(192,132,252,0.25)) !important;
+}
+
+/* Body text legibility on dark */
+.project-content p,
+.project-content li,
+.project-content small {
+  color: var(--fg-1);
+}
+
+/* Figure/card styling consistent with main */
+.image-grid figure,
+.project-content figure {
+  background: var(--card) !important;
+  border: 1px solid var(--stroke) !important;
+  border-radius: var(--radius);
+  color: var(--fg-0);
+    
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35), var(--glow);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+/* Fix white figcaption boxes: use transparent bg + muted text */
+.image-grid figcaption,
+.project-content figure figcaption {
+  background: transparent !important;
+  color: var(--fg-muted) !important;
+}
+
+/* Ensure images center nicely */
+.image-grid { justify-items: center; }
+.image-grid figure {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0; margin: 0;
+}
+.image-grid img, .project-content figure img {
+  display: block; margin: 0 auto; width: 100%; height: auto;
+}
+
+/* Keep spacing modest */
+.project-content section { margin: 1.2rem 0; padding: 0.5rem 0; }
+
+
+/* === Minimal Glass Header Fix (non-invasive) === */
+header {
+  background: var(--glass) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--stroke);
+}
+
+
+/* === Minimal Header Text Color Fix (match main.css) === */
+header a,
+header nav ul li a {
+  color: var(--fg-0) !important;
+}
+header nav ul li a:hover {
+  color: var(--acc-0) !important;
+  text-shadow: 0 0 6px rgba(123,220,255,0.4);
+}

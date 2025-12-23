@@ -1,102 +1,259 @@
-/* Example reset / base styles (optional if you have them elsewhere) */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333333;
-    background-color: #ffffff;
-  }
-  
-  /* MAIN CONTAINER */
+/* ==========================================================
+   Gallery Page — Black Hole Theme (Clean)
+   Keeps: main container sizing, responsive behavior,
+          gallery filters layout, tool pills.
+   ========================================================== */
+
+/* ---- Reset ---- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* This file assumes your global theme variables exist (from main.css):
+   --fg-0, --fg-1, --fg-muted, --acc-0, --stroke, --glow, --glass, etc.
+*/
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--fg-0);
+  background: transparent; /* let main.css handle the cosmic background */
+}
+
+/* ---- Main container ---- */
+main {
+  max-width: 1200px;
+  margin: 80px auto 0;
+  padding: 0 20px;
+}
+
+/* Fully responsive on mobile */
+@media (max-width: 768px) {
   main {
-    max-width: 1200px;
-    margin: 80px auto 0;
-    padding: 0 20px;
+    max-width: 100%;
+    margin: 80px 10px 0;
+    padding: 0 10px;
   }
-  
-  /* Make main fully responsive on mobile */
-  @media (max-width: 768px) {
-    main {
-      max-width: 100%;     /* Allow it to scale down on narrow screens */
-      margin: 80px 10px 0; /* Slight horizontal margin for breathing room */
-      padding: 0 10px;
-    }
+  .gallery-page > h1 {
+    font-size: 2.6rem;
+    margin: 2rem 0 2.5rem;
   }
-  
-  /* GALLERY FILTERS */
-  .gallery-filters {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;  /* Increased spacing between buttons */
-    margin: 3rem 0;  /* More vertical space */
-    flex-wrap: wrap;
-    padding: 0 1rem;
-  }
-  
+}
+
+.gallery-page > h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+
+  margin: 2.5rem 0 1.5rem;
+  color: var(--fg-0);
+
+  text-shadow:
+    0 0 12px rgba(123,220,255,0.15),
+    0 0 28px rgba(192,132,252,0.08);
+}
+
+/* ---- Gallery filters ---- */
+.gallery-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+.filter-btn {
+  padding: 0.75rem 2rem;
+  border: 1px solid rgba(123, 220, 255, 0.45);
+  background: rgba(10, 14, 24, 0.35);
+  color: var(--fg-0);
+
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 700;
+
+  box-shadow: var(--glow);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(123, 220, 255, 0.20),
+    rgba(192, 132, 252, 0.20)
+  );
+  transform: translateY(-2px);
+  border-color: rgba(123, 220, 255, 0.65);
+}
+
+.filter-btn.active {
+  background: linear-gradient(
+    90deg,
+    rgba(123, 220, 255, 0.22),
+    rgba(192, 132, 252, 0.22)
+  );
+  border-color: rgba(123, 220, 255, 0.75);
+}
+
+/* Adjust filter buttons on smaller screens */
+@media (max-width: 768px) {
+  .gallery-filters { gap: 1rem; }
+
   .filter-btn {
-    padding: 0.75rem 2rem;
-    border: 2px solid #007bff;
-    background: transparent;
-    color: #007bff;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.1rem;
-    font-weight: 500;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
   }
-  
-  .filter-btn:hover {
-    background: #007bff;
-    color: white;
-    transform: translateY(-2px);
+}
+
+/* ---- Tools used ---- */
+.tools-used {
+  margin: 1rem 0;
+  padding: 0.6rem 0;
+}
+
+.tools-used h4 {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: var(--fg-muted);
+}
+
+.tools-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.tools-list li {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--fg-1);
+  border: 1px solid var(--stroke);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.project-showcase {
+  display: flex;
+  align-items: stretch;
+
+  height: 400px;           /* ↑ was ~260 */
+  max-height: 400px;
+
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35), var(--glow);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  will-change: transform, box-shadow;
+}
+
+.project-showcase:hover {
+  transform: translateY(-6px);
+
+  /* IMPORTANT: stronger glow that stays ON while hovered */
+  box-shadow:
+    0 18px 44px rgba(0,0,0,0.45),
+    0 0 0.5px rgba(123,220,255,0.70),
+    0 0 18px rgba(123,220,255,0.22),
+    0 0 34px rgba(192,132,252,0.12);
+
+  border-color: rgba(123,220,255,0.55);
+}
+
+.project-showcase .showcase-info h3 {
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: 0.2px;
+  color: var(--fg-0);
+
+  margin: 0;
+  padding: 0;
+}
+
+.project-showcase .showcase-info {
+  flex: 0 0 40%;          /* <-- lock left column */
+  width: 40%;
+
+  padding: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.9rem;
+
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.project-showcase .showcase-info p,
+.project-showcase .showcase-info .tools-used,
+.project-showcase .showcase-info .tools-list {
+  margin: 0;
+  padding: 0;
+}
+
+/* ULs often have default left padding; kill it explicitly */
+.project-showcase .showcase-info .tools-list {
+  padding-left: 0;
+  margin-top: 0.75rem;
+}
+
+.project-showcase .tools-used { margin: 0.5rem 0 0.75rem; }
+
+.project-showcase .tools-list li {
+  font-size: 0.9rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+}
+
+/* Button: align left, consistent size */
+.project-showcase .button {
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  font-size: 1.05rem;
+  padding: 0.75rem 1.2rem;
+  border-radius: 12px;
+}
+
+/* Image column */
+.project-showcase .showcase-image {
+  flex: 0 0 60%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  border-left: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Image crop */
+.project-showcase .showcase-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .project-showcase {
+    flex-direction: column;
+    height: auto;
   }
-  
-  .filter-btn.active {
-    background: #007bff;
-    color: white;
+
+  .project-showcase .showcase-image {
+    justify-content: center;
   }
-  
-  /* Adjust filter buttons on smaller screens */
-  @media (max-width: 768px) {
-    .gallery-filters {
-      gap: 1rem;
-    }
-    .filter-btn {
-      padding: 0.6rem 1.5rem;
-      font-size: 1rem;
-    }
+
+  .project-showcase .showcase-image img {
+    height: auto;
   }
-  
-  /* TOOLS USED */
-  .tools-used {
-    margin: 1rem 0;
-    padding: 0.6rem 0rem;
-  }
-  
-  .tools-used h4 {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    color: #666;
-  }
-  
-  .tools-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0;
-  }
-  
-  .tools-list li {
-    background-color: #f0f0f0;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    color: #555;
-  }
-  
+}
+
+.full-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;   /* ↑ big breathing room like the old design */
+}
+
