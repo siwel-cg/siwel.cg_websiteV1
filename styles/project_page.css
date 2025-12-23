@@ -384,3 +384,58 @@ a:hover { color: var(--acc-0); text-shadow: 0 0 6px rgba(123,220,255,0.35); }
 .project-content figure iframe {
   border-radius: 12px;
 }
+
+/* =========================
+   Image Lightbox
+   ========================= */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+}
+
+.lightbox.is-open {
+  display: flex;
+}
+
+/* Vertical stack: image on top, hint below */
+.lightbox__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+
+  max-width: min(1200px, 95vw);
+  max-height: 90vh;
+}
+
+/* Image styling matches your figures */
+.lightbox__img {
+  max-width: 100%;
+  max-height: 80vh;
+
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.55), var(--glow);
+}
+
+/* Hint styling — subtle, on-brand */
+.lightbox__hint {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  opacity: 0.85;
+
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+
+  background: var(--panel);
+  border: 1px solid var(--panel-stroke);
+}
