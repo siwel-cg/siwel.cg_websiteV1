@@ -235,6 +235,12 @@ main {
   object-fit: cover;
 }
 
+.showcase-image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* Mobile */
 @media (max-width: 900px) {
   .project-showcase {
@@ -256,4 +262,3 @@ main {
   flex-direction: column;
   gap: 2rem;   /* ↑ big breathing room like the old design */
 }
-
