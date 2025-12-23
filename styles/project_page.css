@@ -357,3 +357,30 @@ a:hover { color: var(--acc-0); text-shadow: 0 0 6px rgba(123,220,255,0.35); }
   .breakdown-content { margin-bottom: 1rem; }
   .breakdown-image { width: 100%; }
 }
+
+/* ---- Embedded YouTube / iframe videos ---- */
+.project-content iframe,
+.project-content .video-embed {
+  display: block;
+  margin: 2.5rem auto;
+
+  max-width: 900px;
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+  height: auto;
+
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--glow);
+}
+
+/* Ensure iframe fills the aspect-ratio box */
+.project-content iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.project-content figure iframe {
+  border-radius: 12px;
+}
