@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CUDA Flocking (Boids) — CIS 5650 Project 1</title>
+
+  <!-- Match site-wide styling -->
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/project_page.css" />
+
+  <!-- MathJax (kept for consistency) -->
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="../index.html#home">Home</a></li>
+            <li><a href="../pages/projects.html">Projects</a></li>
+            <li><a href="../pages/research.html">Research</a></li>
+            <li><a href="../pages/gallery.html">Portfolio</a></li>
+            <li><a href="../index.html#demoreel">Demo Reel</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="project-header">
+    <div class="header-container">
+      <h1>CUDA Flocking (BOIDS)</h1>
+      <div class="project-meta">
+        <span class="date">September 2025</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>C++</li>
+            <li>CUDA</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<main class="project-page">
+  <article class="project-content">
+    <div class="top-buttons">
+      <a class="button" href="https://github.com/siwel-cg/Project1-CUDA-Flocking.git" target="_blank" rel="noopener">Code</a>
+    </div>
+
+    <section class="overview-section" id="overview">
+      <h2>Overview</h2>
+      <p>
+        A somewhat realistic and nice looking flocking simulation can be achieved using three simple behavior rulses for agents:
+      </p>
+      <ul>
+        <li>Move towards the centroid of your neighbors</li>
+        <li>Don't get to close to your neighbors</li>
+        <li>Move at a similar speed to your neighbors</li>
+      </ul>
+      <p>
+        By adjusting the radius for which other agents are consider neighbors and the strength of the influence neighbors have your a boid's velocity,
+        some varied and jcomplex behaviors can emmerge.
+      </p>
+      <p>
+        The main place for optimization is when determining which other agenst should effect the current agent. The naive approach is to simply check every
+        single agent to see if they are within a certain distance. This ofcourse is alot of checks, and doesn't scale well as the number of boids increases
+        (see graphs below). For better results, we implemented a spacial grid so that rather than checking every single other agent, we just need to check the
+        one in our current agent's cell and the 26 neighboring cells. Additionally we can even further optimize this by structuring our data in a way which
+        allows for easy and quicker memory acessing on the GPU. Further analysis on the optimizations below:
+      </p>
+    </section>
+
+    <section id="examples">
+      <h2>Results</h2>
+      <p>These were all run with the coherent grid implementation.</p>
+
+      <h3>Bird Counts</h3>
+      <div class="param-card">
+        <div class="param-line">Rule 1: dist 8.0 | strength 0.05</div>
+        <div class="param-line">Rule 2: dist 3.0 | strength 0.10</div>
+        <div class="param-line">Rule 3: dist 4.0 | strength 0.10</div>
+      </div>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img data-lightbox="true" src="../images/CUDABoids/BOIDS_834_10000.gif" alt="10,000 boids" />
+            <figcaption><strong>10,000 boids</strong></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/CUDABoids/BOIDS_834_50000.gif" alt="50,000 boids" />
+            <figcaption><strong>50,000 boids</strong></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/CUDABoids/BOIDS_834_100000.gif" alt="100,000 boids" />
+            <figcaption><strong>100,000 boids</strong></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="comparison-section">
+        <h3>Parameters</h3>
+
+        <!-- Row 1: parameter cards -->
+        <div class="param-pair">
+          <div class="param-card">
+            <h4>Parameter Set B</h4>
+            <div class="param-line">Rule 1: dist 10.0 | strength 0.01</div>
+            <div class="param-line">Rule 2: dist 2.0 | strength 0.10</div>
+            <div class="param-line">Rule 3: dist 8.0 | strength 0.10</div>
+          </div>
+
+          <div class="param-card">
+            <h4>Parameter Set C</h4>
+            <div class="param-line">Rule 1: dist 5.0 | strength 0.01</div>
+            <div class="param-line">Rule 2: dist 2.0 | strength 0.10</div>
+            <div class="param-line">Rule 3: dist 10.0 | strength 0.10</div>
+          </div>
+        </div>
+
+        <!-- Row 2: gifs -->
+        <section class="images-section">
+          <div class="image-grid image-grid-2">
+            <figure>
+              <img data-lightbox="true"
+                  src="../images/CUDABoids/BOIDS_1028_100000.gif"
+                  alt="100,000 boids (Parameter Set B)" />
+              <figcaption><strong>100,000 boids — Set A</strong></figcaption>
+            </figure>
+
+            <figure>
+              <img data-lightbox="true"
+                  src="../images/CUDABoids/BOIDS_5210_100000.gif"
+                  alt="100,000 boids (Parameter Set C)" />
+              <figcaption><strong>100,000 boids — Set B</strong></figcaption>
+            </figure>
+          </div>
+        </section>
+      </section>
+
+    <section id="performance">
+      <h2>Performance Results</h2>
+      <p>
+        The average fps was calculated over a 10 second window for each simulation method with varying numbers of boids.
+      </p>
+
+      <h3>FPS Comparisons</h3>
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/CUDABoids/FPS_LineGraph_V1.png" alt="FPS Line Graph" />
+            <figcaption>FPS Line Graph</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/CUDABoids/FPS_BlockGraph_V1.png" alt="Block Size Graph" />
+            <figcaption>Block Size Graph</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/CUDABoids/FPS_Table_V1.png" alt="FPS Table" />
+          </figure>
+        </div>
+      </section>
+
+      <p>At <strong>1M+ boids</strong>, only the coherent grid remains practical.</p>
+    </section>
+
+    <section id="analysis">
+      <h2>Performance Analysis</h2>
+      <p>
+        As expected, and as can be seen from the graphs, with the naive implementation, increacing the number of boids dramatically decrease fps. This is because its takes roughly O(N^2) to compare every boid to every other boid. On the other hand, using the grid methods, asumming boids are randomly and somewhat evenly scattered throughout our domain, each boid only need to check the limited number of other boids in the surrouning cells. This of course will be just like the naive case as N really grows, but it allows for a much larger total number to be simulated before a significant and visual decrease in performance.
+      </p>
+      <p>
+        At first, it seems that changing from organizing the position and velocity data in arbitrary spots to be coherent in memory wouldn't really have any improvements. You are still doing the same number of memory acesses and calculations, and infact a decrease in performance might be expected since we
+        do some additional reorganizing steps. However, as the results show, clearly there was significant improvements when switching to a coherent structure.
+        This is because although we do the same numeber of memory acesses, the cost for each acess is less. Since our memory is coherent, when fetching data
+        for boid i, boid i+1's data is right next to it in memory and thus as we iterate through i, we can "grab" larger chunks of memory at a time.
+      </p>
+      <p>
+        In order to check 8 blocks instead of 27, you need to double the block size. Thus the total volume of cells actually is less for a 27 cell setup
+        ((3*cellWidth)^3 vs (4*cellWidth)^3). This is somewhat insignificant unless you have a large number of boids, but does technically provide some
+        improvement.
+      </p>
+    </section>
+
+  </article>
+</main>
+
+<footer>
+  <p>© 2025 Lewis Ghrist</p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox__content">
+    <img class="lightbox__img" id="lightboxImg" alt="">
+    <div class="lightbox__hint">Click anywhere or press Esc to close</div>
+  </div>
+</div>
+<script src="../scripts/lightbox.js"></script>
+
+</body>
+</html>

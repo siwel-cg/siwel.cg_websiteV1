@@ -4,7 +4,7 @@
 
   if (!lightbox || !lightboxImg) return;
 
-  const selector = ".project-content img, .image-grid img, .hero-section img";
+  const selector = ".project-content img, .image-grid img, figure img";
   const imgs = document.querySelectorAll(selector);
 
   function open(src, alt) {
