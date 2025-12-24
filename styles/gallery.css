@@ -130,7 +130,7 @@ main {
 .project-showcase {
   display: flex;
   align-items: stretch;
-  min-height: 400px;
+  height: 400px;
   background: var(--card);
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
@@ -216,6 +216,7 @@ main {
 /* Image section - right side on desktop */
 .project-showcase .showcase-image {
   flex: 0 0 60%;
+  height: 100%;
   display: flex;
   justify-content: flex-end;
   border-left: 1px solid rgba(255,255,255,0.06);
@@ -239,11 +240,11 @@ main {
 @media (max-width: 900px) {
   .project-showcase {
     flex-direction: column;
-    min-height: auto;
+    height: auto;
   }
 
   .project-showcase .showcase-info {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     width: 100%;
     padding: 1.5rem;
     border-right: none;
@@ -269,10 +270,9 @@ main {
   }
 
   .project-showcase .showcase-image {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     width: 100%;
-    min-height: 250px;
-    max-height: 400px;
+    height: 300px;
     border-left: none;
     justify-content: center;
   }
