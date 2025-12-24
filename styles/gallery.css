@@ -1,22 +1,16 @@
 /* ==========================================================
-   Gallery Page — Black Hole Theme (Clean)
-   Keeps: main container sizing, responsive behavior,
-          gallery filters layout, tool pills.
+   Gallery Page – Black Hole Theme (Clean + Mobile Fixed)
    ========================================================== */
 
 /* ---- Reset ---- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
-/* This file assumes your global theme variables exist (from main.css):
-   --fg-0, --fg-1, --fg-muted, --acc-0, --stroke, --glow, --glass, etc.
-*/
-
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: var(--fg-0);
-  background: transparent; /* let main.css handle the cosmic background */
+  background: transparent;
 }
 
 /* ---- Main container ---- */
@@ -26,16 +20,15 @@ main {
   padding: 0 20px;
 }
 
-/* Fully responsive on mobile */
 @media (max-width: 768px) {
   main {
     max-width: 100%;
-    margin: 80px 10px 0;
+    margin: 60px 10px 0;
     padding: 0 10px;
   }
   .gallery-page > h1 {
-    font-size: 2.6rem;
-    margin: 2rem 0 2.5rem;
+    font-size: 2rem;
+    margin: 1.5rem 0 2rem;
   }
 }
 
@@ -43,10 +36,8 @@ main {
   font-size: 3.5rem;
   font-weight: 700;
   letter-spacing: 0.4px;
-
   margin: 2.5rem 0 1.5rem;
   color: var(--fg-0);
-
   text-shadow:
     0 0 12px rgba(123,220,255,0.15),
     0 0 28px rgba(192,132,252,0.08);
@@ -67,12 +58,10 @@ main {
   border: 1px solid rgba(123, 220, 255, 0.45);
   background: rgba(10, 14, 24, 0.35);
   color: var(--fg-0);
-
   border-radius: 999px;
   cursor: pointer;
   font-size: 1.05rem;
   font-weight: 700;
-
   box-shadow: var(--glow);
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
@@ -96,13 +85,14 @@ main {
   border-color: rgba(123, 220, 255, 0.75);
 }
 
-/* Adjust filter buttons on smaller screens */
 @media (max-width: 768px) {
-  .gallery-filters { gap: 1rem; }
-
+  .gallery-filters { 
+    gap: 0.75rem;
+    margin: 2rem 0;
+  }
   .filter-btn {
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -136,18 +126,15 @@ main {
   font-size: 0.8rem;
 }
 
+/* ---- Project Cards ---- */
 .project-showcase {
   display: flex;
   align-items: stretch;
-
-  height: 400px;           /* ↑ was ~260 */
-  max-height: 400px;
-
+  min-height: 400px;
   background: var(--card);
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
   overflow: hidden;
-
   box-shadow: 0 10px 28px rgba(0,0,0,0.35), var(--glow);
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   will-change: transform, box-shadow;
@@ -155,15 +142,23 @@ main {
 
 .project-showcase:hover {
   transform: translateY(-6px);
-
-  /* IMPORTANT: stronger glow that stays ON while hovered */
   box-shadow:
     0 18px 44px rgba(0,0,0,0.45),
     0 0 0.5px rgba(123,220,255,0.70),
     0 0 18px rgba(123,220,255,0.22),
     0 0 34px rgba(192,132,252,0.12);
-
   border-color: rgba(123,220,255,0.55);
+}
+
+/* Info section - left side on desktop */
+.project-showcase .showcase-info {
+  flex: 0 0 40%;
+  padding: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.9rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
 }
 
 .project-showcase .showcase-info h3 {
@@ -171,38 +166,26 @@ main {
   line-height: 1.15;
   letter-spacing: 0.2px;
   color: var(--fg-0);
-
   margin: 0;
   padding: 0;
 }
 
-.project-showcase .showcase-info {
-  flex: 0 0 40%;          /* <-- lock left column */
-  width: 40%;
-
-  padding: 2.75rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.9rem;
-
-  border-right: 1px solid rgba(255,255,255,0.06);
+.project-showcase .showcase-info p {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  color: var(--fg-muted);
 }
 
-.project-showcase .showcase-info p,
-.project-showcase .showcase-info .tools-used,
-.project-showcase .showcase-info .tools-list {
-  margin: 0;
+.project-showcase .tools-used { 
+  margin: 0.5rem 0 0.75rem; 
   padding: 0;
 }
 
-/* ULs often have default left padding; kill it explicitly */
-.project-showcase .showcase-info .tools-list {
+.project-showcase .tools-list {
   padding-left: 0;
   margin-top: 0.75rem;
 }
-
-.project-showcase .tools-used { margin: 0.5rem 0 0.75rem; }
 
 .project-showcase .tools-list li {
   font-size: 0.9rem;
@@ -210,55 +193,127 @@ main {
   border-radius: 999px;
 }
 
-/* Button: align left, consistent size */
 .project-showcase .button {
   margin-top: 0.5rem;
   align-self: flex-start;
   font-size: 1.05rem;
   padding: 0.75rem 1.2rem;
   border-radius: 12px;
+  text-decoration: none;
+  display: inline-block;
+  background: rgba(123, 220, 255, 0.15);
+  border: 1px solid rgba(123, 220, 255, 0.45);
+  color: var(--fg-0);
+  transition: all 0.2s ease;
 }
 
-/* Image column */
+.project-showcase .button:hover {
+  background: rgba(123, 220, 255, 0.25);
+  border-color: rgba(123, 220, 255, 0.65);
+  transform: translateY(-2px);
+}
+
+/* Image section - right side on desktop */
 .project-showcase .showcase-image {
   flex: 0 0 60%;
-  height: 100%;
   display: flex;
   justify-content: flex-end;
   border-left: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
 }
 
-/* Image crop */
-.project-showcase .showcase-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.showcase-image a {
+.project-showcase .showcase-image a {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-/* Mobile */
+.project-showcase .showcase-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---- Mobile/Tablet Responsive ---- */
 @media (max-width: 900px) {
   .project-showcase {
     flex-direction: column;
-    height: auto;
+    min-height: auto;
+  }
+
+  .project-showcase .showcase-info {
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .project-showcase .showcase-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .project-showcase .showcase-info p {
+    font-size: 0.95rem;
+  }
+
+  .project-showcase .button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .project-showcase .tools-list li {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
   }
 
   .project-showcase .showcase-image {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 250px;
+    max-height: 400px;
+    border-left: none;
     justify-content: center;
   }
 
   .project-showcase .showcase-image img {
-    height: auto;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 }
 
+/* Extra small screens */
+@media (max-width: 480px) {
+  .project-showcase .showcase-info {
+    padding: 1.25rem;
+  }
+
+  .project-showcase .showcase-info h3 {
+    font-size: 1.3rem;
+  }
+
+  .project-showcase .tools-list {
+    gap: 0.4rem;
+  }
+
+  .project-showcase .tools-list li {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+  }
+}
+
+/* Gallery container */
 .full-gallery {
   display: flex;
   flex-direction: column;
-  gap: 2rem;   /* ↑ big breathing room like the old design */
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+  .full-gallery {
+    gap: 1.5rem;
+  }
 }
