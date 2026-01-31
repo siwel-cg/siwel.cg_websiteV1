@@ -51,14 +51,13 @@
     <article class="project-content">
       <div class="top-buttons">
         <a href="https://siwel-cg.github.io/Project5-WebGPU-Gaussian-Splat-Viewer/" class="button">Live Demo</a>
-        <a href="https://www.youtube.com/watch?v=FcsVPEqJQR4" class="button">Demo Video</a>
       </div>
 
       <!-- Hero Images -->
       <section class="images-section">
         <div class="image-grid">
           <figure>
-            <img src="../images/GaussSplat/Bicycle_GS_V1.png" alt="Gaussian Splat Render (Bicycle)">
+            <img src="../images/GaussSplat/Bicycle_GS_V2.png" alt="Gaussian Splat Render (Bicycle)">
           </figure>
         </div>
       </section>
@@ -83,27 +82,6 @@
         </ul>
         <p>
           For more information, see the <a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/3d_gaussian_splatting_high.pdf" target="_blank" rel="noopener noreferrer">original 3D Gaussian Splatting paper</a>.
-        </p>
-      </section>
-
-      <section class="overview-section">
-        <h2>This is a work in progrss. . .</h2>
-        <p>
-          The current implementation has a few known issues:
-        </p>
-        <ul>
-          <li>
-            <strong>Radius / LOD:</strong> quad sizes do not vary as much as expected, so splats look too uniform.
-          </li>
-          <li>
-            <strong>Covariance falloff:</strong> splats appear overly distinct, suggesting an issue in covariance computation or how the falloff is mapped into the quad.
-          </li>
-          <li>
-            <strong>Culling / indexing:</strong> when zoomed out, a large portion of the scene can disappear and splats may flash due to intermediate index buffer / culling logic.
-          </li>
-        </ul>
-        <p>
-          These are the areas I'm planning on revisiting to improve photorealism and robustness.
         </p>
       </section>
 
@@ -144,7 +122,7 @@
       <section class="images-section">
         <div class="image-grid">
           <figure>
-            <img src="../images/GaussSplat/Bicycle_SizedQuads_V1.png" alt="Sized quads">
+            <img src="../images/GaussSplat/Bicycle_DepthSorted_V2.png" alt="Sized quads">
             <figcaption>Screen-aligned quads sized to bound each splat’s projected footprint.</figcaption>
           </figure>
         </div>
@@ -170,8 +148,8 @@
       <section class="images-section">
         <div class="image-grid">
           <figure>
-            <img src="../images/GaussSplat/Bicycle_DepthSorted_V1.png" alt="Depth-sorted splats">
-            <figcaption>Depth-sorted splats prior to final compositing.</figcaption>
+            <img src="../images/GaussSplat/Splat Elipses.png" alt="Depth-sorted splats">
+            <figcaption>Depth-sorted splats without alpha blending.</figcaption>
           </figure>
         </div>
       </section>
@@ -184,11 +162,11 @@
       <section class="images-section">
         <div class="image-grid">
           <figure>
-            <img src="../images/GaussSplat/Bicycle_GS_V1.png" alt="Bicycle output">
+            <img src="../images/GaussSplat/Bicycle_GS_V2.png" alt="Bicycle output">
             <figcaption>Bicycle scene output.</figcaption>
           </figure>
           <figure>
-            <img src="../images/GaussSplat/Bonsai_GS_V1.png" alt="Bonsai output">
+            <img src="../images/GaussSplat/Bonsai_GS_V2.png" alt="Bonsai output">
             <figcaption>Bonsai scene output.</figcaption>
           </figure>
         </div>
