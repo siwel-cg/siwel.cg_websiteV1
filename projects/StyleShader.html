@@ -85,6 +85,7 @@
       <!-- Overview Section -->
       <section class="overview-section">
         <h2>Breakdown</h2>
+        <p></p>
         <h3>Surface Shader</h3>
         <p>
             For this project I was trying to mimic the swirling painterly effect of Van Gogh. To do this, I started with a base toon shader, which was made using a discrete gradient. I then added a series of noises to deform the UVs of the surface, which I then used as the input for another noise. This distored the cutoff lines between the highlight, midtone, and shadow colors making the colors have a more swirly feel. On top of that I added some slight color variation using two passes of a worley noise where the UVs are multiplied by one Worley and then passed into the second one. This give the circular swirling pattern I was going for. Additionally, I could offset the UVs by a time variable allowing those swirls to move around and ripple. The colors and thresholds were all parameterized for easy customization.
@@ -95,9 +96,9 @@
         </p>
 
         <h3>Outlines</h3>
-          To get an outline effect around the various objects, I started with a basic depth based approach. For each fragment, you compare its depth with the depth of neighboring fragments. The difference in depth between these fragments is then used as the alpha of a post process shader which overlays a parametrized color over the entire screen. If there is enough of a difference, it means we are on the vissible edge of an object or shape, and our difference will be large. This will color in just those edge fragments. Additionally, I offset the sampled neighboring fragments using a noise to get a non-uniform edge.
         <p>
-
+          To get an outline effect around the various objects, I started with a basic depth based approach. For each fragment, you compare its depth with the depth of neighboring fragments. The difference in depth between these fragments is then used as the alpha of a post process shader which overlays a parametrized color over the entire screen. If there is enough of a difference, it means we are on the vissible edge of an object or shape, and our difference will be large. This will color in just those edge fragments. Additionally, I offset the sampled neighboring fragments using a noise to get a non-uniform edge.
+      
         </p>
       </section>
 

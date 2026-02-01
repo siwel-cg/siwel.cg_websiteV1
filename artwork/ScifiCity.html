@@ -55,7 +55,7 @@
             </figure>
 
         </div>
-    </section>
+      </section>
 
     <section class="images-section">
       <div class="image-grid">
@@ -70,6 +70,7 @@
       <!-- Overview Section -->
       <section class="overview-section">
         <h2>Subtools</h2>
+        <p></p>
         <h3>Main Layout</h3>
         <p>
           The main layou tool takes in three inputs: some base mesh to build the city on, a set of "Hero" buildings to be the main focus of the city, and a set of input geometry that can be used to determine spacing of buildings. The spacing of buildings can also be controlled using a noise in combination with this spacing shape. This was done so that an artist could manually control the exact layout if needed by drawing in curves. The noise or geometry would drive a density attributed used when scattering points for a voronoi fracture. This would make areas near that spacing geometry or high valued noise have more points and thus have a higher density of voronoi cells. Since these cells would then get turned into buildings, it defines zones with samller buildings. ADditional controls like the spread of the attribute and the height of the buildings could then be controlled afterwards as needed. The output of this layou is a base set of these samller buildings, the base voronoi cells for larger buildings, and the voronoi 'web' that can be used for streets or dividors between the buildings. 

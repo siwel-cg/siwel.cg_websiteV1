@@ -72,8 +72,11 @@
       <!-- Overview Section -->
       <section class="overview-section">
         <h2>Breakdown</h2>
+        <p></p>
         <h3>Linear</h3>
-        Linear splines are very simple to implement. Given some base positions and some ordering of these points, you just "connect the dots" and draw in strait lines between the positions. 
+        <p>
+          Linear splines are very simple to implement. Given some base positions and some ordering of these points, you just "connect the dots" and draw in strait lines between the positions. 
+        </p>
         <section class="images-section">
             <div class="image-grid">
                 <figure>
@@ -85,7 +88,8 @@
         </section>
 
         <h3>Bezier</h3>
-        <p>Three different methods for making the Bezier splines were implemented: Catmul-Rom Splines, De Casteljau's algorithm, and the Matrix Method. They all will give the same result, but in different ways.</p>
+        <p>
+          Three different methods for making the Bezier splines were implemented: Catmul-Rom Splines, De Casteljau's algorithm, and the Matrix Method. They all will give the same result, but in different ways.</p>
         <p>
             <strong>Catmull-Rom splines </strong> are a way of concatonating piecewise Bezier curves by creating specific control points to ensure C1 continuity along the spline. For each inputted position in our sequence two control points are created (except for the ends), one infront and one behind. These control points ensure that the slope going into the base point matches the slope leaving the base point. We get this slope by calculating the backwards difference with the previous point.
         </p>

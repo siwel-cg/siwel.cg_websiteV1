@@ -84,6 +84,7 @@
       <!-- Overview Section -->
       <section class="overview-section">
         <h2>Breakdown</h2>
+        <p></p>
         <h3>Base Structure</h3>
         <p>
           I wanted a system that allowed for a scallable house/building tool for larger scale scattering of these clustered, scrappy shacks. This lead me to design my tool take in a base grid which the house would be generated on. Since the look I was going for was more chaotic than just base blocks stacked ontop of eachother, I had my inital blocks be placed randomly above an inputted plane. This allowed for both position and orientation of the blocks to randomized while also also allowing me to specify the number of bases I wanted. To generate the upper blocks, I scattered a point ontop of each block and randomized that point's normal and pscale to get a random orientation and size of the next floor I copy onto that point. These base blocks were then split up into a few different systems for the details and rooves.

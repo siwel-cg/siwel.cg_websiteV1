@@ -72,6 +72,7 @@
       <!-- Overview Section -->
       <section class="overview-section">
         <h2>Subtools</h2>
+        <p></p>
         <h3>Book Stack Tool</h3>
         <p>
           I wanted to have these stacks of books filling parts of the floor to add more detail and depth to the final render. Since multiple stacks were going to be vissible, making a single asset and scattering it around wasn't the way to go. To achieve this result, I made a tool that takes in a base point to generte the stack from and some other basic parameters like seed and size. I could then scatter stacks of varying heights and orientations around, completely ellimiating the need for any hand placed labor. The baseic setup works by recursively copying another book to some centered random position on the top most book. The orientation about the up axis is randomized and the scale of the size of the book is reduced so that we don't get very large books stacked ontop of very small books. 
