@@ -1,6 +1,6 @@
 /**
- * Circuit Board Noise Contours
- * Snaps gradient directions to integer vectors for angular lines
+ * Smooth Layered Contours
+ * Simple perlin noise with filled bands fading to black
  */
 
 function initFlowField() {
@@ -23,17 +23,20 @@ function initFlowField() {
   let time = 0;
 
   const CONFIG = {
-    noiseScale: 0.003,
-    levels: 14,
-    lineWidth: 1,
-    colors: [
-      'rgba(123, 220, 255, 0.8)',  // cyan
-      'rgba(192, 132, 252, 0.6)',  // violet
-      'rgba(255, 184, 107, 0.5)',  // amber
-    ]
+    noiseScale: 0.0012,
+    levels: 24,
+    resolution: 8,
   };
 
-  // Permutation table for noise
+  // Colors cycling through accretion gradient
+  const levelHighlights = [
+    [130, 50, 45],    // coral
+    [140, 100, 40],   // amber
+    [45, 140, 160],   // cyan
+    [80, 55, 115],    // violet
+  ];
+
+  // Perlin noise
   const perm = [];
   for (let i = 0; i < 256; i++) perm[i] = i;
   for (let i = 255; i > 0; i--) {
@@ -45,16 +48,11 @@ function initFlowField() {
   function fade(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
   function lerp(t, a, b) { return a + t * (b - a); }
   
-  // Quantized gradient - only returns integer direction vectors
   function grad(hash, x, y, z) {
-    const h = hash & 7;
-    // 8 directions: cardinal + diagonal
-    const dirs = [
-      [1, 0], [1, 1], [0, 1], [-1, 1],
-      [-1, 0], [-1, -1], [0, -1], [1, -1]
-    ];
-    const [dx, dy] = dirs[h];
-    return dx * x + dy * y;
+    const h = hash & 15;
+    const u = h < 8 ? x : y;
+    const v = h < 4 ? y : h === 12 || h === 14 ? x : z;
+    return ((h & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v);
   }
 
   function noise(x, y, z) {
@@ -79,104 +77,57 @@ function initFlowField() {
     );
   }
 
-  // Marching squares for contours
-  function getContourSegments(noiseGrid, gridW, gridH, threshold, step) {
-    const segments = [];
-    
-    for (let y = 0; y < gridH - 1; y++) {
-      for (let x = 0; x < gridW - 1; x++) {
-        const tl = noiseGrid[y][x];
-        const tr = noiseGrid[y][x + 1];
-        const bl = noiseGrid[y + 1][x];
-        const br = noiseGrid[y + 1][x + 1];
-
-        let code = 0;
-        if (tl >= threshold) code |= 8;
-        if (tr >= threshold) code |= 4;
-        if (br >= threshold) code |= 2;
-        if (bl >= threshold) code |= 1;
-
-        if (code === 0 || code === 15) continue;
-
-        const lerpPos = (v1, v2) => (threshold - v1) / (v2 - v1);
-        
-        // Snap interpolation to create more angular lines
-        const snap = (val) => Math.round(val * 2) / 2;
-        
-        const top = { x: x + snap(lerpPos(tl, tr)), y: y };
-        const right = { x: x + 1, y: y + snap(lerpPos(tr, br)) };
-        const bottom = { x: x + snap(lerpPos(bl, br)), y: y + 1 };
-        const left = { x: x, y: y + snap(lerpPos(tl, bl)) };
-
-        const toPixel = (pt) => ({ x: pt.x * step, y: pt.y * step });
-
-        switch (code) {
-          case 1: case 14: segments.push([toPixel(left), toPixel(bottom)]); break;
-          case 2: case 13: segments.push([toPixel(bottom), toPixel(right)]); break;
-          case 3: case 12: segments.push([toPixel(left), toPixel(right)]); break;
-          case 4: case 11: segments.push([toPixel(top), toPixel(right)]); break;
-          case 5:
-            segments.push([toPixel(left), toPixel(top)]);
-            segments.push([toPixel(bottom), toPixel(right)]);
-            break;
-          case 6: case 9: segments.push([toPixel(top), toPixel(bottom)]); break;
-          case 7: case 8: segments.push([toPixel(left), toPixel(top)]); break;
-          case 10:
-            segments.push([toPixel(top), toPixel(right)]);
-            segments.push([toPixel(left), toPixel(bottom)]);
-            break;
-        }
-      }
-    }
-    return segments;
-  }
-
   function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   }
 
   function draw() {
-    ctx.fillStyle = 'rgba(6, 7, 10, 1)';
-    ctx.fillRect(0, 0, width, height);
+    const res = CONFIG.resolution;
+    const cols = Math.ceil(width / res);
+    const rows = Math.ceil(height / res);
+    
+    const imageData = ctx.createImageData(width, height);
+    const data = imageData.data;
 
-    const step = 8;
-    const gridW = Math.ceil(width / step) + 1;
-    const gridH = Math.ceil(height / step) + 1;
-
-    // Build noise grid
-    const noiseGrid = [];
-    for (let y = 0; y < gridH; y++) {
-      noiseGrid[y] = [];
-      for (let x = 0; x < gridW; x++) {
-        noiseGrid[y][x] = noise(
-          x * step * CONFIG.noiseScale,
-          y * step * CONFIG.noiseScale,
+    for (let py = 0; py < rows; py++) {
+      for (let px = 0; px < cols; px++) {
+        const x = px * res;
+        const y = py * res;
+        
+        const n = (noise(
+          x * CONFIG.noiseScale,
+          y * CONFIG.noiseScale,
           time
-        );
+        ) + 1) / 2;
+
+        const levelFloat = n * CONFIG.levels;
+        const level = Math.min(Math.floor(levelFloat), CONFIG.levels - 1);
+        const levelFrac = levelFloat - level;
+        
+        const highlight = levelHighlights[level % levelHighlights.length];
+        
+        const brightness = Math.pow(1 - levelFrac, 6);
+        
+        const r = Math.round(highlight[0] * brightness * 0.7);
+        const g = Math.round(highlight[1] * brightness * 0.7);
+        const b = Math.round(highlight[2] * brightness * 0.7);
+
+        for (let dy = 0; dy < res && y + dy < height; dy++) {
+          for (let dx = 0; dx < res && x + dx < width; dx++) {
+            const idx = ((y + dy) * width + (x + dx)) * 4;
+            data[idx] = r;
+            data[idx + 1] = g;
+            data[idx + 2] = b;
+            data[idx + 3] = 255;
+          }
+        }
       }
     }
 
-    // Draw contours
-    for (let i = 0; i < CONFIG.levels; i++) {
-      const threshold = -0.6 + (i / CONFIG.levels) * 1.2;
-      const segments = getContourSegments(noiseGrid, gridW, gridH, threshold, step);
+    ctx.putImageData(imageData, 0, 0);
 
-      const colorIndex = i % CONFIG.colors.length;
-      ctx.strokeStyle = CONFIG.colors[colorIndex];
-      ctx.lineWidth = CONFIG.lineWidth;
-      ctx.lineCap = 'square';
-      ctx.lineJoin = 'miter';
-
-      ctx.beginPath();
-      segments.forEach(([p1, p2]) => {
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-      });
-      ctx.stroke();
-    }
-
-    time += 0.002;
+    time += 0.0003;
     requestAnimationFrame(draw);
   }
 
