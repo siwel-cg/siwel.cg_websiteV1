@@ -317,3 +317,128 @@ main {
     gap: 1.5rem;
   }
 }
+
+/* ==========================================================
+   Gallery Page — Theme Integration
+   Drop this after gallery.css and style-overhaul.css
+   ========================================================== */
+
+/* ---- Typography ---- */
+body,
+.filter-btn,
+.tools-list li,
+.project-showcase .showcase-info h3,
+.project-showcase .showcase-info p,
+.project-showcase .button {
+  font-family: 'Space Mono', monospace !important;
+}
+
+/* ---- Page Title ---- */
+.gallery-page > h1 {
+  text-shadow: none;
+  margin-top: 0;
+}
+
+/* ---- Filter Buttons ---- */
+.filter-btn {
+  border-radius: 2px;
+  background: rgba(17, 21, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+.filter-btn:hover {
+  background: rgba(123, 220, 255, 0.08);
+  border-color: rgba(123, 220, 255, 0.4);
+}
+
+.filter-btn.active {
+  background: rgba(123, 220, 255, 0.1);
+  border-color: rgba(123, 220, 255, 0.5);
+}
+
+/* ---- Tools Pills ---- */
+.tools-list li {
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 2px solid #2dd4bf;
+}
+
+/* ---- Project Showcase Cards ---- */
+.project-showcase {
+  border-radius: 2px;
+  overflow: visible;
+  position: relative;
+}
+
+.project-showcase::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+  border-left: 2px solid #7bdcff;
+  border-top: 2px solid #7bdcff;
+  opacity: 0.5;
+  transition: all 0.25s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.project-showcase:hover::before {
+  opacity: 1;
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0 6px rgba(123, 220, 255, 0.4));
+}
+
+/* ---- Showcase Info ---- */
+.project-showcase .showcase-info h3 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.project-showcase .showcase-info h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #ff6b5b 0%,
+    #ffb86b 25%,
+    #7bdcff 55%,
+    #c084fc 100%
+  );
+}
+
+/* ---- Showcase Buttons ---- */
+.project-showcase .button {
+  border-radius: 2px;
+  background: rgba(17, 21, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.project-showcase .button:hover {
+  background: rgba(123, 220, 255, 0.08);
+  border-color: rgba(123, 220, 255, 0.4);
+}
+
+/* ---- Showcase Image ---- */
+.project-showcase .showcase-image {
+  overflow: hidden;
+}
+
+.project-showcase .showcase-image img {
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.project-showcase:hover .showcase-image img {
+  filter: brightness(1.05) saturate(1.05);
+  transform: scale(1.02);
+}

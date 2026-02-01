@@ -323,3 +323,273 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================
+   Black Hole Theme — Integrated
+   Drop this after main.css
+   ========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+/* ---- Theme Token Overrides ---- */
+:root {
+  --bg-0: #06070a;
+  --bg-1: #0b0e13;
+  --bg-2: #111522;
+  
+  --fg-0: #e7ecff;
+  --fg-1: #aeb6d6;
+  --fg-muted: #8a93b5;
+  
+  --teal: #2dd4bf;
+  --acc-0: #7bdcff;
+  --acc-1: #c084fc;
+  --acc-warm: #ffb86b;
+  --acc-hot: #ff6b5b;
+  
+  --accretion: linear-gradient(
+    90deg,
+    var(--acc-hot) 0%,
+    var(--acc-warm) 25%,
+    var(--acc-0) 55%,
+    var(--acc-1) 100%
+  );
+  
+  --card: rgba(17, 21, 34, 0.7);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(123, 220, 255, 0.3);
+  --glow: 0 0 20px rgba(123, 220, 255, 0.08);
+}
+
+/* ---- Typography ---- */
+html, body, h1, h2, h3, h4, h5, h6, p, a, li, span, button, input, label {
+  font-family: 'Space Mono', monospace !important;
+}
+
+h1, h2, h3 { 
+  font-weight: 700; 
+  letter-spacing: -0.02em;
+}
+
+/* ---- Background ---- */
+body {
+  background: 
+    radial-gradient(
+      ellipse 800px 400px at 50% -10%,
+      rgba(123, 220, 255, 0.03) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      1200px 800px at 60% -20%,
+      #0f1423 0%,
+      #06070a 55%
+    );
+  background-attachment: fixed;
+}
+
+/* ---- Z-Index Layering for Flow Field ---- */
+header {
+  position: fixed;
+  z-index: 1000;
+  background: rgba(6, 7, 10, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Header Nav ---- */
+header nav ul li a {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+header nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accretion);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+header nav ul li a:hover {
+  color: var(--acc-0);
+}
+
+header nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* ---- Sections ---- */
+main > section {
+  background: rgba(11, 14, 19, 0.3);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ---- Headers with Gradient Underline ---- */
+h1, h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 12px;
+  margin-top: 0;
+}
+
+h1::after, h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accretion);
+}
+
+/* Prevent underline on card titles */
+.gallery-item h3::after,
+.project-card h3::after,
+.project-showcase h3::after {
+  display: none;
+}
+
+/* ---- Cards ---- */
+.gallery-item,
+.project-card,
+.project-showcase,
+.breakdown-part,
+.project-content figure,
+.image-grid figure {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* L bracket decoration */
+.gallery-item::before,
+.project-card::before,
+.project-showcase::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  border-left: 2px solid var(--acc-0);
+  border-top: 2px solid var(--acc-0);
+  opacity: 0.5;
+  transition: all 0.25s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.gallery-item:hover::before,
+.project-card:hover::before,
+.project-showcase:hover::before {
+  opacity: 1;
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 6px rgba(123, 220, 255, 0.4));
+}
+
+/* Card hover state */
+.gallery-item:hover,
+.project-card:hover,
+.project-showcase:hover,
+.breakdown-part:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--glow);
+}
+
+/* ---- Card Images ---- */
+.gallery-item img,
+.project-card img,
+.project-showcase .showcase-image img {
+  transition: filter 0.3s ease;
+}
+
+.gallery-item:hover img,
+.project-card:hover img,
+.project-showcase:hover .showcase-image img {
+  filter: brightness(1.05) saturate(1.05);
+}
+
+/* ---- Buttons ---- */
+.button,
+button,
+.btn,
+.filter-btn {
+  background: rgba(17, 21, 34, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.button:hover,
+button:hover,
+.btn:hover,
+.filter-btn:hover {
+  border-color: var(--acc-0);
+  background: rgba(123, 220, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  border-color: var(--acc-0);
+  background: rgba(123, 220, 255, 0.1);
+}
+
+/* ---- Tools Pills ---- */
+.tools-list li {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  border-left: 2px solid var(--teal);
+}
+
+/* ---- Links ---- */
+a:not(.button):not(.btn):hover {
+  color: var(--acc-0);
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-2);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(123, 220, 255, 0.2);
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(123, 220, 255, 0.25);
+}

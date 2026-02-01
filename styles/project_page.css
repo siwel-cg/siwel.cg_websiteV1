@@ -538,3 +538,193 @@ a:hover { color: var(--acc-0); text-shadow: 0 0 6px rgba(123,220,255,0.35); }
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================
+   Project Page — Theme Integration
+   Drop this after project_page.css and style-overhaul.css
+   ========================================================== */
+
+/* ---- Typography ---- */
+body,
+h1, h2, h3, h4,
+p, a, li, span,
+button,
+.tools-list li,
+.tools-list span,
+.param-card,
+.param-line,
+.breakdown-content,
+.lightbox__hint {
+  font-family: 'Space Mono', monospace !important;
+}
+
+/* ---- Header Nav Hover Underline ---- */
+header nav ul li a {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+header nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #ff6b5b 0%,
+    #ffb86b 25%,
+    #7bdcff 55%,
+    #c084fc 100%
+  );
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+header nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* ---- Project Header ---- */
+.project-header h1 {
+  margin-top: 0;
+}
+
+/* ---- Content Headers ---- */
+.project-content h2,
+.project-content h3,
+.overview-section h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-top: 0;
+}
+
+.project-content h2::after,
+.project-content h3::after,
+.overview-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #ff6b5b 0%,
+    #ffb86b 25%,
+    #7bdcff 55%,
+    #c084fc 100%
+  );
+}
+
+/* ---- Tools Pills ---- */
+.tools-list li,
+.tools-list span {
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 2px solid #2dd4bf;
+}
+
+/* ---- Figures ---- */
+.project-content figure,
+.image-grid figure {
+  border-radius: 2px;
+  position: relative;
+  overflow: visible;
+}
+
+.project-content figure::before,
+.image-grid figure::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 14px;
+  height: 14px;
+  border-left: 2px solid #7bdcff;
+  border-top: 2px solid #7bdcff;
+  opacity: 0.5;
+  transition: all 0.25s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.project-content figure:hover::before,
+.image-grid figure:hover::before {
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 0 6px rgba(123, 220, 255, 0.4));
+}
+
+.project-content figure img,
+.image-grid figure img {
+  border-radius: 2px;
+}
+
+/* ---- Breakdown Cards ---- */
+.breakdown-part {
+  border-radius: 2px;
+  position: relative;
+  overflow: visible;
+}
+
+.breakdown-part::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  border-left: 2px solid #7bdcff;
+  border-top: 2px solid #7bdcff;
+  opacity: 0.5;
+  transition: all 0.25s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.breakdown-part:hover::before {
+  opacity: 1;
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 6px rgba(123, 220, 255, 0.4));
+}
+
+.breakdown-image img {
+  border-radius: 2px;
+}
+
+/* ---- Buttons ---- */
+.button, button, .btn {
+  border-radius: 2px;
+  background: rgba(17, 21, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+.button:hover, button:hover, .btn:hover {
+  background: rgba(123, 220, 255, 0.08);
+  border-color: rgba(123, 220, 255, 0.4);
+}
+
+/* ---- Param Cards ---- */
+.param-card {
+  border-radius: 2px;
+}
+
+/* ---- Iframes/Videos ---- */
+.project-content iframe,
+.project-content .video-embed,
+.project-content figure iframe {
+  border-radius: 2px;
+}
+
+/* ---- Lightbox ---- */
+.lightbox__img,
+.lightbox__hint {
+  border-radius: 2px;
+}
