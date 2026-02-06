@@ -26,10 +26,15 @@ function initFlowField() {
     noiseScale: 0.003,
     levels: 14,
     lineWidth: 1,
+    // colors: [
+    //   'rgba(123, 220, 255, 0.8)',  // cyan
+    //   'rgba(192, 132, 252, 0.6)',  // violet
+    //   'rgba(255, 184, 107, 0.5)',  // amber
+    // ]
     colors: [
-      'rgba(123, 220, 255, 0.8)',  // cyan
-      'rgba(192, 132, 252, 0.6)',  // violet
-      'rgba(255, 184, 107, 0.5)',  // amber
+      'rgba(255, 255, 255, 0.8)',  // cyan
+      'rgba(255, 255, 255, 0.6)',  // violet
+      'rgba(255, 255, 255, 0.5)',  // amber
     ]
   };
 
@@ -137,7 +142,7 @@ function initFlowField() {
   }
 
   function draw() {
-    ctx.fillStyle = 'rgba(6, 7, 10, 1)';
+    ctx.fillStyle = 'rgb(0, 0, 0)';
     ctx.fillRect(0, 0, width, height);
 
     const step = 8;
