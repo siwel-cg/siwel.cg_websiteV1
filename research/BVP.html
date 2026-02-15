@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impossible by Degrees - Lewis Ghrist</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/project_page.css">
+  <!-- MathJax v3 -->
+  <script>
+  window.MathJax = {
+    tex: {inlineMath: [['\\(', '\\)'], ['$', '$']]},
+    options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}
+  };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+  <header>
+      <nav>
+          <ul>
+              <li><a href="../index.html#home">Home</a></li>
+              <li><a href="../pages/projects.html">Projects</a></li>
+              <li><a href="../pages/research.html">Research</a></li>
+              <li><a href="../pages/gallery.html">Portfolio</a></li>
+              <li><a href="../index.html#demoreel">Demo Reel</a></li>
+              <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <div class="project-header">
+    <div class="header-container">
+      <h1>Impossible by Degrees: Cohomology &amp; Bistable Visual Paradox</h1>
+      <div class="project-meta">
+        <span class="date">February 2026</span>
+        <div class="tools-used">
+          <ul class="tools-list">
+            <li>Algebraic Topology</li>
+            <li>Cohomology</li>
+            <li>Visual Paradox</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="project-page">
+    <article class="project-content">
+
+      <div class="top-buttons">
+        <a href="https://arxiv.org/pdf/2602.09313" class="button">Paper (PDF)</a>
+        <a href="https://arxiv.org/abs/2602.09313" class="button">arXiv</a>
+      </div>
+
+      <!-- Hero Image -->
+      <section class="images-section">
+        <div class="image-grid">
+          <figure>
+            <img src="../images/BistableParadoxes/LOZENGE-PINNED.png" alt="Lozenge pinned paradox illustration">
+          </figure>
+        </div>
+      </section>
+
+      <section class="overview-section">
+        <h3>Authors</h3>
+        <p>Lewis Ghrist and <a href="https://www2.math.upenn.edu/~ghrist/">Robert Ghrist</a></p>
+      </section>
+
+      <!-- Abstract -->
+      <section class="overview-section">
+        <h2>Abstract</h2>
+        <p>
+          The Penrose triangle, staircase, and related "impossible objects" have long been understood as related to first cohomology $H^1$: the obstruction to extending locally consistent interpretations around a loop. This paper develops a cohomological hierarchy for a class of visual paradoxes. Restricting to systems built from <em>bistable</em> elements — components admitting exactly two local states, such as the Necker cube's forward/backward orientations, a gear's clockwise/counterclockwise spin, or a rhombic tiling corner's convex/concave interpretation — allows the use of $\mathbb{Z}_2$ coefficients throughout, reducing obstruction theory to parity arithmetic. This reveals a hierarchy of paradox classes from $H^0$ through $H^2$, refined at each degree by the relative/absolute distinction, ranging from ambiguity through impossibility to inaccessibility. A discrete Stokes theorem emerges as the central tool: at each degree, the connecting homomorphism of relative cohomology promotes boundary data to interior obstruction, providing the uniform mechanism by which paradoxes ascend the hierarchy.
+        </p>
+      </section>
+
+      <section>
+        <h3>Things To Come . . .</h3>
+          <p>
+            Throught out the process of exploring these visual paradoxes, we came up with a number of interesting examples and visuals, not all of which were included in the paper itself. I am planning on creating a gallery here of all of them, so stay tuned. For now though, we have created a playlist for the animated pardoxes mentioned in the paper which can be found here: <a href="https://www.youtube.com/playlist?list=PL8erL0pXF3JaYUQHC5G0iFM0lXcGlexch" target="_blank" rel="noopener noreferrer">Companion Animations Playlist (YouTube)</a>. 
+          </p>
+        <ul class="reference-list">
+
+        </ul>
+      </section>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Lewis Ghrist. All rights reserved.</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox__content">
+      <img class="lightbox__img" id="lightboxImg" alt="">
+      <div class="lightbox__hint">Click anywhere or press Esc to close</div>
+    </div>
+  </div>
+
+  <script src="../scripts/lightbox.js"></script>
+
+</body>
+</html>
