@@ -46,33 +46,14 @@ html { scroll-behavior: smooth; }
 
 /* ---- Base page ---- */
 html, body {
-  background: radial-gradient(1200px 800px at 60% -20%, #0f1423 0%, #06070a 55%) fixed;
+  background:
+    radial-gradient(ellipse 900px 600px at 50% 0%, #0d1220 0%, transparent 100%),
+    radial-gradient(ellipse 600px 900px at 80% 50%, rgba(15, 18, 35, 0.6) 0%, transparent 100%),
+    #050608;
+  background-attachment: fixed;
   color: var(--fg-0);
   font-family: Arial, sans-serif;
   line-height: 1.6;
-}
-
-/* Subtle starfield */
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(1px 1px at 15% 30%, #cfd6ff 60%, transparent 61%),
-    radial-gradient(1px 1px at 70% 15%, #9cc9ff 60%, transparent 61%),
-    radial-gradient(1px 1px at 40% 75%, #c084fc 60%, transparent 61%),
-    radial-gradient(1px 1px at 85% 60%, #7bdcff 60%, transparent 61%);
-  opacity: 0.25;
-  mix-blend-mode: screen;
-}
-body::after {
-  opacity: 0.18;
-  animation: twinkle 8s linear infinite alternate;
-}
-@keyframes twinkle {
-  to { opacity: 0.28; transform: translateY(-0.5px); }
 }
 
 /* ---- Header / nav ---- */
@@ -87,14 +68,49 @@ header {
   border-bottom: 1px solid var(--stroke);
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: auto;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--fg-0);
+  margin: 5px 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 nav ul {
   display: flex;
   justify-content: flex-end;
   list-style: none;
-  padding: 1rem;
-
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 1rem 0;
+  margin: 0;
 }
 
 nav ul li { margin-left: 2rem; }
@@ -312,11 +328,38 @@ footer {
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
   nav ul {
+    display: none;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    padding: 0.5rem 0 1rem;
+    margin: 0;
   }
-  nav ul li { margin: 0.5rem 0; }
+
+  nav ul.open {
+    display: flex;
+  }
+
+  nav ul li {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 0.75rem 0;
+  }
 
   .gallery,
   .projects-grid {
